@@ -1,2 +1,2 @@
 # TSAT-3A
-Place to keep track of codes used and easy access to everyone
+Electrical and software development repository for TSAT-3A, containing KiCad schematics, Arduino firmware, Processing visualizations, and supporting development files for the mission's electrical subsystems.
