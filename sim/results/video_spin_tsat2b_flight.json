@@ -1,0 +1,23 @@
+{
+  "video": "~/KSC/ksc_export_full/Knights Satellite Club - general-tsat\ud83c\udf88 - TSat-2B General [1420861020225671280].json_Files/T-Sat2B_Flight-GBMclip-9df47558095968e4.mp4",
+  "fps": 29.97002997002997,
+  "frames_total": 1948,
+  "pairs_analysed": 1798,
+  "pairs_good": 1797,
+  "duration_good_s": 59.9599,
+  "yaw_rate_abs_deg_s": {
+    "median": 82.33340114955095,
+    "p90": 260.1800781387041,
+    "p99": 602.7981839339658,
+    "max": 2886.8894234719337
+  },
+  "yaw_rate_rpm": {
+    "median_abs": 13.722233524925159,
+    "p90_abs": 43.363346356450684,
+    "max_abs": 481.14823724532226,
+    "mean_signed": -1.1441169875793658
+  },
+  "net_rotation_turns": -1.1433933055723973,
+  "fraction_time_below_2deg_s": 0.05672969966629588,
+  "notes": "Image rotation of a nadir camera = payload yaw. Per-frame rotation above ~180 deg (> 5400 deg/s at 30 fps) would alias; motion blur drops matches at high rates. Clip may be edited for presentation (check for cuts)."
+}

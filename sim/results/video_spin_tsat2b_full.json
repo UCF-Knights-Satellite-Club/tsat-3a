@@ -1,0 +1,23 @@
+{
+  "video": "~/KSC/T-Sat2B_Flight.mp4",
+  "fps": 29.106189977869505,
+  "frames_total": 44511,
+  "pairs_analysed": 44510,
+  "pairs_good": 44451,
+  "duration_good_s": 1527.200916155557,
+  "yaw_rate_abs_deg_s": {
+    "median": 88.98239592665871,
+    "p90": 286.7303872963945,
+    "p99": 560.043722436028,
+    "max": 4940.845564273815
+  },
+  "yaw_rate_rpm": {
+    "median_abs": 14.830399321109786,
+    "p90_abs": 47.78839788273242,
+    "max_abs": 823.4742607123026,
+    "mean_signed": -0.027987562142784313
+  },
+  "net_rotation_turns": -0.7165165948376635,
+  "fraction_time_below_2deg_s": 0.013929454055268478,
+  "notes": "Image rotation of a nadir camera = payload yaw. Per-frame rotation above ~180 deg (> 5400 deg/s at 30 fps) would alias; motion blur drops matches at high rates. Clip may be edited for presentation (check for cuts)."
+}

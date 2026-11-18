@@ -1,0 +1,73 @@
+{
+  "video_csv": "results/video_spin_tsat2b_full.csv",
+  "fps": 29.06976744185616,
+  "frac_frames_replaced": 0.0034823635138171195,
+  "whole_flight": {
+    "duration_s": 1529.1936,
+    "rate_rms_deg_s": 172.07442044489522,
+    "rate_abs_median_deg_s": 88.72335000000001,
+    "rate_1s_peak_deg_s": 770.2514379310369,
+    "rate_1s_peak_rpm": 128.3752396551728,
+    "rate_1s_p95_rpm": 47.30979853448252,
+    "dominant_period_s": 13.331911111113085,
+    "accel_rms_deg_s2": 420.32555280100166,
+    "net_drift_turns": -0.7566993035556698,
+    "net_drift_rpm": -0.029690130937861752,
+    "yaw_excursion_turns": 14.60941838800217,
+    "frac_rate_below_2deg_s": 0.014962929678723882,
+    "frac_1s_rate_below_10deg_s": 0.10103347562345541
+  },
+  "phases": {
+    "reel-out / ascent": {
+      "t_start_s": 0.0344,
+      "t_end_s": 1348.476,
+      "duration_s": 1348.4073,
+      "rate_rms_deg_s": 167.28354157281677,
+      "rate_abs_median_deg_s": 85.9676,
+      "rate_1s_peak_deg_s": 770.2514379310369,
+      "rate_1s_peak_rpm": 128.3752396551728,
+      "rate_1s_p95_rpm": 47.61776637931058,
+      "dominant_period_s": 13.331911111113085,
+      "accel_rms_deg_s2": 390.5200171832625,
+      "net_drift_turns": -8.658639329334614,
+      "net_drift_rpm": -0.3852829629148973,
+      "yaw_excursion_turns": 14.60941838800217,
+      "frac_rate_below_2deg_s": 0.015542193232776192,
+      "frac_1s_rate_below_10deg_s": 0.10084590297594782
+    },
+    "top hang": {
+      "t_start_s": 1348.476,
+      "t_end_s": 1429.0775,
+      "duration_s": 80.56709999999998,
+      "rate_rms_deg_s": 176.5677085297483,
+      "rate_abs_median_deg_s": 93.95205,
+      "rate_1s_peak_deg_s": 453.3145034482757,
+      "rate_1s_peak_rpm": 75.55241724137927,
+      "rate_1s_p95_rpm": 30.515557183908054,
+      "dominant_period_s": 1.7170723404257862,
+      "accel_rms_deg_s2": 582.127203629445,
+      "net_drift_turns": 1.269000032666851,
+      "net_drift_rpm": 0.9450507956723163,
+      "yaw_excursion_turns": 2.1747257644447635,
+      "frac_rate_below_2deg_s": 0.008525149190110827,
+      "frac_1s_rate_below_10deg_s": 0.14492753623188406
+    },
+    "reel-in / descent": {
+      "t_start_s": 1429.0775,
+      "t_end_s": 1529.228,
+      "duration_s": 100.11609999999996,
+      "rate_rms_deg_s": 224.14705906885996,
+      "rate_abs_median_deg_s": 138.2508,
+      "rate_1s_peak_deg_s": 589.2370310344828,
+      "rate_1s_peak_rpm": 98.20617183908047,
+      "rate_1s_p95_rpm": 52.8710118390804,
+      "dominant_period_s": 1.928384615384901,
+      "accel_rms_deg_s2": 607.543368426626,
+      "net_drift_turns": 6.635734553556538,
+      "net_drift_rpm": 3.976823639888014,
+      "yaw_excursion_turns": 7.210505673112173,
+      "frac_rate_below_2deg_s": 0.012349914236706689,
+      "frac_1s_rate_below_10deg_s": 0.07032590051457976
+    }
+  }
+}

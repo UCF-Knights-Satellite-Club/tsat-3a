@@ -1,0 +1,24 @@
+{
+  "sample_rate_hz": 19.98589118960617,
+  "rows": 393802,
+  "log_span_s": 19704.0,
+  "flight_rows": [
+    5299,
+    11212
+  ],
+  "flight_duration_s": 295.80867542572156,
+  "max_altitude_m": 124.19,
+  "hang_duration_s": 139.34830193853765,
+  "horiz_accel_rms_ms2": 1.0513639199238567,
+  "horiz_accel_p99_ms2": 4.776654967499126,
+  "horiz_psd_peak_hz": 0.02871536090460657,
+  "tension_mod_peak_hz": 0.2871536090460657,
+  "tension_mod_amp_ms2": 1.484117851455321,
+  "est_swing_period_s": 6.964913332080589,
+  "est_swing_amp_deg": 25.73747023672557,
+  "est_equiv_pendulum_length_m": 12.05014775603907,
+  "top_plateau_s": 41.62936704232076,
+  "top_plateau_horiz_accel_rms_ms2": 0.48726388898688516,
+  "max_descent_rate_ms": 28.722182127771717,
+  "notes": "Accelerometer only: yaw not observable. Swing amplitude assumes an ideal point-mass pendulum (tension modulation at 2x swing frequency); the ascent was reeled out in steps and each step jerks the line, so treat the swing amplitude as an upper bound. Sensor z is vertical (az ~ 9.8 at rest)."
+}
