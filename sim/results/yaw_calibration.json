@@ -1,0 +1,30 @@
+{
+  "target_video": {
+    "duration_s": 1529.1936,
+    "rate_rms_deg_s": 172.07442044489522,
+    "rate_abs_median_deg_s": 88.72335000000001,
+    "rate_1s_peak_deg_s": 770.2514379310369,
+    "rate_1s_peak_rpm": 128.3752396551728,
+    "rate_1s_p95_rpm": 47.30979853448252,
+    "dominant_period_s": 13.331911111113085,
+    "accel_rms_deg_s2": 420.32555280100166,
+    "net_drift_turns": -0.7566993035556698,
+    "net_drift_rpm": -0.029690130937861752,
+    "yaw_excursion_turns": 14.60941838800217,
+    "frac_rate_below_2deg_s": 0.014962929678723882,
+    "frac_1s_rate_below_10deg_s": 0.10103347562345541
+  },
+  "line_driven": {
+    "wander_rad": 2.36085517921747,
+    "wander_tau_s": 8.0,
+    "rate_rms_deg_s": 172.0736714290038,
+    "rate_1s_p95_rpm": 55.052325965436445,
+    "rate_1s_peak_rpm": 78.72233219106067
+  },
+  "gust_driven": {
+    "gust_Nm": 0.002716379714201374,
+    "rate_rms_deg_s": 172.07354609759844,
+    "rate_1s_p95_rpm": 51.58298919715041,
+    "rate_1s_peak_rpm": 78.16250472728724
+  }
+}
