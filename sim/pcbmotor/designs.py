@@ -235,6 +235,15 @@ def main():
         plot_layout(d, r, OUT / f"pcbmotor_{key}_layout.png")
         plot_waveforms(d, r, curve, OUT / f"pcbmotor_{key}_waveforms.png")
         out[key] = dict(row=row, stator=asdict(d), rotor=asdict(r), result=res.as_dict())
+    # High-momentum payload variant (recommended after the TSat-2B video calibration, see RESULTS.md):
+    # the sweep's highest-momentum cheap-fab design with 1.5 mm of extra steel on the 84 mm disc (3 mm total).
+    hm = next(x for x in rows if x["name"] == "payload_jlc4_2oz_out_6c8p_w1.2_h6.35")
+    d, r, area, ilim = find(space, hm["name"])
+    r.disc_t_mm = 1.5
+    res, curve = analyse(d, r, n_theta=72)
+    plot_layout(d, r, OUT / "pcbmotor_payload_high_momentum_layout.png")
+    plot_waveforms(d, r, curve, OUT / "pcbmotor_payload_high_momentum_waveforms.png")
+    out["payload_high_momentum"] = dict(row=hm, stator=asdict(d), rotor=asdict(r), result=res.as_dict())
     (OUT / "pcbmotor_designs.json").write_text(json.dumps(out, indent=2))
     for k, v in out.items():
         print(k, v["row"]["name"], {kk: round(vv, 3) if isinstance(vv, float) else vv for kk, vv in v["row"].items()})
