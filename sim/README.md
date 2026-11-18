@@ -18,6 +18,7 @@ python3 -m venv .venv
 .venv/bin/python -m yaw.calibrate           # fit measured disturbance levels (~1 min); copy values into yaw/sim.py
 .venv/bin/python -m yaw.sim                 # yaw Monte Carlo for all motor candidates (~2 min)
 .venv/bin/python tests/test_em_consistency.py   # torque model cross-check
+.venv/bin/python -m validation.cmu_wheel    # model vs. the measured CMU PCB wheel (~2 min)
 ```
 
 Run `pcbmotor.designs` before `yaw.sim`: the yaw sim reads the recommended PCB designs from
@@ -38,6 +39,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `yaw/sim.py` | Single-axis yaw Monte Carlo: tether, swivel/slip ring, gusts, PID with wheel unloading, motor limits. |
 | `data/video_spin.py`, `data/video_phases.py` | Yaw rate from an onboard nadir video (feature-matched image rotation) and per-phase statistics. |
 | `yaw/calibrate.py` | Fits the measured disturbance levels to the video statistics. |
+| `validation/cmu_wheel.py` | Rebuilds the CMU PCB reaction wheel from its paper and design files and compares the model with its measured resistance and torque constant. |
 | `tests/test_em_consistency.py` | Checks Lorentz-force torque against d(flux linkage)/d(angle). |
 | `results/` | CSV/JSON outputs, plots and `RESULTS.md`. |
 

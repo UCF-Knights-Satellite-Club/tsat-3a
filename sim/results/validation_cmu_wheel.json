@@ -1,0 +1,48 @@
+{
+  "turns": 10,
+  "new_id_mm": 52.94130027008806,
+  "R_one_stator_ohm": 3.057577601416843,
+  "R_two_series_ohm": 6.115155202833686,
+  "R_measured_ohm": 5.5,
+  "gaps": {
+    "0.3": {
+      "Kt_mNm_per_A": 28.14882648118595,
+      "Km_mNm_per_sqrtW": 9.2941766452643,
+      "I_for_8mNm_A": 0.28420367738410063,
+      "copper_W_for_8mNm": 0.7408974996161022
+    },
+    "0.5": {
+      "Kt_mNm_per_A": 26.470181640540236,
+      "Km_mNm_per_sqrtW": 8.739921863664415,
+      "I_for_8mNm_A": 0.30222686450128666,
+      "copper_W_for_8mNm": 0.8378472991181642
+    },
+    "0.75": {
+      "Kt_mNm_per_A": 24.60671985405583,
+      "Km_mNm_per_sqrtW": 8.124644241811804,
+      "I_for_8mNm_A": 0.325114442211256,
+      "copper_W_for_8mNm": 0.9695523586709209
+    },
+    "1.0": {
+      "Kt_mNm_per_A": 22.93862773726459,
+      "Km_mNm_per_sqrtW": 7.5738737574936446,
+      "I_for_8mNm_A": 0.3487566951096959,
+      "copper_W_for_8mNm": 1.1156907953086446
+    },
+    "1.5": {
+      "Kt_mNm_per_A": 20.04643705241371,
+      "Km_mNm_per_sqrtW": 6.618930533314891,
+      "I_for_8mNm_A": 0.3990734103563182,
+      "copper_W_for_8mNm": 1.4608456367217735
+    }
+  },
+  "measured_from_fig11": {
+    "source": "Tayal et al. 2024 Fig. 11 best-fit velocity line (read by eye: 171 rad/s at 0 Nm, 13 rad/s at 8 mNm)",
+    "slope_rad_s_per_Nm": 19750.0,
+    "Kt_mNm_per_A": 20.43823668977688,
+    "Km_mNm_per_sqrtW": 7.1156806696482,
+    "effective_Uq_V": 2.3299589826345644,
+    "stall_current_A": 0.4236289059335572,
+    "note": "For a constant-voltage drive the speed-torque slope is 1.5 R / Kt^2, independent of supply voltage; measured data only reach ~6 mNm, 8 mNm is their extrapolation."
+  }
+}
