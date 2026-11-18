@@ -25,6 +25,8 @@ requirements and the recommended payload design changed.
    - The first payload design (12 coils / 16 poles, 1.5 mm disc, 37 mN·m·s) reaches 96–99% median but
      saturates in 2–4 of 8 runs. It is the lighter fallback (117 g against 223 g rotating).
    - The 40 mm test stator is too small to fly. It exists to check the model on the bench.
+   - The motor model reproduces the one measured PCB reaction wheel we could check (CMU, SmallSat
+     2024) within about 10% on torque constant and 11% on resistance (section 1).
 3. **Momentum and control bandwidth are the hard requirements, not raw torque.**
    - With a swivel: at least 6 mN·m peak torque and 60 mN·m·s of usable momentum each way
      (line-driven case); 15 mN·m and about 130 mN·m·s if the spin is mostly aerodynamic (gust-driven).
@@ -102,14 +104,45 @@ but it mostly affects Kt, not the resistance gain.
 |---|---|---|---|---|
 | Faulhaber 2610T012B (datasheet) | 3.3 | 7.45 mN·m at 12 V | 6,400 rpm no-load | 20 g motor |
 | Maxon EC32 flat 226006 (datasheet) | 13.2 | 85 mN·m at 24 V | 4,530 rpm at 24 V | 57 g motor |
-| CMU PCB reaction wheel (SmallSat 2024) | ≥3.6 (8 mN·m stall at 5 W; the 5 W may include electronics) | 8 mN·m | 170 rad/s (1,620 rpm) | 140 g, 9 mm thick, 1U |
+| CMU PCB reaction wheel (measured, see below) | 7.1 | 8 mN·m (extrapolated; data to 6 mN·m) | 1,600 rpm at 8 V | 140 g, 9 mm thick, 1U |
 | This model, 40 mm test stator | 1.85 | 3.2 mN·m (1.95 continuous) | 8,900 rpm no-load | 24 g rotor |
-| This model, 1U payload stator | 20.4 | 26.7 mN·m at 1 A | 3,440 rpm | 111 g rotor + board |
+| This model, 1U payload stator (12 coils) | 20.4 | 26.7 mN·m at 1 A | 3,440 rpm | 111 g rotor + board |
+| This model, high-momentum payload stator | 16.1 | 21.7 mN·m at 1 A | 4,220 rpm | 223 g rotor + board |
 
-The payload Km is about 6× the CMU wheel's apparent Km. That is plausible for an 82 mm winding under
-16 block magnets on back iron, but it is the number the test stator has to confirm. The model's torque
-is checked internally: d(flux linkage)/d(angle) matches the Lorentz torque within 5%
-(`tests/test_em_consistency.py`). It has not been checked against a built motor yet.
+### Model validation against a built PCB motor (CMU wheel)
+
+`validation/cmu_wheel.py` rebuilds the CMU PCB reaction wheel (Tayal, Fisch, Manchester, SmallSat 2024,
+doi:10.26077/sr9e-tc61) from its paper and open design files (github.com/SaralTayal123/PCB_Motors:
+coil generator notebook, KiCad board, firmware) and runs the same magpylib Lorentz-force method.
+
+- **Their design:** 36 slots and 12 poles (firmware `PP = 6`; the paper's table says "12 pole-pair",
+  but the firmware and README say 12 poles). Two PCB stators, one on each side of the rotor, in
+  series. Wave winding, 10 turns, each radial conductor stitched across all 4 layers (1 oz, 1.2 mm
+  board), coil diameter 53–79 mm, 0.29 mm traces. 12 × (12.7 × 6.35 × 3.18 mm) N42 magnets on a
+  3 mm aluminium rotor, so no back iron. PTFE bushings, Hall sensors, ESP32-S3 + TMC6200 + SimpleFOC.
+- **Measured:** phase resistance 5.5 Ω. Torque constant from their Fig. 11: for a constant-voltage
+  drive the speed–torque slope is 1.5 R / Kt², independent of supply voltage. The best-fit line
+  falls from 171 rad/s at 0 mN·m to 13 rad/s at 8 mN·m, giving **Kt ≈ 20.4 mN·m/A and Km ≈ 7.1
+  mN·m/√W** (values read by eye from the figure). Their 8 mN·m stall is an extrapolation; measured
+  data reach about 6 mN·m.
+- **Model:** phase resistance 6.1 Ω (+11%). Kt depends on the air gap, which the paper doesn't give:
+
+| Air gap (magnet face to copper) | 0.3 mm | 0.5 mm | 0.75 mm | 1.0 mm | 1.5 mm |
+|---|---|---|---|---|---|
+| Model Kt [mN·m/A] | 28.1 | 26.5 | 24.6 | 22.9 | 20.0 |
+| Model Km [mN·m/√W] | 9.3 | 8.7 | 8.1 | 7.6 | 6.6 |
+
+For a plausible 1–1.5 mm gap (PTFE bushing flange plus mounting), the model matches the measured
+torque constant within about 10% and resistance within 11%. The earlier "about 6× CMU" comparison used
+a lower bound (8 mN·m at 5 W total input); the payload designs are about 2.3–2.9× CMU's measured Km,
+mostly because they use steel back iron behind the magnets, which CMU did not. The back-iron part of
+the model (method of images) is not covered by this check; the test stator still has to confirm it.
+
+**Winding lesson.** CMU and the CIOMP group (Wang et al., Optics and Precision Engineering 2015,
+doi:10.3788/OPE.20152304.1004) both use wave windings instead of spiral coils. CIOMP measured 26.2%
+lower motor power at 5,000 rpm with the wave winding than with a spiral winding on otherwise identical
+flywheel prototypes. The payload designs here use spiral (concentrated) coils; a wave-winding variant
+is worth adding to the design study.
 
 ## 2. Old flight data (TSat-1, June 2025)
 
