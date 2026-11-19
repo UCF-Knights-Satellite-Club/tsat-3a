@@ -399,25 +399,33 @@ common-mode current through all three phases (a fourth inverter leg) does.
 ### 5f. Wave winding vs spiral coils ([`pcbmotor_wave.md`](pcbmotor_wave.md), 2026-11-19)
 
 `pcbmotor/wave.py` models a full-pitch two-layer radial wave winding. It uses the same rotor, board and
-drive as the high-momentum spiral design. All four layers are in series as two wave pairs, with no
-parallel paths. The literature behind it (Tokgöz 2020, Wang/CIOMP 2015, CMU 2024, Chulaee 2022–2024) is in
-`~/KSC/research`.
+drive as the high-momentum spiral design. All four layers are in series as two wave pairs. The literature
+behind it (Tokgöz, Paul, Wang/CIOMP, CMU, Chulaee, Han, François & Dehez and others) is in `~/KSC/research`.
 
-| At 15 mN·m and 2000 rpm | Kt | Km | Eddy | Total loss | H max |
+| At 15 mN·m and 2000 rpm | Kt | Km | Eddy @2000 / top rpm | Total loss | H max |
 |---|---|---|---|---|---|
-| Spiral, current recommendation | 21.8 | 16.2 | 0.77 W | 1.63 W | 90 mN·m·s |
-| Wave, same r 21–41 envelope, 48 conductors/layer, width ≤ 1.2 mm | 19.5 | 17.4 | 0.53 W | 1.27 W | 101 |
-| **Wave, end turns outside the magnets (vias at r 15/44), 48/layer, width ≤ 1.2 mm** | 23.0 | 18.5 | 0.33 W | **0.99 W** | 85 |
+| Spiral, current recommendation | 21.8 | 16.2 | 0.77 / 3.43 W | 1.63 W | 90 mN·m·s |
+| Wave, same r 21–41 envelope, 48 conductors/layer, width ≤ 1.2 mm | 19.5 | 17.4 | 0.53 / 2.93 W | 1.27 W | 101 |
+| Wave, end turns outside the magnets (vias at r 15/44), 48/layer, width ≤ 1.2 mm | 23.0 | 18.5 | 0.33 / 1.31 W | 0.99 W | 85 |
+| **Same, width ≤ 1.6 mm as 2 strands that swap lanes at every via** | 23.0 | 18.8 | 0.13 / 0.53 W | **0.77 W** | 85 |
 
-- **The wave winding wins.** It gives 22–39% less loss than the spiral at the same Kt and about the same
+- **The wave winding wins.** It gives 22–53% less loss than the spiral at the same Kt and about the same
   momentum. It fits the same 90 mm board, provided the hub stays inside r ≈ 14 mm.
-- **Keep the traces about 1.2 mm wide.** Filling the slot pitch (traces up to 5 mm) gives Km 22 but about
-  11 W of eddy drag at 2000 rpm.
-- **Don't slit wide traces into strands** that merge at the end turns. The circulating current between strands
-  (4–5 W at 2000 rpm) costs more than the eddy loss it saves.
+- **Use 2 strands about 0.7 mm wide, reversing lane order at every via.** This is the same lane reversal the
+  strand-test board uses, and François & Dehez's "parallel connection".
+  - The reversal balances the strand EMFs, so circulating current is about 0.001 W.
+  - With fixed lanes it is 0.09–0.5 W.
+  - Three strands don't fit their vias at r = 15 mm.
+- **Don't fill the slot pitch** with solid traces (up to 5 mm wide): Km 22, but about 11 W of eddy drag at
+  2000 rpm.
+- **Don't slit traces that merge at the end turns**: 4–5 W circulates at 2000 rpm.
 - **Don't stitch the layers in parallel** as CMU did: Km falls to 13, with 3.6 W circulating.
-- **Next:** generate a wave test layout (via staggering between the two layer pairs is the open layout
-  question), and decide whether the high-momentum payload and the strand-test boards switch to it.
+- **Derating:** Paul 2019's built wave motor measured 15.5% below FEA on torque, so plan on a 5–15% derating
+  until bench data exists.
+- **Next:**
+  - Generate a wave test layout. The open layout question is via staggering between the two layer pairs, with
+    2 strand vias per conductor end.
+  - Decide whether the high-momentum payload and the strand-test boards switch to it.
 
 ## 6. KAOS-3 three-axis hanging payload: pitch and roll (2026-11-19)
 

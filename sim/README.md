@@ -50,7 +50,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `pcbmotor/mechanical.py` | Mechanical checks: gap sensitivity, board bow against the gap, back-iron saturation, magnet retention, balance grade, Km against temperature, bearing loads. |
 | `pcbmotor/asbuilt.py` | Model of the test stator exactly as laid out, and the bench numbers to check it against. |
 | `pcbmotor/stacking.py` | Stacked stator boards (series/parallel), dual rotors and more-layer boards against one board, including eddy drag in the traces and the pull between rotors. |
-| `pcbmotor/wave.py` | Wave-winding variant of the high-momentum payload stator (series layer pairs, fill/capped/slit traces, CMU-style stitched layers) against the spiral design, with eddy and circulating-current losses. |
+| `pcbmotor/wave.py` | Wave-winding variant of the high-momentum payload stator (series layer pairs; fill, capped, slit and full-length swapped/fixed strands; CMU-style stitched layers) against the spiral design, with eddy and circulating-current losses. |
 | `pcbmotor/designs.py` | Design sweep for the 40 mm test stator and the 1U payload stator; drive envelope; plots. |
 | `data/tsat1_swing.py` | Swing and excitation spectrum from the TSat-1 flight accelerometer log. |
 | `yaw/candidates.py` | Motor candidates (datasheet values, approximations flagged). |

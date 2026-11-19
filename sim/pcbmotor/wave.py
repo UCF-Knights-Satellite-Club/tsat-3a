@@ -71,6 +71,7 @@ class WaveDesign:
     cap_mm: float | None = None    # fill only: never wider than this
     strands: int = 1               # split each conductor into this many parallel strands (gap = space)
     slit: bool = False             # strands only in the radial section (merged in the end turns)
+    swap: bool = True              # full-length strands: reverse the lane order at every layer via
     space_mm: float = 0.15
     min_trace_mm: float = 0.15
     stackup: str = "jlc4_2oz_out"
@@ -235,6 +236,45 @@ def foc(kph, th, pp):
     return mean, (t.max() - t.min()) / abs(mean)
 
 
+def strand_circulating(d: WaveDesign, rot: RotorDesign, thetas):
+    """Full-length strands (strands > 1, not slit): every strand runs the whole phase in series and
+    the strands only join at the phase terminals. Each strand's EMF is summed over every conductor
+    of the phase at the strand's true lane position on each layer. With swap=True the lane order
+    reverses at every via (L2 and L4 carry the reversed order, as in bundle.py and the parallel
+    connection of Francois & Dehez 2022); with swap=False each strand keeps its lane. Returns the loss
+    coefficient of all three phases [W/(rad/s)^2]."""
+    if d.slit or d.strands < 2:
+        return 0.0
+    k = d.strands
+    delta = 2 * math.pi / d.n_per_layer
+    phi, ph, sgn = positions(d, rot.n_poles)
+    E = np.zeros((k, len(thetas)))
+    R = np.zeros(k)
+    for li, (z, oz, sigma) in enumerate(zip(d.stack["z_mm"], d.stack["oz"], layer_shapes(d))):
+        r, th, w, avail = template(d, rot.n_poles, sigma)
+        cos_psi = np.clip((avail + d.space_mm) / (r * delta), 1e-3, 1.0)
+        w_cu, w_s = copper_widths(d, w, r)
+        for j in range(k):
+            lane = (k - 1 - j) if (d.swap and li % 2 == 1) else j
+            x = -w / 2 + w_s / 2 + lane * (w_s + d.space_mm)          # perpendicular offset, mm
+            ths = th + x / (r * cos_psi)
+            mids, dls = _segments(r, ths, z)
+            curve = np.empty(len(thetas))
+            for i, a in enumerate(thetas):
+                F = np.cross(dls, rotor_magnets(rot, a).getB(mids))
+                curve[i] = -np.sum(mids[:, 0] * F[:, 1] - mids[:, 1] * F[:, 0])
+            for p_, kk, s_ in zip(phi, ph, sgn):
+                if kk == 0:
+                    E[j] += s_ * _shift(thetas, curve, thetas - p_)
+            xs, ys = r * np.cos(ths), r * np.sin(ths)
+            ds = np.hypot(np.diff(xs), np.diff(ys)) / 1e3
+            wsm = (w_s[:-1] + w_s[1:]) / 2 / 1e3
+            R[j] += (d.n_per_layer // 3) * float(np.sum(RHO_CU_20C * ds / (wsm * oz * OZ_TO_M)))
+    g = 1 / R
+    V = (g[:, None] * E).sum(0) / g.sum()
+    return 3 * float(np.mean((g[:, None] * (E - V) ** 2).sum(0)))
+
+
 # ---------------------------------------------------------------- resistance
 def _cond_resistance(d: WaveDesign, n_poles, sigma, oz):
     r, th, w, _ = template(d, n_poles, sigma, ds_mm=0.1)
@@ -307,6 +347,7 @@ def analyse_wave(d: WaveDesign, rot: RotorDesign, n_theta=144, v_bus=None):
     kt, ripple = foc(kph, th, pp)
     c_eddy = d.n_per_layer * sum(l["c_eddy"] for l in layers)
     circ_c += d.n_per_layer * sum(l["c_slit"] for l in layers)
+    circ_c += strand_circulating(d, rot, thetas)
     J, m_rot = rot.inertia_kgm2()
     kw = dict(v_bus=v_bus) if v_bus else {}
     m = drive_metrics(kt, R, float("nan"), kt * 2 / 3, J, BOARD_AREA_M2, 1.0, **kw)
@@ -319,11 +360,11 @@ def analyse_wave(d: WaveDesign, rot: RotorDesign, n_theta=144, v_bus=None):
     min_w = float(min(copper_widths(d, template(d, rot.n_poles, s)[2], template(d, rot.n_poles, s)[0])[1].min() for s in (1, -1)))
     max_w = float(max(template(d, rot.n_poles, s)[2].max() for s in (1, -1)))
     ok = (min_avail >= max(d.min_trace_mm, d.trace_mm or 0) - 1e-9
-          and via_pitch >= VIA_PAD_MM + d.space_mm and min_w >= d.min_trace_mm - 1e-9)
+          and via_pitch >= (1 if d.slit else d.strands) * (VIA_PAD_MM + d.space_mm) and min_w >= d.min_trace_mm - 1e-9)
     return dict(name=d.name, kind="wave", connection=d.connection, n_per_layer=d.n_per_layer,
                 q=d.n_per_layer // (3 * rot.n_poles), envelope_mm=[d.r_in_mm, d.r_out_mm],
                 active_mm=[d.r_a_mm, d.r_b_mm], trace="fill" if d.trace_mm is None else d.trace_mm,
-                cap_mm=d.cap_mm, strands=d.strands, slit=d.slit,
+                cap_mm=d.cap_mm, strands=d.strands, slit=d.slit, swap=d.swap,
                 strand_min_mm=min_w, trace_max_mm=max_w, via_pitch_mm=via_pitch, layout_ok=bool(ok),
                 Kt_mNm_per_A=kt * 1e3, R_phase_ohm=R, Km_mNm_per_sqrtW=m["Km_mNm_per_sqrtW"],
                 ripple_pct=ripple * 100, noload_rpm=m["noload_rpm"], usable_max_rpm=m["usable_max_rpm"],
@@ -347,7 +388,7 @@ def spiral_baseline():
     w_max = m["usable_max_rpm"] * 2 * math.pi / 60
     w2k = 2000 * 2 * math.pi / 60
     return dict(name=d.name, kind="spiral", connection="series", n_per_layer=None, q=0.25,
-                envelope_mm=[21.0, 41.0], active_mm=[21.0, 41.0], trace=1.2, strand_min_mm=1.2, slit=False,
+                envelope_mm=[21.0, 41.0], active_mm=[21.0, 41.0], trace=1.2, strand_min_mm=1.2, slit=False, swap=False,
                 trace_max_mm=1.2, cap_mm=None, strands=1, via_pitch_mm=None, layout_ok=True,
                 Kt_mNm_per_A=res.Kt_Nm_per_A * 1e3, R_phase_ohm=res.R_phase_ohm,
                 Km_mNm_per_sqrtW=m["Km_mNm_per_sqrtW"], ripple_pct=res.torque_ripple_pct,
@@ -390,6 +431,16 @@ def sweep():
             for cap in (0.8, 1.6, 2.0, 2.5):
                 out.append(WaveDesign(f"wave_{env}_n{n}_cap{cap:g}", n_per_layer=n, r_in_mm=ri, r_a_mm=ra,
                                       r_b_mm=rb, r_out_mm=ro, trace_mm=None, cap_mm=cap))
+    # full-length strands, lane order swapped at every via (or not), on the recommended envelope
+    for n in (48,):
+        for env, (ri, ra, rb, ro) in envs[1:2] + envs[3:]:
+            for cap in (1.6, 2.0, 2.5, None):
+                for k in (2, 3):
+                    for swap in (True, False):
+                        tag = "fill" if cap is None else f"cap{cap:g}"
+                        out.append(WaveDesign(f"wave_{env}_n{n}_{tag}_s{k}{'swap' if swap else 'fixed'}",
+                                              n_per_layer=n, r_in_mm=ri, r_a_mm=ra, r_b_mm=rb, r_out_mm=ro,
+                                              trace_mm=None, cap_mm=cap, strands=k, swap=swap))
     # CMU-style stitched layers (parallel layers, tangential end arcs)
     for n in (48, 96):
         out.append(WaveDesign(f"wave_stitched_act21-41_n{n}_fill", n_per_layer=n, r_in_mm=18.0, r_a_mm=21.0,
@@ -425,9 +476,6 @@ def main():
     (OUT / "pcbmotor_wave_table.md").write_text(table(rows) + "\n")
     plot_layout(RECOMMENDED, rot, OUT / "pcbmotor_wave_layout.png")
 
-
-if __name__ == "__main__":
-    main()
 
 
 def plot_layout(d: WaveDesign, rot: RotorDesign, path):
@@ -466,5 +514,9 @@ def plot_layout(d: WaveDesign, rot: RotorDesign, path):
     plt.close(fig)
 
 
-RECOMMENDED = WaveDesign("wave_env15-44_act22-40_n48_cap1.2", n_per_layer=48, r_in_mm=15.0, r_a_mm=22.0,
-                         r_b_mm=40.0, r_out_mm=44.0, trace_mm=None, cap_mm=1.2)
+RECOMMENDED = WaveDesign("wave_env15-44_act22-40_n48_cap1.6_s2swap", n_per_layer=48, r_in_mm=15.0, r_a_mm=22.0,
+                         r_b_mm=40.0, r_out_mm=44.0, trace_mm=None, cap_mm=1.6, strands=2, swap=True)
+
+
+if __name__ == "__main__":
+    main()

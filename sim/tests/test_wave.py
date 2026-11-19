@@ -56,8 +56,20 @@ def test_fill_width_fits_pitch():
         assert np.allclose(w[mask] + d.space_mm, r[mask] * 2 * math.pi / d.n_per_layer)
 
 
+def test_swapped_strands_cancel_circulating_current():
+    """Reversing the lane order at every via (L2/L4) balances the strand EMFs; fixed lanes don't."""
+    rot = wave.hm_rotor()
+    base = dict(n_per_layer=24, r_in_mm=15.0, r_a_mm=22.0, r_b_mm=40.0, r_out_mm=44.0, trace_mm=None,
+                cap_mm=2.0, strands=2)
+    thetas = np.linspace(0, 2 * (2 * math.pi / rot.n_poles), 36, endpoint=False)
+    swap = wave.strand_circulating(wave.WaveDesign("s", swap=True, **base), rot, thetas)
+    fixed = wave.strand_circulating(wave.WaveDesign("f", swap=False, **base), rot, thetas)
+    assert fixed > 0 and swap < 0.05 * fixed, (swap, fixed)
+
+
 if __name__ == "__main__":
     test_positions_balanced()
     test_fill_width_fits_pitch()
     test_template_shift_matches_direct_sum()
+    test_swapped_strands_cancel_circulating_current()
     print("ok")
