@@ -1,0 +1,10 @@
+# KiCad lock files, per-user state, backups
+*.lck
+*.kicad_prl
+*-backups/
+fp-info-cache
+
+# Python
+__pycache__/
+.venv/
+.pytest_cache/

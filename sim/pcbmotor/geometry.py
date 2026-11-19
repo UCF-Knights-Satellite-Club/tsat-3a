@@ -57,6 +57,10 @@ STACKUPS = {
                      min_trace_mm=0.09, min_space_mm=0.09),
     "jlc4_2oz_out": dict(fab="JLCPCB", z_mm=[0.0, 0.21, 1.39, 1.6], oz=[2.0, 1.0, 1.0, 2.0],
                          min_trace_mm=0.15, min_space_mm=0.15),
+    # JLC's heaviest multilayer option: 2 oz on all four layers (2 oz inner only on 4L 1.6 mm with
+    # 2 oz outer; capabilities page checked 2026-11-19)
+    "jlc4_2oz": dict(fab="JLCPCB", z_mm=[0.0, 0.21, 1.39, 1.6], oz=[2.0] * 4,
+                     min_trace_mm=0.15, min_space_mm=0.15),
 }
 
 

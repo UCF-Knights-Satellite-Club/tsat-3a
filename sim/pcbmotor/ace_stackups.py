@@ -5,7 +5,10 @@ Writes results/pcbmotor_ace_stackups.json and results/pcbmotor_ace_stackups.md.
 
 Question: if a fab such as Accurate Circuit Engineering (ACE) builds the stator with many thin
 layers of heavy copper, and splits the wide traces into narrow transposed strands ("PCB Litz"),
-how much does that buy in efficiency, eddy loss and usable stored momentum?
+how much does that buy in efficiency, eddy loss and usable stored momentum? The advanced-tier
+cases (4 oz, 16-30 layers) check whether going past 6-layer 3 oz is worth asking for. The JLC
+heavy-copper cases (2 oz on all four layers; 2.5-4.5 oz, which JLC only makes as 2-layer boards)
+check what the cheap fab's heaviest options buy.
 
 Everything uses the recommended high-momentum payload rotor (6 coils / 8 poles,
 19.05 x 12.7 x 6.35 mm N42 blocks, 84 mm x 1.5 mm steel disc, 0.6 mm gap) unchanged, so only the
@@ -66,6 +69,22 @@ def _stack(n, oz, diel_mm, fab, min_space):
 STACKUPS["ace6_3oz"] = _stack(6, 3.0, 0.13, "ACE (assumed)", 0.20)
 STACKUPS["ace10_2oz"] = _stack(10, 2.0, 0.09, "ACE (assumed)", 0.15)
 STACKUPS["ace12_2oz"] = _stack(12, 2.0, 0.065, "ACE (assumed, aggressive)", 0.15)
+# ACE "advanced" tier (published roadmap: inner foil up to 5.6 mil, about 4 oz; 30+ layers; 1.2 mil
+# minimum dielectric). Also ASSUMED builds; the 4 oz spacing is a typical heavy-copper rule.
+STACKUPS["ace6_4oz"] = _stack(6, 4.0, 0.18, "ACE advanced (assumed)", 0.25)
+STACKUPS["ace8_3oz"] = _stack(8, 3.0, 0.13, "ACE (assumed)", 0.20)
+STACKUPS["ace16_2oz"] = _stack(16, 2.0, 0.065, "ACE advanced (assumed)", 0.15)
+STACKUPS["ace20_2oz"] = _stack(20, 2.0, 0.065, "ACE advanced (assumed)", 0.15)
+STACKUPS["ace24_1oz"] = _stack(24, 1.0, 0.05, "ACE advanced (assumed)", 0.10)
+STACKUPS["ace30_1oz"] = _stack(30, 1.0, 0.03, "ACE advanced (assumed, 1.2 mil dielectric)", 0.10)
+# JLCPCB's heaviest options (capabilities page, checked 2026-11-19): multilayer outer copper stops at
+# 2 oz, inner goes to 2 oz (2 oz inner only on 4L 1.6 mm with 2 oz outer). 2.5 / 3.5 / 4.5 oz finished
+# copper is 2-layer only, with 0.2 / 0.25 / 0.3 mm minimum trace and space. The all-2 oz 4L board is
+# geometry.STACKUPS["jlc4_2oz"]; 2L boards are 1.6 mm, so the bottom copper sits 1.6 mm minus one
+# copper thickness below the top (mid-plane to mid-plane).
+for _oz, _sp in ((2.5, 0.20), (3.5, 0.25), (4.5, 0.30)):
+    STACKUPS[f"jlc2_{_oz}oz"] = dict(fab="JLCPCB", z_mm=[0.0, round(1.6 - _oz * OZ_TO_M * 1e3, 4)], oz=[_oz] * 2,
+                                     min_trace_mm=_sp, min_space_mm=_sp)
 
 CASES = [
     # label, stackup, strands
@@ -79,6 +98,21 @@ CASES = [
     ("ACE 10L, 2 oz, 3 strands", "ace10_2oz", 3),
     ("ACE 12L, 2 oz, thin dielectric", "ace12_2oz", 1),
     ("ACE 12L, 2 oz, thin dielectric, 3 strands", "ace12_2oz", 3),
+    # advanced tier, stranded only (solid heavy copper is already shown to be worse)
+    ("ACE 6L, 4 oz, 3 strands", "ace6_4oz", 3),
+    ("ACE 8L, 3 oz, 3 strands", "ace8_3oz", 3),
+    ("ACE 16L, 2 oz, 3 strands", "ace16_2oz", 3),
+    ("ACE 20L, 2 oz, 3 strands", "ace20_2oz", 3),
+    ("ACE 24L, 1 oz, 3 strands", "ace24_1oz", 3),
+    ("ACE 30L, 1 oz, 1.2 mil dielectric, 3 strands", "ace30_1oz", 3),
+    # JLCPCB's heaviest copper
+    ("JLC 4L, 2 oz all layers", "jlc4_2oz", 1),
+    ("JLC 4L, 2 oz all layers, 3 strands", "jlc4_2oz", 3),
+    ("JLC 2L, 2.5 oz", "jlc2_2.5oz", 1),
+    ("JLC 2L, 2.5 oz, 2 strands", "jlc2_2.5oz", 2),
+    ("JLC 2L, 4.5 oz", "jlc2_4.5oz", 1),
+    ("JLC 2L, 4.5 oz, 2 strands", "jlc2_4.5oz", 2),
+    ("JLC 2L, 4.5 oz, 3 strands", "jlc2_4.5oz", 3),
 ]
 
 
@@ -198,7 +232,7 @@ def main(write=True):
     d0, r = StatorDesign(**j["stator"]), RotorDesign(**j["rotor"])
     rows = []
     for label, st, strands in CASES:
-        space = STACKUPS[st]["min_space_mm"] if st.startswith("ace") else d0.space_mm
+        space = STACKUPS[st]["min_space_mm"]          # heavy copper needs a wider space
         d = replace(d0, name=f"{st}_s{strands}", stackup=st, space_mm=max(space, d0.space_mm))
         rows.append(evaluate(label, d, r, strands))
     if not write:
