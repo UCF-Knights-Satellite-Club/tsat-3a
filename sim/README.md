@@ -20,6 +20,10 @@ python3 -m venv .venv
 .venv/bin/python tests/test_em_consistency.py   # torque model cross-check
 .venv/bin/python -m validation.cmu_wheel    # model vs. the measured CMU PCB wheel (~2 min)
 .venv/bin/python -m pcbmotor.stacking       # stacked boards / dual rotor vs single board (~2 min)
+.venv/bin/python -m pcbmotor.ace_stackups   # custom heavy-copper stackups and stranded traces (~1 min)
+.venv/bin/python -m pcbmotor.cubesat_wheels # PCB wheels in COTS CubeSat wheel footprints (~30 s)
+.venv/bin/python -m pcbmotor.magnetorquer   # stator as a magnetorquer (common-mode current via a neutral wire)
+.venv/bin/python -m pcbmotor.mechanical     # gap, flatness, back iron, magnet retention, balance, temperature, bearing loads
 .venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
 .venv/bin/python tests/test_layout.py       # as-built coil layout checks
 ```
@@ -37,6 +41,10 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `pcbmotor/geometry.py` | Stator and rotor geometry, fab stackups (OSH Park 2/4/6-layer, JLCPCB 4/6-layer presets). One source of truth that the KiCad footprint generator will also use. |
 | `pcbmotor/em.py` | Resistance, inductance, torque and back-EMF of a PCB motor. |
 | `pcbmotor/layout.py` | As-built copper: real spirals per layer, layer vias and terminals. Used by the KiCad generator (`PCBMotorTest/gen_stator.py`) and by `em.analyse_layout`. |
+| `pcbmotor/ace_stackups.py` | Custom (ACE-style) heavy-copper, many-layer stackups and stranded, transposed traces against the JLCPCB payload board; driver-limit and speed-cap sensitivity. |
+| `pcbmotor/cubesat_wheels.py` | PCB-motor reaction wheels sized into the footprints of COTS CubeSat wheels (CubeSpace, Rocket Lab, Blue Canyon) and compared on momentum, mass, torque and steady power. |
+| `pcbmotor/magnetorquer.py` | Stator used as a magnetorquer: dipole per amp of common-mode current, power, and the torque ripple it puts on the wheel. |
+| `pcbmotor/mechanical.py` | Mechanical checks: gap sensitivity, board bow against the gap, back-iron saturation, magnet retention, balance grade, Km against temperature, bearing loads. |
 | `pcbmotor/asbuilt.py` | Model of the test stator exactly as laid out, and the bench numbers to check it against. |
 | `pcbmotor/stacking.py` | Stacked stator boards (series/parallel), dual rotors and more-layer boards against one board, including eddy drag in the traces and the pull between rotors. |
 | `pcbmotor/designs.py` | Design sweep for the 40 mm test stator and the 1U payload stator; drive envelope; plots. |
