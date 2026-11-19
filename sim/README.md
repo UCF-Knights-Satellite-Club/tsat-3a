@@ -24,6 +24,8 @@ python3 -m venv .venv
 .venv/bin/python -m pcbmotor.cubesat_wheels # PCB wheels in COTS CubeSat wheel footprints (~30 s)
 .venv/bin/python -m pcbmotor.magnetorquer   # stator as a magnetorquer (common-mode current via a neutral wire)
 .venv/bin/python -m pcbmotor.mechanical     # gap, flatness, back iron, magnet retention, balance, temperature, bearing loads
+.venv/bin/python -m pcbmotor.wave           # wave winding vs spiral coils on the high-momentum rotor (~2 min)
+.venv/bin/python tests/test_wave.py         # wave-winding model checks
 .venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
 .venv/bin/python -m hang.run                # KAOS-3 three-axis hanging payload: D&C specs S1-S3 and flight Monte Carlo (~10 min, 8 cores)
 .venv/bin/python tests/test_layout.py       # as-built coil layout checks
@@ -48,6 +50,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `pcbmotor/mechanical.py` | Mechanical checks: gap sensitivity, board bow against the gap, back-iron saturation, magnet retention, balance grade, Km against temperature, bearing loads. |
 | `pcbmotor/asbuilt.py` | Model of the test stator exactly as laid out, and the bench numbers to check it against. |
 | `pcbmotor/stacking.py` | Stacked stator boards (series/parallel), dual rotors and more-layer boards against one board, including eddy drag in the traces and the pull between rotors. |
+| `pcbmotor/wave.py` | Wave-winding variant of the high-momentum payload stator (series layer pairs, fill/capped/slit traces, CMU-style stitched layers) against the spiral design, with eddy and circulating-current losses. |
 | `pcbmotor/designs.py` | Design sweep for the 40 mm test stator and the 1U payload stator; drive envelope; plots. |
 | `data/tsat1_swing.py` | Swing and excitation spectrum from the TSat-1 flight accelerometer log. |
 | `yaw/candidates.py` | Motor candidates (datasheet values, approximations flagged). |
@@ -58,6 +61,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `yaw/calibrate.py` | Fits the measured disturbance levels to the video statistics. |
 | `validation/cmu_wheel.py` | Rebuilds the CMU PCB reaction wheel from its paper and design files and compares the model with its measured resistance and torque constant. |
 | `tests/test_em_consistency.py` | Checks Lorentz-force torque against d(flux linkage)/d(angle). |
+| `tests/test_wave.py` | Wave-winding checks: balanced phases, slot-filling widths, and template-shift torque against a direct sum over every conductor. |
 | `results/` | CSV/JSON outputs, plots and `RESULTS.md`. |
 
 ## Models
