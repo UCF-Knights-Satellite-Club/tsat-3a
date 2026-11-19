@@ -3,7 +3,8 @@
 Generated 2026-11-17 by the scripts in `sim/` (see [`../README.md`](../README.md) for models and
 assumptions). Full Monte Carlo tables: [`yaw_tables.md`](yaw_tables.md). Raw data:
 `pcbmotor_sweep.csv`, `pcbmotor_designs.json`, `yaw_summary.csv`, `yaw_requirements.json`,
-`tsat1_swing.json`, `video_spin_tsat2b_full.*`, `video_phases_tsat2b_full.*`, `yaw_calibration.json`.
+`tsat1_swing.json`, `video_spin_tsat2b_full.*`, `video_phases_tsat2b_full.*`, `yaw_calibration.json`,
+`hang_summary.json`. Sections 5 and 6 (PCB motor design studies, KAOS-3 hanging payload) were added 2026-11-18/19.
 
 ## Conclusions
 
@@ -40,6 +41,10 @@ requirements and the recommended payload design changed.
 5. **Keep the 1U body aerodynamically symmetric about the yaw axis.** If TSat-2B's spin was mostly
    wind torque rather than line twist, a swivel helps less and the momentum demand doubles; a centred
    tether attachment and no one-sided protrusions reduce that torque at the source.
+6. **KAOS-3 (three-axis, eye just above the centre of mass) works in simulation with a 2 A driver**
+   (section 6): it holds within 0.7° through a ±10° swing and passes the D&C demo specs S1–S3 at eye
+   heights of 2–6 mm. Pitch/roll momentum is set by the centre-of-mass error at release (about 100
+   mN·m·s per mm), so pre-trim before release or size the wheels for about 70 mN·m·s.
 
 ## 1. PCB motor designs
 
@@ -312,7 +317,150 @@ Demand comes from ideal-actuator runs that hold heading for 10 minutes with no u
 - Hang-test the payload with a logging IMU, with and without the swivel, to tell the line-driven and
   gust-driven explanations apart before flight.
 
-## 5. Caveats
+## 5. PCB motor design studies (2026-11-18)
+
+Four studies on the same EM model, for the KAOS-3 senior design scoping and possible ACE sponsorship.
+Each module's docstring lists its assumptions; the full tables are in the linked files.
+
+### 5a. Custom stackups and stranded traces ([`pcbmotor_ace_stackups.md`](pcbmotor_ace_stackups.md))
+
+`pcbmotor/ace_stackups.py` puts the high-momentum payload rotor over JLC and ACE-style stackups (6-layer
+3 oz, 10- and 12-layer 2 oz; ACE values assumed), with solid 1.2 mm traces or each trace split into 3
+narrow, transposed strands. 11.1 V, 1 A driver, 6 mN·m kept for control after eddy drag, 6000 rpm cap.
+
+| Stator | Km mN·m/√W | Eddy W at 2,000 rpm | Usable momentum mN·m·s | Cu W, 10° swing |
+|---|---|---|---|---|
+| JLC 4L 2 oz out (current) | 16.2 | 0.69 | 80 | 0.31 |
+| JLC 4L, 3 strands | 14.0 | 0.03 | 128 (cap) | 0.41 |
+| ACE 6L 3 oz, solid | 30.0 | 2.04 | 56 | 0.09 |
+| ACE 6L 3 oz, 3 strands | 24.5 | 0.07 | 128 (cap) | 0.14 |
+| ACE 12L 2 oz, 3 strands | 29.8 | 0.12 | 128 (cap) | 0.09 |
+
+- **Stranding is the big win, and it works at JLC.** It cuts eddy loss by about 20× and lifts usable
+  momentum from 80 to the 128 mN·m·s speed cap.
+- **Heavy copper without strands is worse**: more eddy drag, lower usable speed (56–67 mN·m·s).
+- **ACE heavy copper with strands** roughly halves to thirds the copper heat for the same torque. That
+  matters for heat in near-vacuum, not for momentum.
+- Stranded windings have low Kt (about 11 mN·m/A), so they need a 2 A driver to match the current
+  design's torque.
+
+### 5b. PCB wheels in COTS CubeSat footprints ([`pcbmotor_cubesat_wheels.md`](pcbmotor_cubesat_wheels.md))
+
+`pcbmotor/cubesat_wheels.py` sizes a PCB wheel (12 V, 2 A, 6000 rpm, stranded) into the footprint and
+height of CubeSpace, Rocket Lab and Blue Canyon wheels.
+
+| Footprint | COTS wheel (momentum mN·m·s, mass g) | PCB wheel, JLC / ACE (momentum, mass g) | Torque, JLC / ACE mN·m |
+|---|---|---|---|
+| 46 × 46 | CubeSpace CW0162 (16.2, 144) | 22 / 23 (162 / 169) | 3 / 7 |
+| 50 × 50 | Rocket Lab RW-0.03 (30, 183) | 42 / 42 (233 / 232) | 6 / 9 |
+| 58 × 58 | BCT RWp050 (50, 240) | 60 / 65 (260 / 277) | 6 / 13 |
+| 70 × 70 | BCT RWp100 (100, 330) | 137 / 137 (379 / 378) | 10 / 15 |
+
+- A PCB wheel stores about 1.3–1.4× the momentum of the COTS wheel in the same footprint at similar
+  momentum per kilogram, and with ACE copper gives about twice the torque at 58 mm and up.
+- Steady power at rated momentum is 0.2–0.45 W.
+- PCB wheel masses are estimates (rotor, stator board with driver, hub, bearings, cover). COTS values
+  are from data sheets and vendor listings.
+
+### 5c. Stator as a magnetorquer ([`pcbmotor_magnetorquer.md`](pcbmotor_magnetorquer.md))
+
+Normal three-phase drive makes no net magnetic dipole. Bringing out the star point and driving a
+common-mode current through all three phases (a fourth inverter leg) does.
+
+| Design | Dipole A·m² per A | Power for 0.01 A·m² | Torque ripple on the wheel at 0.01 A·m² |
+|---|---|---|---|
+| Payload, high momentum | 0.042 | 23 mW | ±1.5 mN·m (zero mean, cancellable by FOC) |
+| Reference: dedicated 80-turn edge coil on a 90 mm board (assumed) | 0.39 per A | about the same m²/P | – |
+
+- Per watt, the stator is about as good a magnetorquer as a dedicated air-core coil
+  (0.0044 against 0.0042 (A·m²)²/W).
+- It costs a neutral wire and a fourth half-bridge. The encoder knows the rotor angle, so FOC can cancel
+  the triplen-harmonic torque ripple.
+- Useful for momentum dumping in orbit; irrelevant on a balloon.
+
+### 5d. Mechanical checks ([`pcbmotor_mechanical.md`](pcbmotor_mechanical.md))
+
+| Check | Test stator | Payload | Payload, high momentum |
+|---|---|---|---|
+| Kt at 0.3 / design / 1.0 mm gap (mN·m/A) | 11.4 / 10.5 / 8.6 | 29.1 / 26.7 / 23.7 | 22.9 / 21.7 / 20.3 |
+| IPC-6012 bow and twist allowance (vs gap) | 0.32 mm (ok) | 0.95 mm (exceeds 0.6) | 0.95 mm (exceeds 0.6) |
+| Steel needed / present | 1.19 / 1.5 mm | 1.14 / 1.5 | 2.36 / 3.0 |
+| Magnet bond shear at top speed (margin) | 0.11 MPa (88×) | 0.10 (104×) | 0.29 (35×) |
+| 1% mass error on one magnet | G3.8 | G2.9 | G7.1 |
+| Km at −50 / 20 / 80 °C | 2.5 / 2.0 / 1.6 | 26.0 / 20.4 / 17.1 | 20.5 / 16.1 / 13.5 |
+
+- **Board flatness is the real mechanical risk.** A 90 mm board may bow 0.95 mm under IPC-6012 Class 2,
+  more than the 0.6 mm gap. Clamp or bond the stator to a flat plate, or specify tighter flatness.
+- Back iron, magnet bonds and bearing loads are fine.
+- The high-momentum rotor needs balancing: one magnet 1% heavy gives G7.1.
+- Km rises 27% at −50 °C (copper resistance falls faster than the magnets weaken).
+- Rotor bending modes need FEA and are not computed.
+
+## 6. KAOS-3 three-axis hanging payload: pitch and roll (2026-11-19)
+
+`hang/model.py` and `hang/run.py` test the KAOS-3 senior design architecture against the D&C demo
+specifications S1–S3, then in a flight Monte Carlo. Full tables: [`hang_tables.md`](hang_tables.md);
+plots: `hang_s1_example.png`, `hang_flight_example.png`.
+
+**Model.**
+- **Payload.** A 2.6 kg rigid body (uniform 20 × 20 × 11 cm box, assumed) on an elastic line. The line
+  attaches at an eye d above the centre of mass: 4 mm by design, tested at 2–6 mm, and the controller
+  always assumes 4 mm.
+- **Wheels.** Three high-momentum PCB wheels with driver current and back-EMF limits, eddy drag and
+  gyroscopic coupling.
+- **Trim stage.** A 0.3 kg battery pack moves ±15 mm at 2 mm/s in two axes. With wheels it unloads
+  the pitch and roll wheels; without wheels it levels the payload from the estimated tilt.
+- **Control.** A Mahony attitude estimator (gyro plus accelerometer, 30 s time constant) and a 100 Hz,
+  15 rad/s PID loop.
+- **Flight disturbance.** Random motion of the top of the line, scaled to 3°, 6° and 10° RMS swing.
+  10° RMS is roughly the TSat-1 swing estimate (up to 26° peak, an upper bound).
+
+**Results.**
+
+| Test | Wheels + trim, 2 A driver | Wheels + trim, 1 A driver (current design) | Trim only | No control |
+|---|---|---|---|---|
+| S1: ±10° swing, 3–10 s period, hold level | **Pass at every d**: peak error 0.3–0.7° | Pass up to d = 4 mm; fails at 5–6 mm with long periods (2.6–4.8°, current-limited) | – | 13–82° |
+| S2: hold 15°, still air | **Pass** (≤0.4°) | Pass | Pass (≤1.7°) | 15° (no tilt) |
+| S2: hold 15° during a 10° swing | **Pass** (≤0.5°) | Fails at d = 6 mm (3.6°) | Fails (11–15°) | 24–26° |
+| S3: 20 g moved 30 mm | **Pass**: never leaves 0.3° | Pass | Peak 4–13°, back within 1° in 20–46 s (passes the 60 s spec) | Stays tilted |
+| Flight, 10° RMS swing: time within 2° | **100% median, 96% worst** | 97% median, 48% worst | 2% | 2% |
+
+1. **The architecture works in the model.** With the eye 2–6 mm above the centre of mass, three wheels
+   hold the payload within 0.3–0.7° while the line swings ±10°, where the free payload swings 13–26°.
+   The trim stage holds steady tilts and corrects unbalance. The estimator error stays under 0.7°
+   during the swing.
+2. **Driver current, not momentum, sets the margin.** Holding level against a swing takes
+   M·g·d·sin(swing): about 22 mN·m peak at d = 5 mm and 10°, beyond the current design's 1 A limit
+   (21.8 mN·m).
+   - A 2 A driver passes everything.
+   - Stranded windings halve Kt, so at 2 A they behave like the solid winding at 1 A. Keep a solid
+     winding, or give stranded windings a 4 A driver.
+   - Spec S7 (6 mN·m continuous) understates this. Peak torque should be about 30 mN·m for d up to
+     6 mm.
+3. **Pitch/roll momentum is set by the centre-of-mass error at release, not by the swing.** In flight,
+   peak momentum was 30–66 mN·m·s, about 100 mN·m·s per mm of initial lateral offset, at every swing
+   level. That is the wheels holding attitude while the trim stage, which deliberately ignores the
+   swing, catches up. The swing alone needs 20–60 mN·m·s (S1, d = 2–6 mm). S6's 30 mN·m·s is too low:
+   - either raise it to about 70 mN·m·s (the high-momentum wheel stores 80),
+   - or level the payload with the trim stage on the launch line before release, and keep d at or
+     below 4 mm.
+4. **Trim travel is just enough.** A 15° tilt at d = 6 mm uses the whole ±15 mm (S9). Keep d ≤ 5 mm,
+   or add travel or trim mass.
+5. **Trim alone is a usable fallback in calm air only.** It holds a 15° tilt and corrects unbalance in
+   still air, but follows the line in any swing (2–19% of time within 2° in flight). The fallback in
+   the D&C (yaw wheel plus a fixed tilted antenna) is consistent with this.
+6. **Avoid a hang-test line near the payload's rocking period.** With a short rig line (about 2 m, 3 s
+   swing) and d = 2 mm, line swing and payload rocking resonate: the free payload rocked to 82°. The
+   rocking period is 2π·√(I/(M·g·d)): about 3 s at 2 mm and 2 s at 4 mm. With wheels running this is
+   harmless (0.3°), but a wheel fault on the rig would be violent.
+7. **Power.** The three wheels draw 0.3 W mean in 3° RMS swing and 1.2 W in 10° RMS (2 A driver,
+   JLC solid).
+
+Not modelled: aerodynamic torque on pitch and roll, line torsion and swivel friction, IMU offset and
+misalignment, structural modes, and a magnetometer or GPS heading (heading is gyro-only, so a tilted
+target's azimuth drifts slowly). Payload inertia and trim-stage parameters are assumed.
+
+## 7. Caveats
 
 - **Satellite.** Inertia is assumed (1 kg, 10×10 cm). Replace it with the CAD value.
 - **Tether and disturbance.** The "measured" levels are calibrated to one TSat-2B flight (a 2U
