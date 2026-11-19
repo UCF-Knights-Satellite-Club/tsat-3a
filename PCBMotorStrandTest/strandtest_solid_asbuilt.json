@@ -1,0 +1,95 @@
+{
+  "design": "payload_jlc4_2oz_out_6c8p_w1.2_h6.35_jlc4_2oz",
+  "variant": "solid",
+  "strands": 1,
+  "strand_mm": 1.2,
+  "strand_gap_mm": 0.15,
+  "bundle_mm": 1.2,
+  "n_turns": 7,
+  "turns_per_layer": [
+    6.389271399168252,
+    6.748214640920638,
+    5.748214640920638,
+    6.389271399168252
+  ],
+  "lane_lengths_mm": [
+    [
+      448.9704225163691
+    ],
+    [
+      439.4723955445501
+    ],
+    [
+      421.1690668207415
+    ],
+    [
+      433.4490937925605
+    ]
+  ],
+  "strand_lanes": [
+    [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  ],
+  "via_drill_mm": 0.3,
+  "via_dia_mm": 0.6,
+  "ring_track_mm": 0.9,
+  "lead_track_mm": 1.0,
+  "ring_layers": [
+    "In1.Cu",
+    "In2.Cu"
+  ],
+  "ring_radii_mm": [
+    43.55,
+    44.65,
+    45.75,
+    46.85
+  ],
+  "ring": {
+    "PHASE_A": {
+      "outer_mm": 19.945902205745455,
+      "inner_mm": 223.27776535678947,
+      "vias": 6
+    },
+    "PHASE_B": {
+      "outer_mm": 24.470396195095717,
+      "inner_mm": 330.02907412995216,
+      "vias": 6
+    },
+    "PHASE_C": {
+      "outer_mm": 22.270852684647355,
+      "inner_mm": 231.04271683659118,
+      "vias": 6
+    }
+  },
+  "board_mm": [
+    100.0,
+    100.0
+  ],
+  "stackup": "JLCPCB 4L (assumed thicknesses): copper 70 / 70 / 70 / 70 um, dielectric 0.14 / 1.11 / 0.14 mm",
+  "header_pins": {
+    "1": "B1",
+    "2": "A2",
+    "3": "C2",
+    "4": "B2",
+    "5": "A1",
+    "6": "C1"
+  },
+  "jumper_pad_strand": null,
+  "jumper": null
+}

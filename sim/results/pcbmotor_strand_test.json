@@ -1,0 +1,201 @@
+{
+  "design": "payload_jlc4_2oz_out_6c8p_w1.2_h6.35_jlc4_2oz",
+  "stackup": "jlc4_2oz",
+  "rotor": {
+    "n_poles": 8,
+    "magnet_shape": "block",
+    "magnet_d_mm": 6.0,
+    "block_len_mm": 19.05,
+    "block_w_mm": 12.7,
+    "magnet_h_mm": 6.35,
+    "magnet_r_mm": 31.0,
+    "br_T": 1.32,
+    "airgap_mm": 0.6,
+    "back_iron": true,
+    "back_iron_t_mm": 1.5,
+    "disc_od_mm": 84.0,
+    "disc_t_mm": 1.5,
+    "disc_density": 7850.0
+  },
+  "boards": {
+    "solid": {
+      "variant": "solid",
+      "strands": 1,
+      "strand_width_mm": 1.2,
+      "strand_gap_mm": 0.15,
+      "turns_per_layer": 7,
+      "copper_width_mm": 1.2,
+      "strand_R_ohm": [
+        0.3634468314679769
+      ],
+      "R_coil_ohm": 0.3634468314679769,
+      "R_phase_ohm": 0.7870261001177439,
+      "ring_ohm_per_phase": {
+        "PHASE_A": 0.044353630653663545,
+        "PHASE_B": 0.060132437181790094,
+        "PHASE_C": 0.04599472828931389
+      },
+      "phase_R_bench_ohm": {
+        "A1-A2": 0.7712472935896173,
+        "B1-B2": 0.7870261001177439,
+        "C1-C2": 0.7728883912252678
+      },
+      "Kt_mNm_per_A": 20.11248438181945,
+      "ripple_pct": 3.6717778417165676,
+      "Km_mNm_per_sqrtW": 18.510814248069142,
+      "phase_backEMF_V_peak_per_krpm": 1.404116292874743,
+      "line_backEMF_V_peak_per_krpm_star": 2.4320007589943167,
+      "electrical_Hz_per_krpm": 66.66666666666667,
+      "c_eddy": 2.055607475403325e-05,
+      "c_circ": 1.0996603758115094e-36,
+      "c_total": 2.055607475403325e-05,
+      "strand_backEMF_spread_mV_rms_per_krpm": 2.7027303870114903e-14,
+      "rotor_J_kgm2": 0.0002036909700695509,
+      "drag": {
+        "1000": {
+          "eddy_mNm": 2.1526271144637823,
+          "circ_mNm": 1.151561652697743e-31,
+          "total_mNm": 2.1526271144637823,
+          "total_W": 0.22542258429058706,
+          "decel_rpm_per_s": 100.917948139843
+        },
+        "2000": {
+          "eddy_mNm": 4.305254228927565,
+          "circ_mNm": 2.303123305395486e-31,
+          "total_mNm": 4.305254228927565,
+          "total_W": 0.9016903371623483,
+          "decel_rpm_per_s": 201.835896279686
+        },
+        "3000": {
+          "eddy_mNm": 6.457881343391346,
+          "circ_mNm": 3.454684958093229e-31,
+          "total_mNm": 6.457881343391346,
+          "total_W": 2.028803258615284,
+          "decel_rpm_per_s": 302.75384441952895
+        },
+        "4000": {
+          "eddy_mNm": 8.61050845785513,
+          "circ_mNm": 4.606246610790972e-31,
+          "total_mNm": 8.61050845785513,
+          "total_W": 3.606761348649393,
+          "decel_rpm_per_s": 403.671792559372
+        }
+      },
+      "coast_tau_s": 9.909040150264353
+    },
+    "stranded": {
+      "variant": "stranded",
+      "strands": 3,
+      "strand_width_mm": 0.3,
+      "strand_gap_mm": 0.15,
+      "turns_per_layer": 7,
+      "copper_width_mm": 0.8999999999999999,
+      "strand_R_ohm": [
+        1.4405364987253213,
+        1.440647493770241,
+        1.4405364987253213
+      ],
+      "R_coil_ohm": 0.48019116505773807,
+      "R_phase_ohm": 1.0205147672972663,
+      "ring_ohm_per_phase": {
+        "PHASE_A": 0.04418553637369804,
+        "PHASE_B": 0.060132437181790094,
+        "PHASE_C": 0.04599472828931389
+      },
+      "phase_R_bench_ohm": {
+        "A1-A2": 1.0045678664891742,
+        "B1-B2": 1.0205147672972663,
+        "C1-C2": 1.00637705840479
+      },
+      "Kt_mNm_per_A": 20.078602200169268,
+      "ripple_pct": 3.551802280043643,
+      "Km_mNm_per_sqrtW": 16.22849325026772,
+      "phase_backEMF_V_peak_per_krpm": 1.401750870364525,
+      "line_backEMF_V_peak_per_krpm_star": 2.4279037270252517,
+      "electrical_Hz_per_krpm": 66.66666666666667,
+      "c_eddy": 9.598196560246186e-07,
+      "c_circ": 2.957978775847995e-09,
+      "c_total": 9.627776348004666e-07,
+      "strand_backEMF_spread_mV_rms_per_krpm": 1.6112202270006863,
+      "rotor_J_kgm2": 0.0002036909700695509,
+      "drag": {
+        "1000": {
+          "eddy_mNm": 0.10051207933793413,
+          "circ_mNm": 0.000309758813055953,
+          "total_mNm": 0.10082183815099009,
+          "total_W": 0.010558038201885651,
+          "decel_rpm_per_s": 4.726658400574769
+        },
+        "2000": {
+          "eddy_mNm": 0.20102415867586826,
+          "circ_mNm": 0.000619517626111906,
+          "total_mNm": 0.20164367630198018,
+          "total_W": 0.042232152807542604,
+          "decel_rpm_per_s": 9.453316801149539
+        },
+        "3000": {
+          "eddy_mNm": 0.30153623801380236,
+          "circ_mNm": 0.0009292764391678591,
+          "total_mNm": 0.3024655144529702,
+          "total_W": 0.09502234381697088,
+          "decel_rpm_per_s": 14.179975201724304
+        },
+        "4000": {
+          "eddy_mNm": 0.4020483173517365,
+          "circ_mNm": 0.001239035252223812,
+          "total_mNm": 0.40328735260396037,
+          "total_W": 0.16892861123017042,
+          "decel_rpm_per_s": 18.906633602299078
+        }
+      },
+      "coast_tau_s": 211.5659553223475,
+      "jumper_J2_open": {
+        "pads 3-2 (strands 0-1)": {
+          "R_ohm": 2.8811839924955622,
+          "V_mV_rms_per_krpm": 2.087182021585168,
+          "V_mV_peak_per_krpm": 3.44938898386359
+        },
+        "pads 1-2 (strands 2-1)": {
+          "R_ohm": 2.8811839924955622,
+          "V_mV_rms_per_krpm": 2.7300973210777806,
+          "V_mV_peak_per_krpm": 5.444009692627871
+        },
+        "pads 3-1 (strands 0-2)": {
+          "R_ohm": 2.8810729974506426,
+          "V_mV_rms_per_krpm": 3.3991933450927667,
+          "V_mV_peak_per_krpm": 4.944805256731547
+        }
+      },
+      "jumper_J2_open_phaseA_R_ohm": 1.9809710960097693,
+      "untransposed_jumper": {
+        "pads 3-2 (strands 0-1)": {
+          "R_ohm": 2.955415941761162,
+          "V_mV_rms_per_krpm": 35.812334787939,
+          "V_mV_peak_per_krpm": 58.556284654212746
+        },
+        "pads 1-2 (strands 2-1)": {
+          "R_ohm": 2.8069520432299626,
+          "V_mV_rms_per_krpm": 38.26873311115412,
+          "V_mV_peak_per_krpm": 62.5354409580654
+        },
+        "pads 3-1 (strands 0-2)": {
+          "R_ohm": 2.8810729974506426,
+          "V_mV_rms_per_krpm": 74.04035054510543,
+          "V_mV_peak_per_krpm": 121.09172561227805
+        }
+      },
+      "untransposed_c_circ": 1.0439370325434648e-06,
+      "untransposed_circ_mNm_at_3000": 0.32796249122488774,
+      "untransposed_strand_backEMF_spread_mV_rms_per_krpm": 30.26474549818205
+    }
+  },
+  "design_study_estimate": {
+    "c_eddy_solid": 2.0502947113520567e-05,
+    "c_eddy_stranded": 9.610756459462765e-07
+  },
+  "notes": [
+    "Bearing drag is not included: measure it by spinning the rotor with no stator.",
+    "JLC does not publish its 4-layer dielectric thicknesses; layer depths are the sim's assumed 1.6 mm build (geometry.STACKUPS['jlc4_2oz']).",
+    "Resistance at 20 C; copper rises 0.39 %/K."
+  ]
+}
