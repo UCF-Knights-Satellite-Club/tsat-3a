@@ -19,6 +19,9 @@ python3 -m venv .venv
 .venv/bin/python -m yaw.sim                 # yaw Monte Carlo for all motor candidates (~2 min)
 .venv/bin/python tests/test_em_consistency.py   # torque model cross-check
 .venv/bin/python -m validation.cmu_wheel    # model vs. the measured CMU PCB wheel (~2 min)
+.venv/bin/python -m pcbmotor.stacking       # stacked boards / dual rotor vs single board (~2 min)
+.venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
+.venv/bin/python tests/test_layout.py       # as-built coil layout checks
 ```
 
 Run `pcbmotor.designs` before `yaw.sim`: the yaw sim reads the recommended PCB designs from
@@ -33,6 +36,9 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 |---|---|
 | `pcbmotor/geometry.py` | Stator and rotor geometry, fab stackups (OSH Park 2/4/6-layer, JLCPCB 4/6-layer presets). One source of truth that the KiCad footprint generator will also use. |
 | `pcbmotor/em.py` | Resistance, inductance, torque and back-EMF of a PCB motor. |
+| `pcbmotor/layout.py` | As-built copper: real spirals per layer, layer vias and terminals. Used by the KiCad generator (`PCBMotorTest/gen_stator.py`) and by `em.analyse_layout`. |
+| `pcbmotor/asbuilt.py` | Model of the test stator exactly as laid out, and the bench numbers to check it against. |
+| `pcbmotor/stacking.py` | Stacked stator boards (series/parallel), dual rotors and more-layer boards against one board, including eddy drag in the traces and the pull between rotors. |
 | `pcbmotor/designs.py` | Design sweep for the 40 mm test stator and the 1U payload stator; drive envelope; plots. |
 | `data/tsat1_swing.py` | Swing and excitation spectrum from the TSat-1 flight accelerometer log. |
 | `yaw/candidates.py` | Motor candidates (datasheet values, approximations flagged). |

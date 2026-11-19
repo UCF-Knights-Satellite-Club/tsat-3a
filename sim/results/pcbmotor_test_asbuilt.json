@@ -1,0 +1,98 @@
+{
+  "design": "test_4L_6c8p_w0.15_m8.0x3.0",
+  "as_built": {
+    "n_turns_rings": 18.0,
+    "turns_per_layer": [
+      17.616836574000413,
+      17.500000000000007,
+      17.000000000000007,
+      17.11683657400041
+    ],
+    "R_coil_ohm": 9.592711881800804,
+    "R_phase_ohm": 19.81151804972447,
+    "Kt_Nm_per_A": 0.011471222752931963,
+    "torque_ripple_pct": 0.7832260461269496,
+    "Ke_phase_V_per_rad_s": 0.007647481835287975,
+    "Km_Nm_per_sqrtW": 0.0021042881348500215
+  },
+  "ring_ohm_per_phase": {
+    "PHASE_A": 0.4225358808080089,
+    "PHASE_B": 0.6260942861228603,
+    "PHASE_C": 0.44292827673773316
+  },
+  "sweep_model": {
+    "turns_per_layer": 20,
+    "R_phase_ohm": 20.75134987729042,
+    "Kt_Nm_per_A": 0.010348551734958708
+  },
+  "bench_predictions": {
+    "phase_resistance_ohm_20C": {
+      "A1-A2": 19.60795964440962,
+      "B1-B2": 19.81151804972447,
+      "C1-C2": 19.62835204033934
+    },
+    "line_to_line_resistance_ohm_star": 39.62303609944894,
+    "resistance_tempco_pct_per_K": 0.393,
+    "phase_backEMF_V_peak_per_krpm": 0.800842425073403,
+    "line_backEMF_V_peak_per_krpm (star)": 1.3870997690838056,
+    "electrical_Hz_per_krpm": 66.66666666666667,
+    "Kt_mNm_per_A_peak (FOC)": 11.471222752931963,
+    "Km_mNm_per_sqrtW": 2.1042881348500213,
+    "stall_torque_mNm_at_11.1V_voltage_limited": 3.710686892223792,
+    "noload_rpm_at_11.1V": 8002.308303556036
+  },
+  "notes": [
+    "Back-EMF assumes the rotor in sim/results/pcbmotor_designs.json (8 x 8x3 mm N42 discs, 1.5 mm steel back plate, 0.5 mm air gap). Measure the real gap; Kt falls with gap.",
+    "Resistance at 20 C; copper rises 0.39 %/K, so log board temperature or measure R cold."
+  ],
+  "backEMF_vs_gap": [
+    {
+      "airgap_mm": 0.5,
+      "back_iron": true,
+      "Kt_mNm_per_A": 11.449397078059784,
+      "phase_backEMF_V_peak_per_krpm": 0.7993187055214458
+    },
+    {
+      "airgap_mm": 0.5,
+      "back_iron": false,
+      "Kt_mNm_per_A": 8.77210228681079,
+      "phase_backEMF_V_peak_per_krpm": 0.612408268906289
+    },
+    {
+      "airgap_mm": 0.75,
+      "back_iron": true,
+      "Kt_mNm_per_A": 10.35671578362986,
+      "phase_backEMF_V_peak_per_krpm": 0.7230351604704227
+    },
+    {
+      "airgap_mm": 0.75,
+      "back_iron": false,
+      "Kt_mNm_per_A": 7.924106908854365,
+      "phase_backEMF_V_peak_per_krpm": 0.5532070233581555
+    },
+    {
+      "airgap_mm": 1.0,
+      "back_iron": true,
+      "Kt_mNm_per_A": 9.373086298327449,
+      "phase_backEMF_V_peak_per_krpm": 0.6543648679175258
+    },
+    {
+      "airgap_mm": 1.0,
+      "back_iron": false,
+      "Kt_mNm_per_A": 7.161846682809199,
+      "phase_backEMF_V_peak_per_krpm": 0.49999122055221795
+    },
+    {
+      "airgap_mm": 1.5,
+      "back_iron": true,
+      "Kt_mNm_per_A": 7.688818719458879,
+      "phase_backEMF_V_peak_per_krpm": 0.5367808089741265
+    },
+    {
+      "airgap_mm": 1.5,
+      "back_iron": false,
+      "Kt_mNm_per_A": 5.859397568216972,
+      "phase_backEMF_V_peak_per_krpm": 0.40906311899494074
+    }
+  ]
+}

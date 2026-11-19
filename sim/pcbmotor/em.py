@@ -211,3 +211,51 @@ def analyse(d: StatorDesign, r: RotorDesign, n_theta=72):
         rotor_mass_kg=m,
         copper_mass_g=copper_mass_g(d),
     ), (thetas, tq)
+
+
+# ---------------------------------------------------------------- as-built copper (layout.py)
+def layout_torque_curve(lay, r: RotorDesign, n_theta=72, max_seg_mm=0.25):
+    """Same as coil_torque_curve, but on the as-built spiral copper of one coil (all layers,
+    including the via stubs) from pcbmotor.layout.CoilLayout."""
+    from .layout import path_points
+    mids, dls = [], []
+    for z, path in zip(lay.design.stack["z_mm"], lay.layers):
+        poly = path_points(path, max_seg_mm)
+        p = np.c_[poly / 1e3, np.full(len(poly), -z / 1e3)]
+        mids.append((p[:-1] + p[1:]) / 2)
+        dls.append(np.diff(p, axis=0))
+    mids, dls = np.vstack(mids), np.vstack(dls)
+    period = 2 * (2 * math.pi / r.n_poles)
+    thetas = np.linspace(0, period, n_theta, endpoint=False)
+    tq = np.empty(n_theta)
+    for i, th in enumerate(thetas):
+        F = np.cross(dls, rotor_magnets(r, th).getB(mids))
+        tq[i] = np.sum(mids[:, 0] * F[:, 1] - mids[:, 1] * F[:, 0])
+    return thetas, -tq
+
+
+def layout_coil_resistance(lay, temp_c=20.0, n_vias=3):
+    """Resistance of one as-built coil: exact trace lengths per layer plus its layer vias."""
+    from .layout import path_length, VIA_DRILL_MM
+    rho = RHO_CU_20C * (1 + ALPHA_CU * (temp_c - 20.0))
+    d = lay.design
+    r = sum(rho * (path_length(p) / 1e3) / ((d.trace_mm / 1e3) * oz * OZ_TO_M)
+            for p, oz in zip(lay.layers, d.stack["oz"]))
+    # plated via barrel: 1.6 mm long, ~25 um plating (OSH Park nominal ~1 mil)
+    t_pl = 25e-6
+    a_via = math.pi * ((VIA_DRILL_MM / 1e3) * t_pl)
+    return r + n_vias * rho * 1.6e-3 / a_via
+
+
+def analyse_layout(lay, r: RotorDesign, n_theta=72, extra_phase_ohm=0.0):
+    """Kt, ripple and phase resistance of the as-built stator. extra_phase_ohm adds the
+    board's ring and lead tracks for one phase (from the generator)."""
+    d = lay.design
+    thetas, tq = layout_torque_curve(lay, r, n_theta)
+    kt, ripple, _, _ = foc_torque(d, r, thetas, tq)
+    n = d.n_coils // 3
+    r_coil = layout_coil_resistance(lay)
+    r_ph = (r_coil * n if d.series else r_coil / n) + extra_phase_ohm
+    return dict(n_turns_rings=lay.n_turns, turns_per_layer=lay.turns_per_layer(),
+                R_coil_ohm=r_coil, R_phase_ohm=r_ph, Kt_Nm_per_A=kt, torque_ripple_pct=ripple * 100,
+                Ke_phase_V_per_rad_s=kt * 2 / 3, Km_Nm_per_sqrtW=kt / math.sqrt(1.5 * r_ph))

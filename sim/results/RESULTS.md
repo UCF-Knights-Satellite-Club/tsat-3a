@@ -48,22 +48,22 @@ requirements and the recommended payload design changed.
 | | Test stator | Payload stator (recommended) | Payload, OSH Park 6L (comparison) |
 |---|---|---|---|
 | Name | `test_4L_6c8p_w0.15_m8.0x3.0` | `payload_jlc4_2oz_out_12c16p_w1.2_h3.18` | `payload_osh6_9c12p_w1.2_h3.18` |
-| Fab / stackup | OSH Park 4-layer (1/0.5/0.5/1 oz) | JLCPCB 4-layer, 2 oz outer / 1 oz inner | OSH Park 6-layer |
+| Fab / stackup | OSH Park 4-layer (published stackup: 1.7 mil plated outer, 0.5 oz inner, 39 mil core) | JLCPCB 4-layer, 2 oz outer / 1 oz inner | OSH Park 6-layer |
 | Board | 42 mm round | 90 × 90 mm, winding 42–82 mm diameter | same as payload |
 | Coils / poles | 6 / 8 | 12 / 16 | 9 / 12 |
 | Trace / space | 0.15 / 0.15 mm, 20 turns per layer per coil | 1.2 / 0.15 mm, 5 turns per layer per coil | 1.2 / 0.15 mm, 7 turns |
 | Magnets | 8 × (8 mm dia × 3 mm) N42 discs | 16 × (19.05 × 6.35 × 3.18 mm) N42 blocks | 12 × (19.05 × 9.53 × 3.18 mm) |
 | Rotor | 1.5 mm steel back plate, 40 mm | 84 mm × 1.5 mm steel disc (back iron and flywheel) | same as payload |
 | Air gap | 0.5 mm | 0.6 mm | 0.6 mm |
-| Kt (per A peak, FOC) | 10.3 mN·m/A | 26.7 mN·m/A | 38.5 mN·m/A |
-| Phase R / L | 20.8 Ω / 180 µH | 1.14 Ω / 95 µH | 3.99 Ω / 228 µH |
-| Km (torque per √W) | 1.85 mN·m/√W | **20.4 mN·m/√W** | 15.7 mN·m/√W |
-| Torque at 11.1 V | 3.2 mN·m peak (0.31 A, voltage-limited); **1.95 mN·m continuous** (0.19 A, 1.1 W, 40 K rise) | 26.7 mN·m at the 1 A driver limit, 1.7 W, 11 K rise | 38.5 mN·m at 1 A, 6.0 W, 37 K rise |
-| No-load speed at 11.1 V | 8,900 rpm (capped at 6,000 for a hand-balanced rotor) | 3,440 rpm | 2,380 rpm |
+| Kt (per A peak, FOC) | 10.5 mN·m/A | 26.7 mN·m/A | 38.5 mN·m/A |
+| Phase R / L | 19.3 Ω / 169 µH | 1.14 Ω / 95 µH | 3.99 Ω / 228 µH |
+| Km (torque per √W) | 1.95 mN·m/√W | **20.4 mN·m/√W** | 15.7 mN·m/√W |
+| Torque at 11.1 V | 3.5 mN·m peak (0.33 A, voltage-limited); **2.06 mN·m continuous** (0.20 A, 1.1 W, 40 K rise) | 26.7 mN·m at the 1 A driver limit, 1.7 W, 11 K rise | 38.5 mN·m at 1 A, 6.0 W, 37 K rise |
+| No-load speed at 11.1 V | 8,700 rpm (capped at 6,000 for a hand-balanced rotor) | 3,440 rpm | 2,380 rpm |
 | Rotor inertia / mass | 4.4×10⁻⁶ kg·m² / 24 g | 1.02×10⁻⁴ kg·m² / 111 g (+5.6 g copper on the board) | 1.07×10⁻⁴ / 117 g |
 | Momentum at max speed | 2.8 mN·m·s | **36.7 mN·m·s** | 26.8 mN·m·s |
 | Torque ripple (ideal sinusoidal drive) | 0.7% | 2.4% | 1.6% |
-| PWM ripple current p-p at 20 / 50 / 100 kHz | 0.39 / 0.15 / 0.08 A | 0.73 / 0.29 / 0.15 A | 0.31 / 0.12 / 0.06 A |
+| PWM ripple current p-p at 20 / 50 / 100 kHz | 0.41 / 0.16 / 0.08 A | 0.73 / 0.29 / 0.15 A | 0.31 / 0.12 / 0.06 A |
 
 Notes on the choices:
 - **Trace width barely changes Km.** It trades torque per amp against speed: fewer, wider turns mean
@@ -73,7 +73,7 @@ Notes on the choices:
   12/16 (21.5 mN·m/√W), but it reaches only 2,310 rpm (24.7 mN·m·s). The JLC 4-layer board with 2 oz
   outer copper stores 49% more momentum for 5% less Km and fewer layers.
 - **Test stator.** Run it with ≥100 kHz PWM or a 5 V bench supply: at 50 kHz and 11.1 V the ripple
-  (0.15 A) is comparable to its 0.19 A continuous current. Its 40 K continuous limit with natural
+  (0.16 A) is comparable to its 0.20 A continuous current. Its 40 K continuous limit with natural
   convection is only 1.1 W, so log board temperature during tests.
 - **Payload stator.** 50 kHz PWM is enough. Electrical time constant is 84 µs.
 
@@ -87,15 +87,17 @@ copper loss.
 
 | Stackup | Copper (outer/inner) | Kt [mN·m/A] | R phase [Ω] | Km [mN·m/√W] | Km² vs OSH Park 6L | Km² vs OSH Park 4L |
 |---|---|---|---|---|---|---|
-| OSH Park 4L | 1 / 0.5 oz | 26.7 | 2.27 | 14.5 | 0.75× | 1.00× |
-| OSH Park 6L | 1 / 0.5 oz | 39.7 | 3.78 | 16.7 | 1.00× | 1.33× |
-| JLCPCB 4L | 1 / 1 oz | 26.7 | 1.51 | 17.7 | 1.13× | **1.50×** |
-| JLCPCB 6L | 1 / 1 oz | 39.7 | 2.27 | 21.5 | **1.67×** | 2.22× |
-| JLCPCB 4L | 2 / 1 oz | 26.7 | 1.14 | 20.4 | **1.50×** | 2.00× |
+| OSH Park 4L | 1.24 (plated) / 0.5 oz | 27.1 | 2.11 | 15.2 | 0.83× | 1.00× |
+| OSH Park 6L | 1 / 0.5 oz (assumed) | 39.7 | 3.78 | 16.7 | 1.00× | 1.20× |
+| JLCPCB 4L | 1 / 1 oz | 26.7 | 1.51 | 17.7 | 1.13× | **1.36×** |
+| JLCPCB 6L | 1 / 1 oz | 39.7 | 2.27 | 21.5 | **1.67×** | 2.01× |
+| JLCPCB 4L | 2 / 1 oz | 26.7 | 1.14 | 20.4 | **1.50×** | 1.81× |
 
-Going from 0.5 oz to 1 oz inner copper cuts phase resistance by a third in 4-layer (2.27 → 1.51 Ω) and
-raises Km² by 50% for the same layer count. Kt is the same for a given layer count because the copper
-pattern is the same. JLC layer spacing is assumed (JLC doesn't publish its prepreg/core thicknesses),
+JLCPCB 4-layer with 1 oz inner copper has 28% less phase resistance than OSH Park 4-layer (1.51 against
+2.11 Ω) and 36% more Km² for the same copper pattern, even though OSH Park's plated outer copper is
+thicker (1.7 mil, from OSH Park's published stackup, checked 2026-11-18). Kt differs by 1.5% between them
+because OSH Park's 39 mil core puts its bottom layers closer to the magnets than the assumed JLC
+spacing. The OSH Park 6-layer row still assumes bare 1 oz outer copper and even layer spacing. JLC layer spacing is assumed (JLC doesn't publish its prepreg/core thicknesses),
 but it mostly affects Kt, not the resistance gain.
 
 ### Sanity checks against real hardware
@@ -105,7 +107,7 @@ but it mostly affects Kt, not the resistance gain.
 | Faulhaber 2610T012B (datasheet) | 3.3 | 7.45 mN·m at 12 V | 6,400 rpm no-load | 20 g motor |
 | Maxon EC32 flat 226006 (datasheet) | 13.2 | 85 mN·m at 24 V | 4,530 rpm at 24 V | 57 g motor |
 | CMU PCB reaction wheel (measured, see below) | 7.1 | 8 mN·m (extrapolated; data to 6 mN·m) | 1,600 rpm at 8 V | 140 g, 9 mm thick, 1U |
-| This model, 40 mm test stator | 1.85 | 3.2 mN·m (1.95 continuous) | 8,900 rpm no-load | 24 g rotor |
+| This model, 40 mm test stator | 1.95 | 3.5 mN·m (2.06 continuous) | 8,700 rpm no-load | 24 g rotor |
 | This model, 1U payload stator (12 coils) | 20.4 | 26.7 mN·m at 1 A | 3,440 rpm | 111 g rotor + board |
 | This model, high-momentum payload stator | 16.1 | 21.7 mN·m at 1 A | 4,220 rpm | 223 g rotor + board |
 
@@ -143,6 +145,63 @@ doi:10.3788/OPE.20152304.1004) both use wave windings instead of spiral coils. C
 lower motor power at 5,000 rpm with the wave winding than with a spiral winding on otherwise identical
 flywheel prototypes. The payload designs here use spiral (concentrated) coils; a wave-winding variant
 is worth adding to the design study.
+
+### Test stator as laid out (PCBMotorTest v0.1, 2026-11-18)
+
+`PCBMotorTest/gen_stator.py` lays the test design out as real 4-layer spirals (`pcbmotor/layout.py`), and
+`pcbmotor/asbuilt.py` runs the same EM model on that copper (`pcbmotor_test_asbuilt.json`). The two
+centre vias need room, so the coil has 18 turn rings instead of 20. The turn edges are parallel to the
+sector boundary rather than radial, so the outer turns are wider. Net: Kt 11.5 mN·m/A (+9% over the
+sweep), phase R 19.6–19.8 Ω including the ring tracks (+2%), Km 2.1 mN·m/√W. Predicted phase back-EMF:
+0.80 V peak per 1000 rpm with the steel back plate, 0.61 without (0.5 mm gap). These use OSH Park's
+published 4-layer stackup (updated 2026-11-18: the 39 mil core puts the bottom layers 0.17 mm closer to
+the magnets than the old 1.2 mm guess, and the 1.7 mil plated outer copper lowers resistance by 7%). That pair is the direct
+bench test of the back-iron model. Full table: `PCBMotorTest/README.md`.
+
+### Stacking several stator boards, and dual rotors (2026-11-18)
+
+`pcbmotor/stacking.py` runs the same EM model on boards stacked on one side of the rotor (1.6 mm boards,
+0.3 mm apart, phases in series or in parallel), on dual-rotor sandwiches (stator between two magnet
+discs), and on the same copper on one board with more layers. Full tables:
+[`pcbmotor_stacking.md`](pcbmotor_stacking.md). The study also adds **eddy-current drag in the traces**,
+which the design sweep left out: a trace of width w in a changing axial field loses
+σ·w²/12·(dB/dt)² per unit volume.
+
+Recommended payload (high-momentum 6c/8p), 11.1 V, 1 A driver limit:
+
+| Config | Km mN·m/√W | No-load rpm | Momentum, no drag | Momentum with eddy drag and 6 mN·m left for control | Eddy loss at top speed | Rotor + boards | Pull between rotors |
+|---|---|---|---|---|---|---|---|
+| Single board (as designed) | 16.2 | 4,215 | 90 | **80** | 3.4 W | 247 g | – |
+| 2 boards, series | 19.7 | 2,444 | 52 | 46 | 1.4 W | 271 g | – |
+| 2 boards, parallel | 19.7 | 4,898 | 105 | 82 | 5.8 W + 2.6 W circulating | 271 g | – |
+| 3 boards, parallel | 21.0 | 5,627 | 120 | 40 | 8.2 W + 10.2 W circulating | 295 g | – |
+| 1 board, 2 rotors | 32.3 | 2,107 | 77 | 71 | 3.0 W | 404 g | 530 N |
+| 2 boards parallel, 2 rotors | 42.5 | 2,268 | 83 | 79 | 3.9 W | 428 g | 370 N |
+| 6-layer board (JLC 1 oz) | 17.1 | 2,817 | 60 | 53 | 1.4 W | 247 g | – |
+
+(momentum in mN·m·s; requirement 60 line-driven, 130 gust-driven)
+
+1. **Stacking doesn't help the payload.** It raises Km, but torque isn't the limit: the single board already
+   needs only 0.86 W of copper loss for the 15 mN·m gust-driven requirement. Stored momentum is the limit, and
+   no stacked option stores more usable momentum than the single board.
+   - Series boards (and the 6-layer board) raise the back-EMF, so the wheel tops out lower: 46–53 mN·m·s,
+     below the 60 needed.
+   - Parallel boards keep the speed, but the extra copper adds eddy drag, and the far board's lower back-EMF
+     drives a current round the loop between boards. Two boards end level with one (82 against 80); three are
+     worse.
+   - A dual rotor doubles Km but halves the speed, adds a 157 g second rotor and pulls the rotors together with
+     about 530 N (54 kgf). The bearings, the spacer through the stator and the board would carry that, and
+     assembly would be hazardous.
+2. **Eddy drag is real for the 1.2 mm payload traces.** The single board loses 0.8 W at 2,000 rpm and 3.4 W at
+   4,200 rpm, costing about 11% of usable momentum (90 → 80 mN·m·s). It still meets the 60 mN·m·s line-driven
+   requirement. Loss scales with trace width squared, so splitting each wide trace into narrower parallel
+   strands would cut it sharply. Those strands need transposing between layers, or circulating currents
+   replace the eddy currents. Eddy loss is negligible on the 0.15 mm test stator, so the bench won't measure it.
+3. **Test stator: two cheap extra measurements.**
+   - OSH Park makes 3 boards, so stacking two and measuring each board's back-EMF on its own checks how the
+     field falls off with distance: the model gives about 0.47× for the second board.
+   - The same v0.1 board between two rotors should show twice the back-EMF (dual rotor). That needs a second
+     rotor and a frame that holds about 70 N.
 
 ## 2. Old flight data (TSat-1, June 2025)
 
