@@ -15,12 +15,28 @@ import numpy as np
 
 OZ_TO_M = 34.79e-6  # 1 oz/ft^2 copper thickness
 
-# OSH Park stackups (FR408, 1.6 mm). Layer z is distance below the TOP copper
-# surface (the rotor/magnet side). 4-layer values are OSH Park's published
-# stackup; 6-layer spacing is an assumption until confirmed.
+# OSH Park stackups (FR408, 1.6 mm). Layer z is the depth of each copper layer below the top
+# layer, measured between copper mid-planes (the air gap is measured to the top layer).
+# 4-layer values are OSH Park's published stackup (docs.oshpark.com/services/four-layer, checked
+# 2026-11-18): 1.7 mil (0.0432 mm) outer copper "clad+plated", 7.87 mil (0.1999 mm) prepreg,
+# 0.5 oz (0.0175 mm) inner copper, 39 mil (0.9906 mm) core. The finished outer copper is 1.24 oz
+# equivalent, which is what sets its resistance. The 2- and 6-layer spacing is an assumption.
+_OSH4_CU = (0.0432, 0.0175, 0.0175, 0.0432)
+_OSH4_DIEL = (0.1999, 0.9906, 0.1999)
+
+
+def _midplane_depths(cu, diel):
+    z, out = 0.0, [0.0]
+    for k, t in enumerate(diel):
+        z += cu[k] / 2 + t + cu[k + 1] / 2
+        out.append(round(z, 4))
+    return out
+
+
 OSHPARK_STACKUPS = {
     2: dict(z_mm=[0.0, 1.6], oz=[1.0, 1.0], min_trace_mm=0.1524, min_space_mm=0.1524),
-    4: dict(z_mm=[0.0, 0.2, 1.4, 1.6], oz=[1.0, 0.5, 0.5, 1.0], min_trace_mm=0.127, min_space_mm=0.127),
+    4: dict(z_mm=_midplane_depths(_OSH4_CU, _OSH4_DIEL), oz=[round(t / OZ_TO_M / 1e3, 3) for t in _OSH4_CU],
+            min_trace_mm=0.127, min_space_mm=0.127),
     6: dict(z_mm=[0.0, 0.2, 0.7, 0.9, 1.4, 1.6], oz=[1.0, 0.5, 0.5, 0.5, 0.5, 1.0],
             min_trace_mm=0.127, min_space_mm=0.127),
 }

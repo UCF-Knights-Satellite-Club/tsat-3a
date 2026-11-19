@@ -19,6 +19,14 @@ python3 -m venv .venv
 .venv/bin/python -m yaw.sim                 # yaw Monte Carlo for all motor candidates (~2 min)
 .venv/bin/python tests/test_em_consistency.py   # torque model cross-check
 .venv/bin/python -m validation.cmu_wheel    # model vs. the measured CMU PCB wheel (~2 min)
+.venv/bin/python -m pcbmotor.stacking       # stacked boards / dual rotor vs single board (~2 min)
+.venv/bin/python -m pcbmotor.ace_stackups   # custom heavy-copper stackups and stranded traces (~1 min)
+.venv/bin/python -m pcbmotor.cubesat_wheels # PCB wheels in COTS CubeSat wheel footprints (~30 s)
+.venv/bin/python -m pcbmotor.magnetorquer   # stator as a magnetorquer (common-mode current via a neutral wire)
+.venv/bin/python -m pcbmotor.mechanical     # gap, flatness, back iron, magnet retention, balance, temperature, bearing loads
+.venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
+.venv/bin/python -m hang.run                # KAOS-3 three-axis hanging payload: D&C specs S1-S3 and flight Monte Carlo (~10 min, 8 cores)
+.venv/bin/python tests/test_layout.py       # as-built coil layout checks
 ```
 
 Run `pcbmotor.designs` before `yaw.sim`: the yaw sim reads the recommended PCB designs from
@@ -33,11 +41,20 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 |---|---|
 | `pcbmotor/geometry.py` | Stator and rotor geometry, fab stackups (OSH Park 2/4/6-layer, JLCPCB 4/6-layer presets). One source of truth that the KiCad footprint generator will also use. |
 | `pcbmotor/em.py` | Resistance, inductance, torque and back-EMF of a PCB motor. |
+| `pcbmotor/layout.py` | As-built copper: real spirals per layer, layer vias and terminals. Used by the KiCad generator (`PCBMotorTest/gen_stator.py`) and by `em.analyse_layout`. |
+| `pcbmotor/ace_stackups.py` | Custom (ACE-style) heavy-copper, many-layer stackups and stranded, transposed traces against the JLCPCB payload board; driver-limit and speed-cap sensitivity. |
+| `pcbmotor/cubesat_wheels.py` | PCB-motor reaction wheels sized into the footprints of COTS CubeSat wheels (CubeSpace, Rocket Lab, Blue Canyon) and compared on momentum, mass, torque and steady power. |
+| `pcbmotor/magnetorquer.py` | Stator used as a magnetorquer: dipole per amp of common-mode current, power, and the torque ripple it puts on the wheel. |
+| `pcbmotor/mechanical.py` | Mechanical checks: gap sensitivity, board bow against the gap, back-iron saturation, magnet retention, balance grade, Km against temperature, bearing loads. |
+| `pcbmotor/asbuilt.py` | Model of the test stator exactly as laid out, and the bench numbers to check it against. |
+| `pcbmotor/stacking.py` | Stacked stator boards (series/parallel), dual rotors and more-layer boards against one board, including eddy drag in the traces and the pull between rotors. |
 | `pcbmotor/designs.py` | Design sweep for the 40 mm test stator and the 1U payload stator; drive envelope; plots. |
 | `data/tsat1_swing.py` | Swing and excitation spectrum from the TSat-1 flight accelerometer log. |
 | `yaw/candidates.py` | Motor candidates (datasheet values, approximations flagged). |
 | `yaw/sim.py` | Single-axis yaw Monte Carlo: tether, swivel/slip ring, gusts, PID with wheel unloading, motor limits. |
 | `data/video_spin.py`, `data/video_phases.py` | Yaw rate from an onboard nadir video (feature-matched image rotation) and per-phase statistics. |
+| `hang/model.py` | Three-axis hanging payload (KAOS-3): rigid body on an elastic line attached just above the centre of mass, three PCB wheels with driver limits and eddy drag, two-axis battery trim stage, Mahony attitude estimator, 100 Hz PID. |
+| `hang/run.py` | Runs the D&C demo specifications (S1 swing, S2 tilt, S3 unbalance) over eye heights 2–6 mm and a flight Monte Carlo; writes `hang_tables.md`. |
 | `yaw/calibrate.py` | Fits the measured disturbance levels to the video statistics. |
 | `validation/cmu_wheel.py` | Rebuilds the CMU PCB reaction wheel from its paper and design files and compares the model with its measured resistance and torque constant. |
 | `tests/test_em_consistency.py` | Checks Lorentz-force torque against d(flux linkage)/d(angle). |
