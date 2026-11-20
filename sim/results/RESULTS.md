@@ -4,7 +4,7 @@ Generated 2026-11-17 by the scripts in `sim/` (see [`../README.md`](../README.md
 assumptions). Full Monte Carlo tables: [`yaw_tables.md`](yaw_tables.md). Raw data:
 `pcbmotor_sweep.csv`, `pcbmotor_designs.json`, `yaw_summary.csv`, `yaw_requirements.json`,
 `tsat1_swing.json`, `video_spin_tsat2b_full.*`, `video_phases_tsat2b_full.*`, `yaw_calibration.json`,
-`hang_summary.json`. Sections 5 and 6 (PCB motor design studies, KAOS-3 hanging payload) were added 2026-11-18/19.
+`hang_summary.json`. Sections 5 and 6 (PCB motor design studies, KAOS-3 hanging payload) were added 2026-11-18/19; 5e (larger wheels) on 2026-11-19.
 
 ## Conclusions
 
@@ -319,7 +319,7 @@ Demand comes from ideal-actuator runs that hold heading for 10 minutes with no u
 
 ## 5. PCB motor design studies (2026-11-18)
 
-Four studies on the same EM model, for the KAOS-3 senior design scoping and possible ACE sponsorship.
+Five studies on the same EM model, for the KAOS-3 senior design scoping and possible ACE sponsorship.
 Each module's docstring lists its assumptions; the full tables are in the linked files.
 
 ### 5a. Custom stackups and stranded traces ([`pcbmotor_ace_stackups.md`](pcbmotor_ace_stackups.md))
@@ -343,6 +343,12 @@ narrow, transposed strands. 11.1 V, 1 A driver, 6 mN·m kept for control after e
   matters for heat in near-vacuum, not for momentum.
 - Stranded windings have low Kt (about 11 mN·m/A), so they need a 2 A driver to match the current
   design's torque.
+- **Going past 6-layer 3 oz buys little** (ACE advanced tier, added 2026-11-19: 6L 4 oz, 8L 3 oz,
+  16/20L 2 oz, 24/30L 1 oz, all stranded). The rotor's magnets are on one side, so added layers sit in
+  a weaker field: 20L 2 oz reaches Km 35.4 against 24.5, saving 0.07 W of copper heat in a 10° swing
+  (0.46 W at 26°), while eddy loss at 6,000 rpm doubles (0.61 to 1.31 W). 4 oz gains nothing (Km 25.0)
+  because the wider strand spacing eats the copper. Momentum stays at the 128 mN·m·s cap for all.
+  Recommendation for the ACE request: 6-layer 3 oz, stranded; 8-layer 3 oz only at the same price.
 
 ### 5b. PCB wheels in COTS CubeSat footprints ([`pcbmotor_cubesat_wheels.md`](pcbmotor_cubesat_wheels.md))
 
@@ -395,6 +401,52 @@ common-mode current through all three phases (a fourth inverter leg) does.
 - The high-momentum rotor needs balancing: one magnet 1% heavy gives G7.1.
 - Km rises 27% at −50 °C (copper resistance falls faster than the magnets weaken).
 - Rotor bending modes need FEA and are not computed.
+
+### 5e. Larger wheels: where a PCB motor beats a conventional one ([`pcbmotor_large_wheels.md`](pcbmotor_large_wheels.md))
+
+`pcbmotor/large_wheels.py` scales the stator from the 90 mm KAOS-3 wheel to 600 mm, in two layouts: the
+payload proportions scaled up ("disc") and a 40 mm wide winding ring at the rim ("ring", centre left
+free). Pole pitch stays near 25 mm (8 to 72 poles), magnets are 12.7 × 6.35 mm N42 blocks, traces are
+stranded, and the gap grows with size (0.6 mm at 90 mm to 1.1 mm at 600 mm). Conventional motors are
+datasheet values: Kollmorgen TBM frameless slotted motors (60–129 mm) and the Parker Bayside K178200
+that drives the 2 m SPIDER gondola wheel.
+
+![Km against size](pcbmotor_large_wheels.png)
+
+| Wheel | Km N·m/√W, JLC / ACE | Board kg (JLC) | Magnets + iron kg | Conventional comparison |
+|---|---|---|---|---|
+| 90 mm disc (KAOS-3) | 0.016 / 0.027 | 0.03 | 0.21 | TBM 60 mm, 0.22 kg: 0.097 (6× the PCB) |
+| 250 mm disc | 0.21 / 0.37 | 0.18 | 1.7 | TBM 129 mm, 1.3 kg: 0.44; 3.2 kg: 1.12 |
+| 400 mm ring | 0.44 / 0.77 | 0.24 | 2.2 | same |
+| 600 mm disc | 1.19 / 2.05 | 0.95 | 9.7 | SPIDER motor, 6.3 kg: 1.98 |
+| 600 mm ring | 0.79 / 1.39 | 0.38 | 3.3 | same |
+
+- **Km grows as D² (disc) or D^1.84 (fixed-width ring).** At 90 mm a 60 mm iron-core frameless motor
+  has 6× the PCB's Km; the PCB reaches the 129 mm Kollmorgen motors at about 400–600 mm and the SPIDER
+  motor at 600 mm with ACE copper.
+- **Per kilogram that is not flywheel, the PCB wins from about 150 mm.** The magnets and back iron sit at
+  the rim and are flywheel mass the wheel needs anyway (the 600 mm ring's alone store 35 N·m·s at
+  40 m/s), so the parasitic mass is the board: 1.1–3.1 N·m/√W per kg against 0.31–0.44 for the
+  conventional motors, whose rotor sits at the hub. Counting magnets and iron too, the 600 mm ACE ring
+  (0.37) matches them.
+- **No cogging at any size.** The TBM motors cog 0.9–2.6% of continuous torque peak to peak, with no
+  current. The PCB's 1–4% FOC ripple scales with current, so it vanishes at zero torque and the encoder
+  can cancel it.
+- **Drag is similar, but adjustable.** Eddy drag at 1,000 rpm on the 600 mm JLC ring is 73 mN·m, against
+  42–271 mN·m of iron and windage drag for the 129 mm Kollmorgen motors. Eddy loss falls with the
+  square of strand width; iron loss is fixed. At a 40 m/s rim speed the stranded PCB loses 4–26 W, so big
+  PCB wheels want low rim speed or finer strands.
+- **Gap and flatness are not the limit.** A 1.5 mm gap costs only 5–10% of Km at 250–600 mm. Bonding to a
+  machined plate or building the stator from arc segments handles flatness; JLC's single-board limit for
+  4 layers is 663 × 593 mm, so above about 590 mm the stator must be segmented anyway.
+- **Extrapolated to 2 m** (SPIDER wheel size; not modelled): a JLC ring gives about 7.6 N·m/√W from about
+  12 kg of magnets, iron and board (1.3 kg board). At 10 N·m that is about 1.7 W of copper loss, against
+  26 W for the SPIDER motor.
+- **Where it wins:** large, slow wheels whose rim must be heavy anyway (gondola azimuth wheels, large
+  stabilized platforms); ring wheels with a free centre (around a flight line or instrument); jitter-
+  sensitive pointing through zero speed; low heat in vacuum. **Where it loses:** small wheels (CubeSat,
+  KAOS-3), where Km is 3–6× lower but torques are mN·m and power is a fraction of a watt anyway, and
+  high-rim-speed wheels, where eddy loss grows.
 
 ### 5f. Wave winding vs spiral coils ([`pcbmotor_wave.md`](pcbmotor_wave.md), 2026-11-19)
 

@@ -101,13 +101,16 @@ def main():
         gap = np.linalg.norm(P[i] - P[j], axis=1) - HW[i] - HW[j]
         bad = gap < space - 1e-4
         i, j, gap = i[bad], j[bad], gap[bad]
-        same = (ID[i] == ID[j]) & (np.abs(S[i] - S[j]) <= NEAR)
+        # along one track, points closer than its own width + space are the same copper
+        near = np.maximum(NEAR, HW[i] + HW[j] + space + STEP)
+        same = (ID[i] == ID[j]) & (np.abs(S[i] - S[j]) <= near)
         i, j, gap = i[~same], j[~same], gap[~same]
         viol = []
         for a, c, g in zip(i, j, gap):
             key = (min(ID[a], ID[c]), max(ID[a], ID[c]))
+            nr = max(NEAR, HW[a] + HW[c] + space + STEP)
             if ID[a] != ID[c] and key in joints and any(
-                    np.linalg.norm(P[a] - J) <= NEAR + HW[a] and np.linalg.norm(P[c] - J) <= NEAR + HW[c]
+                    np.linalg.norm(P[a] - J) <= nr + HW[a] and np.linalg.norm(P[c] - J) <= nr + HW[c]
                     for J in joints[key]):
                 continue
             viol.append((g, P[a], P[c]))

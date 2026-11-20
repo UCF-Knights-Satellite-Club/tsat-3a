@@ -22,14 +22,18 @@ python3 -m venv .venv
 .venv/bin/python -m pcbmotor.stacking       # stacked boards / dual rotor vs single board (~2 min)
 .venv/bin/python -m pcbmotor.ace_stackups   # custom heavy-copper stackups and stranded traces (~1 min)
 .venv/bin/python -m pcbmotor.cubesat_wheels # PCB wheels in COTS CubeSat wheel footprints (~30 s)
+.venv/bin/python -m pcbmotor.large_wheels   # PCB stators scaled 90-600 mm against frameless motors (~1 min)
 .venv/bin/python -m pcbmotor.magnetorquer   # stator as a magnetorquer (common-mode current via a neutral wire)
 .venv/bin/python -m pcbmotor.mechanical     # gap, flatness, back iron, magnet retention, balance, temperature, bearing loads
 .venv/bin/python -m pcbmotor.wave           # wave winding vs spiral coils on the high-momentum rotor (~2 min)
 .venv/bin/python tests/test_wave.py         # wave-winding model checks
 .venv/bin/python -m pcbmotor.layout_gallery # layout images of every evaluated stator (~15 min)
 .venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
+.venv/bin/python -m pcbmotor.strand_test    # solid vs stranded test boards as laid out (after PCBMotorStrandTest/gen_strand_test.py)
+.venv/bin/python -m pcbmotor.compare_plots  # comparison charts: stackups, strand test boards, board layouts (after the studies above)
 .venv/bin/python -m hang.run                # KAOS-3 three-axis hanging payload: D&C specs S1-S3 and flight Monte Carlo (~10 min, 8 cores)
 .venv/bin/python tests/test_layout.py       # as-built coil layout checks
+.venv/bin/python tests/test_bundle.py       # strand-bundle coil checks (strand test boards)
 ```
 
 Run `pcbmotor.designs` before `yaw.sim`: the yaw sim reads the recommended PCB designs from
@@ -47,8 +51,12 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `pcbmotor/layout.py` | As-built copper: real spirals per layer, layer vias and terminals. Used by the KiCad generator (`PCBMotorTest/gen_stator.py`) and by `em.analyse_layout`. |
 | `pcbmotor/ace_stackups.py` | Custom (ACE-style) heavy-copper, many-layer stackups and stranded, transposed traces against the JLCPCB payload board; driver-limit and speed-cap sensitivity. |
 | `pcbmotor/cubesat_wheels.py` | PCB-motor reaction wheels sized into the footprints of COTS CubeSat wheels (CubeSpace, Rocket Lab, Blue Canyon) and compared on momentum, mass, torque and steady power. |
+| `pcbmotor/large_wheels.py` | PCB stators scaled from 90 to 600 mm (scaled disc and 40 mm rim ring) against Kollmorgen TBM frameless motors and the SPIDER gondola wheel motor: Km, Km per parasitic kg, cogging, drag, gap sensitivity. |
 | `pcbmotor/magnetorquer.py` | Stator used as a magnetorquer: dipole per amp of common-mode current, power, and the torque ripple it puts on the wheel. |
 | `pcbmotor/mechanical.py` | Mechanical checks: gap sensitivity, board bow against the gap, back-iron saturation, magnet retention, balance grade, Km against temperature, bearing loads. |
+| `pcbmotor/bundle.py` | As-built coils wound from a bundle of transposed strands (or one solid trace): lanes, per-strand vias, buses. Used by `PCBMotorStrandTest/gen_strand_test.py`. |
+| `pcbmotor/strand_test.py` | Solid vs stranded test boards as laid out: Kt, R, eddy drag, circulating current between strands, coast-down and J2 predictions. |
+| `pcbmotor/compare_plots.py` | Comparison charts across the evaluated stackups (solid vs stranded), the strand test boards and the stacked / dual-rotor layouts. |
 | `pcbmotor/asbuilt.py` | Model of the test stator exactly as laid out, and the bench numbers to check it against. |
 | `pcbmotor/stacking.py` | Stacked stator boards (series/parallel), dual rotors and more-layer boards against one board, including eddy drag in the traces and the pull between rotors. |
 | `pcbmotor/wave.py` | Wave-winding variant of the high-momentum payload stator (series layer pairs; fill, capped, slit and full-length swapped/fixed strands; CMU-style stitched layers) against the spiral design, with eddy and circulating-current losses. |
