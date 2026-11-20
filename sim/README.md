@@ -106,6 +106,11 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 - **Check.** `tests/test_em_consistency.py` integrates the magnet flux through every turn and checks
   that d(flux linkage)/d(angle) matches the Lorentz torque within 5%. The check found a real bug (long
   radial trace edges were sampled once), which is now fixed.
+- **Eddy loss and strand currents.** Each trace is treated as a thin strip in the axial field of
+  the passing magnets: loss per volume σ·w²/12·⟨(dB/dt)²⟩, so drag power grows with speed squared
+  and with trace width squared (`stacking.py`, `wave.py`, `strand_test.py`). Parallel strands also
+  carry a circulating current driven by the EMF difference between their lanes, which is why the
+  recommended strands swap lanes at every via.
 - **Inductance.** Neumann integral of the mean turn, with the winding's geometric mean distance for
   self-inductance and the layer z-spacing for mutual terms. Order of magnitude only; it sets the PWM
   frequency, not the torque.

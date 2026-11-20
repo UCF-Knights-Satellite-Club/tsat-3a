@@ -1,6 +1,6 @@
 # PCB motor wave-winding test stators (v0.1)
 
-Three 4-layer stators that test the wave winding the sim now recommends for the payload. They are
+Three 4-layer stators (plus blind-via versions of the same three, `bv_*`, described below) that test the wave winding the sim now recommends for the payload. They are
 `sim/results/pcbmotor_wave.md` and RESULTS.md 5f, built for the same rotor as the strand-test boards.
 The three boards differ only in their copper:
 
