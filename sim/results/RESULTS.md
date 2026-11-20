@@ -574,6 +574,45 @@ strand count. It adds two things the wave model lacked:
 - **Not modelled:** proximity loss from the ripple in wide traces, MOSFET switching loss (which
   grows with f·V·I), and battery resistance.
 
+### 5i. Dual stator: rotor between two boards ([`pcbmotor_dual_stator.md`](pcbmotor_dual_stator.md), 2026-11-20)
+
+`pcbmotor/dual_stator.py` puts the high-momentum rotor between two identical stator boards. There is no iron
+anywhere: the 3 mm of steel back iron and disc become the same mass of non-magnetic carrier, so inertia is
+unchanged. It is the reverse of the dual rotor in `stacking.py`, which has one board between two rotors.
+- **Second board.** A bare magnet's axial field is the same on both faces, so the second board (the same PCB
+  flipped, with two phase leads swapped) matches the first.
+- **2× magnets.** Two 1/4 in blocks stacked per pole (12.7 mm) are also tested. With no iron that gives each
+  board exactly the field it sees now on back iron.
+- **Control.** A single board on back iron with the same 2× magnets separates the gain from the second board
+  from the gain from more magnet.
+
+Wave (blind vias, 2 oz, 2 strands swapped), loss at 15 mN·m and 2000 rpm:
+
+| Config | Km mN·m/√W | Loss W | Drag @2000 mN·m | H @4000 rpm mN·m·s | Rotor + boards g |
+|---|---|---|---|---|---|
+| Single board, back iron (as now) | 21.2 | 0.66 | 0.75 | 85 | 264 |
+| Single board, back iron, 2× magnets | 24.1 | 0.56 | 0.82 | 122 | 356 |
+| Dual stator, 1× magnets | 22.1 | 0.71 | 1.20 | 85 | 304 |
+| Dual stator, 2× magnets | **30.0** | 0.56 | 1.49 | 122 | 396 |
+
+- **With the current magnets it doesn't help.**
+  - Without back iron each board gets only 0.74× the Kt, so two boards give Km 22.1 against 21.2 (+4%).
+  - The eddy drag doubles, so total loss rises.
+  - The spiral is worse still: 2.03 W against 1.63 W, because its 1.2 mm traces have high eddy loss.
+- **With 2× magnets Km rises 41%.** At 2000 rpm that only beats a single board with the same magnets
+  (equal 0.56 W at 15 mN·m) above about 15 mN·m. That rises to about 30 mN·m at 4000 rpm, because eddy loss
+  grows with speed squared. The KAOS-3 wheels sit below that most of the time, and the dual stator has
+  twice the drag (1.5 against 0.8 mN·m of the 6 mN·m control margin).
+- **Series or parallel give the same Km.** They bracket a rewind (§5h). Parallel boards with the rotor 0.1 mm
+  off centre circulate only about 0.01 W, and in series the offset cancels to first order.
+- **No axial pull, as with the current single board.** The 370–530 N of the dual rotor and the stator yoke
+  come from iron the dual stator doesn't have.
+- **Thicker magnets are the cheap gain.** Stacking two blocks on the existing 3 mm of steel (2.6 mm needed,
+  `mechanical.flux_per_pole`) gives Km +14% and 43% more inertia for 92 g, on one board.
+- **Verdict:** not worth it for KAOS-3. It pays off where torque is high, speed is low and copper loss
+  dominates (large slow wheels, §5e), or where the drive is thermally limited, since two boards have twice the
+  cooling faces.
+
 ## 6. KAOS-3 three-axis hanging payload: pitch and roll (2026-11-19)
 
 `hang/model.py` and `hang/run.py` test the KAOS-3 senior design architecture against the D&C demo
