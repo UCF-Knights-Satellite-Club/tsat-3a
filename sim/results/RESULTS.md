@@ -520,6 +520,60 @@ slotless core.
   0.5–0.7 W at the design torque, so a yoke trades little copper saving for mass, drag and pull. It
   only pays for slow, mass-tolerant drives.
 
+### 5h. Bus voltage, turns and PWM ripple ([`pcbmotor_bus_voltage.md`](pcbmotor_bus_voltage.md), 2026-11-19)
+
+`pcbmotor/bus_voltage.py` puts the recommended wave stator on 2S–8S LiPo supplies, first with the
+same winding and then rewound for each voltage. The rewind options are 24–120 conductors per layer
+and 1 or 2 parallel paths (L1+L4 in parallel with L2+L3), each with its best trace width and
+strand count. It adds two things the wave model lacked:
+
+- **Phase inductance**, by the Neumann formula. Ls is only 8.1 µH for the recommended winding
+  (L_self 6.3, M_AB −1.8), and it scales with turns squared.
+- **PWM ripple**, from centre-aligned SVPWM switched against the carrier. It assumes 0.25 Ω of
+  driver and harness resistance per phase, the same at every voltage.
+
+**Same winding** (Kt 23.0 mN·m/A, R 1.0 Ω), with 15 mN·m at 2000 rpm as the operating point:
+
+| V bus | No-load rpm | Momentum mN·m·s | Energy J | Magnet bond shear MPa | Ripple loss W at 50 / 100 kHz |
+|---|---|---|---|---|---|
+| 7.4 | 2666 | 57 | 7.9 | 0.12 | 0.65 / 0.16 |
+| 11.1 | 3999 | 85 | 17.9 | 0.26 | 1.05 / 0.26 |
+| 14.8 | 5332 | 114 | 31.7 | 0.46 | 1.46 / 0.37 |
+| 22.2 | 7997 (over the 6000 cap) | 171 | 71.4 | 1.04 | 2.01 / 0.50 |
+
+**Rewound for about 4000 rpm no-load** (same top speed and momentum):
+
+| V bus | Winding | Kt | Km | Current at 15 mN·m | Copper W | Driver W | Eddy W | Ripple W at 50 kHz | Total W |
+|---|---|---|---|---|---|---|---|---|---|
+| 7.4 | n24, 3 mm cap, 4 strands | 11.9 | 18.2 | 1.26 A | 0.68 | 0.60 | 0.09 | 2.03 | 3.40 |
+| 11.1 | n48, 1.6 mm cap, 2 strands (recommended) | 23.0 | 18.8 | 0.65 A | 0.64 | 0.16 | 0.12 | 1.05 | 1.97 |
+| 14.8 | n120, 0.6 mm, 2 paths | 28.4 | 19.8 | 0.53 A | 0.57 | 0.10 | 0.08 | 1.01 | 1.77 |
+| 22.2 | n96, 0.6 mm | 45.5 | 18.2 | 0.33 A | 0.68 | 0.04 | 0.07 | 0.99 | 1.79 |
+| 29.6 | n120, 0.6 mm | 56.8 | 18.7 | 0.26 A | 0.64 | 0.03 | 0.08 | 1.01 | 1.76 |
+
+- **Turns don't change Km.** Km stays 18–20 at every turn count. With more turns the best trace
+  narrows (1.6 mm with 2 strands at n48, 0.6 mm solid at n96–120), so eddy loss stays at 0.07–0.13 W.
+  Above n48 two strands' vias no longer fit at r = 15 mm, but narrow solid traces do as well.
+- **Two parallel paths add about 5% Km.** Current splits by conductance, so more of it flows in the
+  2 oz pair. The circulating loss between the paths is about 0.01 mW.
+- **PWM ripple is the biggest single loss at 50 kHz.** At 2000 rpm it's about 1 W per wheel, more
+  than the copper loss. When the winding is rewound to suit the voltage, ripple loss stays about the
+  same, because Ls and R both scale with turns squared. On a fixed winding it grows with voltage.
+  It's small at zero speed (0.09 W), which helps the pitch and roll wheels, since they hover near
+  zero speed. Fixes: PWM at 100 kHz or more (about 0.26 W), or series inductors. The worst case at
+  any modulation depth is 1.8 W at 11.1 V and 50 kHz.
+- **Higher voltage saves only driver and harness loss** (0.16 W at 11.1 V, 0.04 W at 22.2 V). It
+  needs more turns, which means narrower traces, more vias and higher-voltage MOSFETs. 7.4 V costs
+  about 1.4 W more per wheel, and the n=24 step only lands at 5150 rpm.
+- **Keeping the winding and raising the voltage** buys speed. Momentum, energy, bond shear and drag
+  scale with speed, speed squared, speed squared and speed respectively. Above about 16.7 V the
+  rotor passes the 6000 rpm hand-balance cap.
+- **Verdict:** 11.1 V (3S) with the n48 winding is a good match. Specify the PWM frequency
+  (≥100 kHz) or series inductance in the driver design. If KSC's bus is a different voltage, rewind
+  to suit it: n must be a multiple of 24, and two parallel paths give the in-between steps.
+- **Not modelled:** proximity loss from the ripple in wide traces, MOSFET switching loss (which
+  grows with f·V·I), and battery resistance.
+
 ## 6. KAOS-3 three-axis hanging payload: pitch and roll (2026-11-19)
 
 `hang/model.py` and `hang/run.py` test the KAOS-3 senior design architecture against the D&C demo

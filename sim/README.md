@@ -30,6 +30,8 @@ python3 -m venv .venv
 .venv/bin/python -m pcbmotor.wave_asbuilt   # wave test boards as laid out: Kt, R, eddy and strand circulating current (~10 s)
 .venv/bin/python tests/test_wave_layout.py  # wave test-board copper: series path, connectivity, spacing
 .venv/bin/python -m pcbmotor.stator_yoke    # slotless stator yoke: gain vs pull, mass and iron-loss drag (~15 min)
+.venv/bin/python -m pcbmotor.bus_voltage    # bus voltage and turn count: speed, momentum, inductance, PWM ripple loss (~6 min)
+.venv/bin/python tests/test_bus_voltage.py  # parallel paths, inductance shortcut vs brute force, ripple model
 .venv/bin/python -m pcbmotor.layout_gallery # layout images of every evaluated stator (~15 min)
 .venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
 .venv/bin/python -m pcbmotor.strand_test    # solid vs stranded test boards as laid out (after PCBMotorStrandTest/gen_strand_test.py)
@@ -67,6 +69,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `pcbmotor/wave_layout.py` | As-built copper of the wave test boards (`PCBMotorWaveTest/`): nested layer pairs, strand lanes and their via crossings (swapped or fixed), loop breaks, jumpers, pads; series-path, connectivity and spacing checks. |
 | `pcbmotor/wave_asbuilt.py` | EM model of that copper: Kt, phase R, eddy drag and the current circulating between strands. |
 | `pcbmotor/stator_yoke.py` | Slotless soft-magnetic yoke behind the stator (method of images on both iron planes): Kt/Km gain, axial pull, yoke thickness and mass, iron-loss drag, for the spiral and wave designs. |
+| `pcbmotor/bus_voltage.py` | Wave stator on 2S–8S supplies: same winding vs rewound (24–120 conductors per layer, 1 or 2 parallel paths); Neumann phase inductance; SVPWM ripple current and its loss; speed, momentum, bond shear, driver loss. |
 | `pcbmotor/designs.py` | Design sweep for the 40 mm test stator and the 1U payload stator; drive envelope; plots. |
 | `data/tsat1_swing.py` | Swing and excitation spectrum from the TSat-1 flight accelerometer log. |
 | `yaw/candidates.py` | Motor candidates (datasheet values, approximations flagged). |
