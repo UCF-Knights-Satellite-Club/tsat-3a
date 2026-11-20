@@ -1,0 +1,299 @@
+[
+  {
+    "name": "solid",
+    "strands": 1,
+    "swap": true,
+    "cap_mm": 1.2,
+    "stackup": "jlc4_2oz",
+    "buried": false,
+    "space_mm": 0.15,
+    "via_mm": [
+      0.3,
+      0.56
+    ],
+    "Kt_mNm_per_A": 22.441789753984867,
+    "R_phase_ohm": 0.8928796638873936,
+    "R_links_ohm": 0.10375087463785966,
+    "Km_mNm_per_sqrtW": 19.39167813185804,
+    "ripple_pct": 4.648829774394091,
+    "noload_rpm": 4090.4162321291064,
+    "eddy_W_at_2000rpm": 0.3556164083324334,
+    "circulating_W_at_2000rpm": 0.0,
+    "drag_mNm_at_2000rpm": 1.69794327692078,
+    "loss_15mNm_2000rpm_W": 0.9539614962823133,
+    "board": {
+      "r_term": 53.635,
+      "r_rings": [
+        55.065,
+        56.315
+      ],
+      "r_pad": 58.915,
+      "vias": 258,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "swap",
+    "strands": 2,
+    "swap": true,
+    "cap_mm": 1.6,
+    "stackup": "jlc4_2oz",
+    "buried": false,
+    "space_mm": 0.15,
+    "via_mm": [
+      0.3,
+      0.56
+    ],
+    "Kt_mNm_per_A": 22.3985967317975,
+    "R_phase_ohm": 0.8591125675280056,
+    "R_links_ohm": 0.12426615464983475,
+    "Km_mNm_per_sqrtW": 19.73104763702572,
+    "ripple_pct": 4.418278191493703,
+    "noload_rpm": 4098.304111945216,
+    "eddy_W_at_2000rpm": 0.15828288985647632,
+    "circulating_W_at_2000rpm": 0.0008678962059498024,
+    "drag_mNm_at_2000rpm": 0.7598890289638752,
+    "loss_15mNm_2000rpm_W": 0.7370900864746217,
+    "board": {
+      "r_term": 53.835,
+      "r_rings": [
+        55.265,
+        56.515
+      ],
+      "r_pad": 59.115,
+      "vias": 330,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "fixed",
+    "strands": 2,
+    "swap": false,
+    "cap_mm": 1.6,
+    "stackup": "jlc4_2oz",
+    "buried": false,
+    "space_mm": 0.15,
+    "via_mm": [
+      0.3,
+      0.56
+    ],
+    "Kt_mNm_per_A": 22.39907933007533,
+    "R_phase_ohm": 0.8587235510706637,
+    "R_links_ohm": 0.12426615464983475,
+    "Km_mNm_per_sqrtW": 19.73594160179389,
+    "ripple_pct": 4.417560926707239,
+    "noload_rpm": 4098.215812132652,
+    "eddy_W_at_2000rpm": 0.1582836179562324,
+    "circulating_W_at_2000rpm": 0.1905179214688076,
+    "drag_mNm_at_2000rpm": 1.6654046747267321,
+    "loss_15mNm_2000rpm_W": 0.9264542496205302,
+    "board": {
+      "r_term": 53.835,
+      "r_rings": [
+        55.265,
+        56.515
+      ],
+      "r_pad": 59.115,
+      "vias": 330,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "bv_solid",
+    "strands": 1,
+    "swap": true,
+    "cap_mm": 1.2,
+    "stackup": "jlc4_2oz",
+    "buried": true,
+    "space_mm": 0.15,
+    "via_mm": [
+      0.3,
+      0.56
+    ],
+    "Kt_mNm_per_A": 22.676893302137277,
+    "R_phase_ohm": 0.7778719376278114,
+    "R_links_ohm": 0.0807118403794742,
+    "Km_mNm_per_sqrtW": 20.99345289630381,
+    "ripple_pct": 4.021068220657438,
+    "noload_rpm": 4048.008687286837,
+    "eddy_W_at_2000rpm": 0.37369846903489284,
+    "circulating_W_at_2000rpm": 0.0,
+    "drag_mNm_at_2000rpm": 1.7842787571833036,
+    "loss_15mNm_2000rpm_W": 0.8842208289340276,
+    "board": {
+      "r_term": 47.235,
+      "r_rings": [
+        48.665,
+        49.915
+      ],
+      "r_pad": 52.515,
+      "vias": 258,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "bv_swap",
+    "strands": 2,
+    "swap": true,
+    "cap_mm": 1.6,
+    "stackup": "jlc4_2oz",
+    "buried": true,
+    "space_mm": 0.15,
+    "via_mm": [
+      0.3,
+      0.56
+    ],
+    "Kt_mNm_per_A": 22.627770815340664,
+    "R_phase_ohm": 0.7598641829875836,
+    "R_links_ohm": 0.1004309659907784,
+    "Km_mNm_per_sqrtW": 21.194742998167072,
+    "ripple_pct": 3.7874458224782055,
+    "noload_rpm": 4056.796484145686,
+    "eddy_W_at_2000rpm": 0.15386784236775367,
+    "circulating_W_at_2000rpm": 0.0026359482926692325,
+    "drag_mNm_at_2000rpm": 0.7472505568867653,
+    "loss_15mNm_2000rpm_W": 0.6573751613050889,
+    "board": {
+      "r_term": 47.435,
+      "r_rings": [
+        48.865,
+        50.115
+      ],
+      "r_pad": 52.715,
+      "vias": 330,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "bv_fixed",
+    "strands": 2,
+    "swap": false,
+    "cap_mm": 1.6,
+    "stackup": "jlc4_2oz",
+    "buried": true,
+    "space_mm": 0.15,
+    "via_mm": [
+      0.3,
+      0.56
+    ],
+    "Kt_mNm_per_A": 22.628519050884805,
+    "R_phase_ohm": 0.7593161398914148,
+    "R_links_ohm": 0.1004309659907784,
+    "Km_mNm_per_sqrtW": 21.2030914668242,
+    "ripple_pct": 3.786534420917848,
+    "noload_rpm": 4056.6623419458388,
+    "eddy_W_at_2000rpm": 0.15386847743023996,
+    "circulating_W_at_2000rpm": 0.21659702673732356,
+    "drag_mNm_at_2000rpm": 1.7688424869989665,
+    "loss_15mNm_2000rpm_W": 0.8709425280033631,
+    "board": {
+      "r_term": 47.435,
+      "r_rings": [
+        48.865,
+        50.115
+      ],
+      "r_pad": 52.715,
+      "vias": 330,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "bv_solid",
+    "strands": 1,
+    "swap": true,
+    "cap_mm": 1.2,
+    "stackup": "ace4_3oz",
+    "buried": true,
+    "space_mm": 0.2,
+    "via_mm": [
+      0.2,
+      0.4
+    ],
+    "Kt_mNm_per_A": 22.676893302137277,
+    "R_phase_ohm": 0.6163408609520926,
+    "R_links_ohm": 0.08197205160646139,
+    "Km_mNm_per_sqrtW": 23.584541994509586,
+    "ripple_pct": 4.021068220657438,
+    "noload_rpm": 4048.008687286837,
+    "eddy_W_at_2000rpm": 0.5589095438033665,
+    "circulating_W_at_2000rpm": 0.0,
+    "drag_mNm_at_2000rpm": 2.6685964991262603,
+    "loss_15mNm_2000rpm_W": 0.9634180182896646,
+    "board": {
+      "r_term": 47.10000000000001,
+      "r_rings": [
+        48.500000000000014,
+        49.750000000000014
+      ],
+      "r_pad": 52.350000000000016,
+      "vias": 258,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "bv_swap",
+    "strands": 2,
+    "swap": true,
+    "cap_mm": 1.6,
+    "stackup": "ace4_3oz",
+    "buried": true,
+    "space_mm": 0.2,
+    "via_mm": [
+      0.2,
+      0.4
+    ],
+    "Kt_mNm_per_A": 22.625911591857523,
+    "R_phase_ohm": 0.6122678946985205,
+    "R_links_ohm": 0.0968163955904988,
+    "Km_mNm_per_sqrtW": 23.60965890601058,
+    "ripple_pct": 3.774837161162249,
+    "noload_rpm": 4057.129840495066,
+    "eddy_W_at_2000rpm": 0.20475728072914154,
+    "circulating_W_at_2000rpm": 0.003552915364982753,
+    "drag_mNm_at_2000rpm": 0.9946079221446575,
+    "loss_15mNm_2000rpm_W": 0.6119584633843902,
+    "board": {
+      "r_term": 47.300000000000004,
+      "r_rings": [
+        48.70000000000001,
+        49.95000000000001
+      ],
+      "r_pad": 52.55000000000001,
+      "vias": 330,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "bv_fixed",
+    "strands": 2,
+    "swap": false,
+    "cap_mm": 1.6,
+    "stackup": "ace4_3oz",
+    "buried": true,
+    "space_mm": 0.2,
+    "via_mm": [
+      0.2,
+      0.4
+    ],
+    "Kt_mNm_per_A": 22.62665982740166,
+    "R_phase_ohm": 0.6118408108532449,
+    "R_links_ohm": 0.0968163955904988,
+    "Km_mNm_per_sqrtW": 23.618678645677264,
+    "ripple_pct": 3.7739261016653667,
+    "noload_rpm": 4056.9956762491274,
+    "eddy_W_at_2000rpm": 0.20475800293963367,
+    "circulating_W_at_2000rpm": 0.3040400890711165,
+    "drag_mNm_at_2000rpm": 2.4293319413770766,
+    "loss_15mNm_2000rpm_W": 0.912138119610787,
+    "board": {
+      "r_term": 47.300000000000004,
+      "r_rings": [
+        48.70000000000001,
+        49.95000000000001
+      ],
+      "r_pad": 52.55000000000001,
+      "vias": 330,
+      "breaks": 24
+    }
+  }
+]

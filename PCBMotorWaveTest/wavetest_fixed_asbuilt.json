@@ -1,0 +1,360 @@
+{
+  "design": "wave_test_fixed",
+  "variant": "fixed",
+  "strands": 2,
+  "swap": false,
+  "cap_mm": 1.6,
+  "stackup": "JLCPCB 4L (assumed thicknesses): copper 70 / 70 / 70 / 70 um, dielectric 0.14 / 1.11 / 0.14 mm",
+  "board_mm": 129.4,
+  "segments": 16482,
+  "vias": 330,
+  "pads": [
+    "A1",
+    "A2",
+    "B1",
+    "B2",
+    "C1",
+    "C2"
+  ],
+  "radii_mm": {
+    "p1_vias": [
+      14.5,
+      51.0
+    ],
+    "p2_vias": [
+      18.6,
+      44.6
+    ],
+    "p1_radial": [
+      17.3,
+      46.4
+    ],
+    "p2_radial": [
+      22.0,
+      40.0
+    ],
+    "terminal_vias": 53.84,
+    "jumper_rings": [
+      55.27,
+      56.52
+    ],
+    "pads": 59.12
+  },
+  "jumpers": [
+    {
+      "phase": "A",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 5.686998582962992
+    },
+    {
+      "phase": "A",
+      "ring": 1,
+      "R": 56.515,
+      "span_deg": 5.68699858296289
+    },
+    {
+      "phase": "A",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 5.686998582962992
+    },
+    {
+      "phase": "A",
+      "ring": 1,
+      "R": 56.515,
+      "span_deg": 33.75000000000009
+    },
+    {
+      "phase": "A",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 1.8130014170370505
+    },
+    {
+      "phase": "A",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 1.8130014170370505
+    },
+    {
+      "phase": "A",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 1.8130014170370505
+    },
+    {
+      "phase": "B",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 5.686998582962941
+    },
+    {
+      "phase": "B",
+      "ring": 1,
+      "R": 56.515,
+      "span_deg": 5.686998582962941
+    },
+    {
+      "phase": "B",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 5.686998582962941
+    },
+    {
+      "phase": "B",
+      "ring": 1,
+      "R": 56.515,
+      "span_deg": 33.750000000000014
+    },
+    {
+      "phase": "B",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 1.8130014170370758
+    },
+    {
+      "phase": "B",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 1.8130014170370758
+    },
+    {
+      "phase": "B",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 1.8130014170370758
+    },
+    {
+      "phase": "C",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 5.686998582962915
+    },
+    {
+      "phase": "C",
+      "ring": 1,
+      "R": 56.515,
+      "span_deg": 5.686998582962941
+    },
+    {
+      "phase": "C",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 5.686998582962915
+    },
+    {
+      "phase": "C",
+      "ring": 1,
+      "R": 56.515,
+      "span_deg": 33.749999999999936
+    },
+    {
+      "phase": "C",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 1.8130014170370505
+    },
+    {
+      "phase": "C",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 1.8130014170370505
+    },
+    {
+      "phase": "C",
+      "ring": 0,
+      "R": 55.265,
+      "span_deg": 1.8130014170370505
+    }
+  ],
+  "chain": {
+    "A": [
+      {
+        "pair": 2,
+        "j": 42,
+        "angle_deg": 337.5,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 1,
+        "j": 42,
+        "angle_deg": 341.25,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 2,
+        "j": 43,
+        "angle_deg": 345.0,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 1,
+        "j": 43,
+        "angle_deg": 348.75,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 2,
+        "j": 0,
+        "angle_deg": 22.5,
+        "start": "bot",
+        "end": "top"
+      },
+      {
+        "pair": 1,
+        "j": 0,
+        "angle_deg": 26.25,
+        "start": "bot",
+        "end": "top"
+      },
+      {
+        "pair": 2,
+        "j": 1,
+        "angle_deg": 30.0,
+        "start": "bot",
+        "end": "top"
+      },
+      {
+        "pair": 1,
+        "j": 1,
+        "angle_deg": 33.75,
+        "start": "bot",
+        "end": "top"
+      }
+    ],
+    "B": [
+      {
+        "pair": 2,
+        "j": 10,
+        "angle_deg": 97.5,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 1,
+        "j": 10,
+        "angle_deg": 101.25,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 2,
+        "j": 11,
+        "angle_deg": 105.0,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 1,
+        "j": 11,
+        "angle_deg": 108.75,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 2,
+        "j": 16,
+        "angle_deg": 142.5,
+        "start": "bot",
+        "end": "top"
+      },
+      {
+        "pair": 1,
+        "j": 16,
+        "angle_deg": 146.25,
+        "start": "bot",
+        "end": "top"
+      },
+      {
+        "pair": 2,
+        "j": 17,
+        "angle_deg": 150.0,
+        "start": "bot",
+        "end": "top"
+      },
+      {
+        "pair": 1,
+        "j": 17,
+        "angle_deg": 153.75,
+        "start": "bot",
+        "end": "top"
+      }
+    ],
+    "C": [
+      {
+        "pair": 2,
+        "j": 26,
+        "angle_deg": 217.5,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 1,
+        "j": 26,
+        "angle_deg": 221.25,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 2,
+        "j": 27,
+        "angle_deg": 225.0,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 1,
+        "j": 27,
+        "angle_deg": 228.75,
+        "start": "top",
+        "end": "bot"
+      },
+      {
+        "pair": 2,
+        "j": 32,
+        "angle_deg": 262.5,
+        "start": "bot",
+        "end": "top"
+      },
+      {
+        "pair": 1,
+        "j": 32,
+        "angle_deg": 266.25,
+        "start": "bot",
+        "end": "top"
+      },
+      {
+        "pair": 2,
+        "j": 33,
+        "angle_deg": 270.0,
+        "start": "bot",
+        "end": "top"
+      },
+      {
+        "pair": 1,
+        "j": 33,
+        "angle_deg": 273.75,
+        "start": "bot",
+        "end": "top"
+      }
+    ]
+  },
+  "checks": {
+    "series_errors": [],
+    "connectivity": {
+      "shorts": 0,
+      "pieces_per_net": {
+        "PHASE_A": 1,
+        "PHASE_C": 1,
+        "PHASE_B": 1
+      },
+      "ok": true
+    },
+    "spacing_violations": 0
+  }
+}

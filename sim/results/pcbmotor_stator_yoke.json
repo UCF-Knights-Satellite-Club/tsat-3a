@@ -1,0 +1,262 @@
+[
+  {
+    "case": "spiral (current payload)",
+    "variant": "spiral",
+    "stackup": "jlc4_2oz_out",
+    "yoke": false,
+    "z_yoke_mm": -1.785,
+    "Kt_mNm_per_A": 21.77950470165984,
+    "R_phase_ohm": 1.210208438626474,
+    "Km_mNm_per_sqrtW": 16.164872410058116,
+    "noload_rpm": 4214.8002144756065,
+    "H_top_mNms": 89.90366323298169,
+    "copper_W_15mNm": 0.8610690036635243,
+    "eddy_W_2000": 0.772929097883333,
+    "circ_W_2000": 0.0,
+    "loss_15mNm_2000_W": 1.6339981015468572
+  },
+  {
+    "case": "spiral (current payload)",
+    "variant": "spiral",
+    "stackup": "jlc4_2oz_out",
+    "yoke": {
+      "SMC": {
+        "thickness_mm": 4.816729729324868,
+        "mass_g": 280.84157694326217,
+        "iron_loss": {
+          "2000": {
+            "W": 2.7679745823527924,
+            "drag_mNm": 13.216105114025144
+          },
+          "4000": {
+            "W": 5.679740052100535,
+            "drag_mNm": 13.55938057153229
+          }
+        },
+        "note": "Somaloy/Atomet-class soft magnetic composite (assumed coefficients)"
+      },
+      "ferrite": {
+        "thickness_mm": 16.51450192911383,
+        "mass_g": 624.5743178352086,
+        "iron_loss": {
+          "2000": {
+            "W": 0.13495157948869826,
+            "drag_mNm": 0.644346328610555
+          },
+          "4000": {
+            "W": 0.26990315897739653,
+            "drag_mNm": 0.644346328610555
+          }
+        },
+        "note": "MnZn power ferrite (assumed coefficients)"
+      }
+    },
+    "z_yoke_mm": -1.785,
+    "Kt_mNm_per_A": 39.891427707602496,
+    "R_phase_ohm": 1.210208438626474,
+    "Km_mNm_per_sqrtW": 29.607644800999886,
+    "noload_rpm": 2301.152562414653,
+    "H_top_mNms": 49.08466225955612,
+    "copper_W_15mNm": 0.25666981301654246,
+    "eddy_W_2000": 1.6202514092063913,
+    "circ_W_2000": 0.0,
+    "pull_N": 411.389769685027,
+    "phi_pole_Wb": 0.00022022088322473296,
+    "loss_15mNm_2000_W": 1.8769212222229337
+  },
+  {
+    "case": "wave, through vias, 2 strands swapped",
+    "variant": "swap",
+    "stackup": "jlc4_2oz",
+    "yoke": false,
+    "z_yoke_mm": -1.785,
+    "Kt_mNm_per_A": 22.398596731797507,
+    "R_phase_ohm": 0.8591125675280056,
+    "Km_mNm_per_sqrtW": 19.731047637025725,
+    "noload_rpm": 4098.3041119452155,
+    "H_top_mNms": 87.41874678691231,
+    "copper_W_15mNm": 0.5779393004121954,
+    "eddy_W_2000": 0.15828288985647646,
+    "circ_W_2000": 0.0008678962059498026,
+    "loss_15mNm_2000_W": 0.7370900864746217
+  },
+  {
+    "case": "wave, through vias, 2 strands swapped",
+    "variant": "swap",
+    "stackup": "jlc4_2oz",
+    "yoke": {
+      "SMC": {
+        "thickness_mm": 4.816729729324868,
+        "mass_g": 280.84157694326217,
+        "iron_loss": {
+          "2000": {
+            "W": 2.7679745823527924,
+            "drag_mNm": 13.216105114025144
+          },
+          "4000": {
+            "W": 5.679740052100535,
+            "drag_mNm": 13.55938057153229
+          }
+        },
+        "note": "Somaloy/Atomet-class soft magnetic composite (assumed coefficients)"
+      },
+      "ferrite": {
+        "thickness_mm": 16.51450192911383,
+        "mass_g": 624.5743178352086,
+        "iron_loss": {
+          "2000": {
+            "W": 0.13495157948869826,
+            "drag_mNm": 0.644346328610555
+          },
+          "4000": {
+            "W": 0.26990315897739653,
+            "drag_mNm": 0.644346328610555
+          }
+        },
+        "note": "MnZn power ferrite (assumed coefficients)"
+      }
+    },
+    "z_yoke_mm": -1.785,
+    "Kt_mNm_per_A": 42.7369069006556,
+    "R_phase_ohm": 0.8591125675280056,
+    "Km_mNm_per_sqrtW": 37.64717745549134,
+    "noload_rpm": 2147.9388131928704,
+    "H_top_mNms": 45.816541207130044,
+    "copper_W_15mNm": 0.15875144090181995,
+    "eddy_W_2000": 0.34665299350413475,
+    "circ_W_2000": 0.0015973971150458632,
+    "pull_N": 411.389769685027,
+    "phi_pole_Wb": 0.00022022088322473296,
+    "loss_15mNm_2000_W": 0.5070018315210006
+  },
+  {
+    "case": "wave, blind vias, 2 strands swapped",
+    "variant": "bv_swap",
+    "stackup": "jlc4_2oz",
+    "yoke": false,
+    "z_yoke_mm": -1.785,
+    "Kt_mNm_per_A": 22.627770815340664,
+    "R_phase_ohm": 0.7598641829875836,
+    "Km_mNm_per_sqrtW": 21.194742998167072,
+    "noload_rpm": 4056.796484145686,
+    "H_top_mNms": 86.53336963938526,
+    "copper_W_15mNm": 0.500871370644666,
+    "eddy_W_2000": 0.1538678423677538,
+    "circ_W_2000": 0.0026359482926692373,
+    "loss_15mNm_2000_W": 0.6573751613050891
+  },
+  {
+    "case": "wave, blind vias, 2 strands swapped",
+    "variant": "bv_swap",
+    "stackup": "jlc4_2oz",
+    "yoke": {
+      "SMC": {
+        "thickness_mm": 4.816729729324868,
+        "mass_g": 280.84157694326217,
+        "iron_loss": {
+          "2000": {
+            "W": 2.7679745823527924,
+            "drag_mNm": 13.216105114025144
+          },
+          "4000": {
+            "W": 5.679740052100535,
+            "drag_mNm": 13.55938057153229
+          }
+        },
+        "note": "Somaloy/Atomet-class soft magnetic composite (assumed coefficients)"
+      },
+      "ferrite": {
+        "thickness_mm": 16.51450192911383,
+        "mass_g": 624.5743178352086,
+        "iron_loss": {
+          "2000": {
+            "W": 0.13495157948869826,
+            "drag_mNm": 0.644346328610555
+          },
+          "4000": {
+            "W": 0.26990315897739653,
+            "drag_mNm": 0.644346328610555
+          }
+        },
+        "note": "MnZn power ferrite (assumed coefficients)"
+      }
+    },
+    "z_yoke_mm": -1.785,
+    "Kt_mNm_per_A": 42.01155551551893,
+    "R_phase_ohm": 0.7598641829875836,
+    "Km_mNm_per_sqrtW": 39.3509431119473,
+    "noload_rpm": 2185.02409542582,
+    "H_top_mNms": 46.60758765182755,
+    "copper_W_15mNm": 0.14530221248895722,
+    "eddy_W_2000": 0.33526711697660716,
+    "circ_W_2000": 0.003463869863317074,
+    "pull_N": 411.389769685027,
+    "phi_pole_Wb": 0.00022022088322473296,
+    "loss_15mNm_2000_W": 0.4840331993288815
+  },
+  {
+    "case": "wave, blind vias, 2 strands swapped, 3 oz (assumed)",
+    "variant": "bv_swap",
+    "stackup": "ace4_3oz",
+    "yoke": false,
+    "z_yoke_mm": -1.8025,
+    "Kt_mNm_per_A": 22.625911591857527,
+    "R_phase_ohm": 0.6122678946985205,
+    "Km_mNm_per_sqrtW": 23.609658906010583,
+    "noload_rpm": 4057.1298404950653,
+    "H_top_mNms": 86.54048028649689,
+    "copper_W_15mNm": 0.4036482672902657,
+    "eddy_W_2000": 0.20475728072914173,
+    "circ_W_2000": 0.003552915364982748,
+    "loss_15mNm_2000_W": 0.6119584633843902
+  },
+  {
+    "case": "wave, blind vias, 2 strands swapped, 3 oz (assumed)",
+    "variant": "bv_swap",
+    "stackup": "ace4_3oz",
+    "yoke": {
+      "SMC": {
+        "thickness_mm": 4.804378385139175,
+        "mass_g": 280.12142630716556,
+        "iron_loss": {
+          "2000": {
+            "W": 2.7608767776834244,
+            "drag_mNm": 13.182215593078224
+          },
+          "4000": {
+            "W": 5.665175725636118,
+            "drag_mNm": 13.52461080328805
+          }
+        },
+        "note": "Somaloy/Atomet-class soft magnetic composite (assumed coefficients)"
+      },
+      "ferrite": {
+        "thickness_mm": 16.472154463334313,
+        "mass_g": 622.9727473085999,
+        "iron_loss": {
+          "2000": {
+            "W": 0.1346055286408544,
+            "drag_mNm": 0.6426940575206901
+          },
+          "4000": {
+            "W": 0.2692110572817088,
+            "drag_mNm": 0.6426940575206901
+          }
+        },
+        "note": "MnZn power ferrite (assumed coefficients)"
+      }
+    },
+    "z_yoke_mm": -1.8025,
+    "Kt_mNm_per_A": 41.892951985727684,
+    "R_phase_ohm": 0.6122678946985205,
+    "Km_mNm_per_sqrtW": 43.71440695034152,
+    "noload_rpm": 2191.210137662345,
+    "H_top_mNms": 46.7395388309291,
+    "copper_W_15mNm": 0.11774252261268685,
+    "eddy_W_2000": 0.44325844392085667,
+    "circ_W_2000": 0.004619854888807295,
+    "pull_N": 408.5301809212206,
+    "phi_pole_Wb": 0.00021965617976856309,
+    "loss_15mNm_2000_W": 0.5656208214223508
+  }
+]

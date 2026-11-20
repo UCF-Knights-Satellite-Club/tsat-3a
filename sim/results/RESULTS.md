@@ -148,8 +148,8 @@ the model (method of images) is not covered by this check; the test stator still
 **Winding lesson.** CMU and the CIOMP group (Wang et al., Optics and Precision Engineering 2015,
 doi:10.3788/OPE.20152304.1004) both use wave windings instead of spiral coils. CIOMP measured 26.2%
 lower motor power at 5,000 rpm with the wave winding than with a spiral winding on otherwise identical
-flywheel prototypes. The payload designs here use spiral (concentrated) coils; a wave-winding variant
-is worth adding to the design study.
+flywheel prototypes. The payload designs here use spiral (concentrated) coils. Section 5f now simulates
+a wave-winding variant: it cuts loss by 22–39% on the same rotor.
 
 ### Test stator as laid out (PCBMotorTest v0.1, 2026-11-18)
 
@@ -447,6 +447,132 @@ that drives the 2 m SPIDER gondola wheel.
   sensitive pointing through zero speed; low heat in vacuum. **Where it loses:** small wheels (CubeSat,
   KAOS-3), where Km is 3–6× lower but torques are mN·m and power is a fraction of a watt anyway, and
   high-rim-speed wheels, where eddy loss grows.
+
+### 5f. Wave winding vs spiral coils ([`pcbmotor_wave.md`](pcbmotor_wave.md), 2026-11-19)
+
+Layout images of every design in this study and the recommended spiral designs are in [`layouts/`](layouts/README.md).
+
+`pcbmotor/wave.py` models a full-pitch two-layer radial wave winding. It uses the same rotor, board and
+drive as the high-momentum spiral design. All four layers are in series as two wave pairs. The literature
+behind it (Tokgöz, Paul, Wang/CIOMP, CMU, Chulaee, Han, François & Dehez and others) is in `~/KSC/research`.
+
+| At 15 mN·m and 2000 rpm | Kt | Km | Eddy @2000 / top rpm | Total loss | H max |
+|---|---|---|---|---|---|
+| Spiral, current recommendation | 21.8 | 16.2 | 0.77 / 3.43 W | 1.63 W | 90 mN·m·s |
+| Wave, same r 21–41 envelope, 48 conductors/layer, width ≤ 1.2 mm | 19.5 | 17.4 | 0.53 / 2.93 W | 1.27 W | 101 |
+| Wave, end turns outside the magnets (vias at r 15/44), 48/layer, width ≤ 1.2 mm | 23.0 | 18.5 | 0.33 / 1.31 W | 0.99 W | 85 |
+| **Same, width ≤ 1.6 mm as 2 strands that swap lanes at every via** | 23.0 | 18.8 | 0.13 / 0.53 W | **0.77 W** | 85 |
+
+- **The wave winding wins.** It gives 22–53% less loss than the spiral at the same Kt and about the same
+  momentum. It fits the same 90 mm board, provided the hub stays inside r ≈ 14 mm.
+- **Use 2 strands about 0.7 mm wide, reversing lane order at every via.** This is the same lane reversal the
+  strand-test board uses, and François & Dehez's "parallel connection".
+  - The reversal balances the strand EMFs, so circulating current is about 0.001 W.
+  - With fixed lanes it is 0.09–0.5 W.
+  - Three strands don't fit their vias at r = 15 mm.
+- **Don't fill the slot pitch** with solid traces (up to 5 mm wide): Km 22, but about 11 W of eddy drag at
+  2000 rpm.
+- **Don't slit traces that merge at the end turns**: 4–5 W circulates at 2000 rpm.
+- **Don't stitch the layers in parallel** as CMU did: Km falls to 13, with 3.6 W circulating.
+- **Derating:** Paul 2019's built wave motor measured 15.5% below FEA on torque, so plan on a 5–15% derating
+  until bench data exists.
+- **Test boards (2026-11-19):** [`PCBMotorWaveTest/`](../../PCBMotorWaveTest/README.md) has solid,
+  2-strand-swapped and 2-strand-fixed wave stators. They use the strand-test rotor on JLC 4-layer all-2-oz
+  copper, drawn by `pcbmotor/wave_layout.py`.
+  - All three are DRC clean, fully connected and 0.15 mm clean between turns.
+  - The two layer pairs are nested to keep their through vias clear of each other.
+  - The strand swap is purely via placement.
+  - As built: Kt 22.4 mN·m/A and Km 19.4–19.7, against the spiral's 16.2.
+  - Coast-down drag at 2000 rpm: 1.70 (solid), 0.76 (swap) and 1.67 mN·m (fixed). The swap vs fixed
+    difference measures the strand circulating current directly.
+  - The nesting makes the board about 129 mm square, so a 90 mm payload version needs a different via
+    scheme. The options are in the board README.
+- **Blind-via variant (`bv_*`, 2026-11-19):** each pair's vias span only its own two layers, so both
+  pairs share via rings.
+  - Km 21.2 at 2 oz, and 23.6 at an assumed 3 oz ACE-style build (0.2 mm space, vias of 0.4 mm or
+    smaller).
+  - Loss 0.66 W and 0.61 W at 15 mN·m and 2000 rpm, against 1.63 W for the spiral.
+  - The copper's outer edge drops to r ≈ 45.4 mm, but the jumpers and pads outside it still make the
+    board about 117 mm. Fitting 90 mm needs a 6-layer build with jumper layers as well. See the board
+    README.
+
+### 5g. Slotless stator yoke behind the PCB ([`pcbmotor_stator_yoke.md`](pcbmotor_stator_yoke.md), 2026-11-19)
+
+`pcbmotor/stator_yoke.py` adds an ideal soft-magnetic plane 0.15 mm behind the bottom copper, using
+the method of images like the rotor back iron. It also estimates the yoke's pull, its thickness and
+mass, and its iron loss (assumed SMC and ferrite coefficients). Marignetti 2018 built this kind of
+slotless core.
+
+| Design | Km without → with yoke | Top rpm at 11.1 V | Momentum at top speed |
+|---|---|---|---|
+| Spiral (current payload) | 16.2 → 29.6 | 4215 → 2301 | 90 → 49 mN·m·s |
+| Wave, blind vias, 2 oz, 2 strands swapped | 21.2 → 39.4 | 4057 → 2185 | 87 → 47 mN·m·s |
+| Wave, blind vias, 3 oz (assumed) | 23.6 → 43.7 | 4057 → 2191 | 87 → 47 mN·m·s |
+
+- **The gain:** Km nearly doubles, so copper loss at a given torque falls about 3.5×.
+- **Axial pull:** about 410 N on the yoke.
+- **SMC yoke:** 4.8 mm and 280 g to stay below 1.2 T. Iron loss about 2.8 W at 2000 rpm, which is
+  about 13 mN·m of drag at any speed (assumed coefficients). That's twice the control margin.
+- **Ferrite yoke:** only about 0.6 mN·m of drag, but about 16.5 mm and 625 g to stay below 0.35 T.
+- **Speed halves** on the same bus voltage, unless the winding is redone with half the turns.
+- **Not modelled:** the rotor back iron would need to carry about twice the flux.
+- **Verdict:** not worth it for the KAOS-3 wheels. With the wave winding the motor already uses
+  0.5–0.7 W at the design torque, so a yoke trades little copper saving for mass, drag and pull. It
+  only pays for slow, mass-tolerant drives.
+
+### 5h. Bus voltage, turns and PWM ripple ([`pcbmotor_bus_voltage.md`](pcbmotor_bus_voltage.md), 2026-11-19)
+
+`pcbmotor/bus_voltage.py` puts the recommended wave stator on 2S–8S LiPo supplies, first with the
+same winding and then rewound for each voltage. The rewind options are 24–120 conductors per layer
+and 1 or 2 parallel paths (L1+L4 in parallel with L2+L3), each with its best trace width and
+strand count. It adds two things the wave model lacked:
+
+- **Phase inductance**, by the Neumann formula. Ls is only 8.1 µH for the recommended winding
+  (L_self 6.3, M_AB −1.8), and it scales with turns squared.
+- **PWM ripple**, from centre-aligned SVPWM switched against the carrier. It assumes 0.25 Ω of
+  driver and harness resistance per phase, the same at every voltage.
+
+**Same winding** (Kt 23.0 mN·m/A, R 1.0 Ω), with 15 mN·m at 2000 rpm as the operating point:
+
+| V bus | No-load rpm | Momentum mN·m·s | Energy J | Magnet bond shear MPa | Ripple loss W at 50 / 100 kHz |
+|---|---|---|---|---|---|
+| 7.4 | 2666 | 57 | 7.9 | 0.12 | 0.65 / 0.16 |
+| 11.1 | 3999 | 85 | 17.9 | 0.26 | 1.05 / 0.26 |
+| 14.8 | 5332 | 114 | 31.7 | 0.46 | 1.46 / 0.37 |
+| 22.2 | 7997 (over the 6000 cap) | 171 | 71.4 | 1.04 | 2.01 / 0.50 |
+
+**Rewound for about 4000 rpm no-load** (same top speed and momentum):
+
+| V bus | Winding | Kt | Km | Current at 15 mN·m | Copper W | Driver W | Eddy W | Ripple W at 50 kHz | Total W |
+|---|---|---|---|---|---|---|---|---|---|
+| 7.4 | n24, 3 mm cap, 4 strands | 11.9 | 18.2 | 1.26 A | 0.68 | 0.60 | 0.09 | 2.03 | 3.40 |
+| 11.1 | n48, 1.6 mm cap, 2 strands (recommended) | 23.0 | 18.8 | 0.65 A | 0.64 | 0.16 | 0.12 | 1.05 | 1.97 |
+| 14.8 | n120, 0.6 mm, 2 paths | 28.4 | 19.8 | 0.53 A | 0.57 | 0.10 | 0.08 | 1.01 | 1.77 |
+| 22.2 | n96, 0.6 mm | 45.5 | 18.2 | 0.33 A | 0.68 | 0.04 | 0.07 | 0.99 | 1.79 |
+| 29.6 | n120, 0.6 mm | 56.8 | 18.7 | 0.26 A | 0.64 | 0.03 | 0.08 | 1.01 | 1.76 |
+
+- **Turns don't change Km.** Km stays 18–20 at every turn count. With more turns the best trace
+  narrows (1.6 mm with 2 strands at n48, 0.6 mm solid at n96–120), so eddy loss stays at 0.07–0.13 W.
+  Above n48 two strands' vias no longer fit at r = 15 mm, but narrow solid traces do as well.
+- **Two parallel paths add about 5% Km.** Current splits by conductance, so more of it flows in the
+  2 oz pair. The circulating loss between the paths is about 0.01 mW.
+- **PWM ripple is the biggest single loss at 50 kHz.** At 2000 rpm it's about 1 W per wheel, more
+  than the copper loss. When the winding is rewound to suit the voltage, ripple loss stays about the
+  same, because Ls and R both scale with turns squared. On a fixed winding it grows with voltage.
+  It's small at zero speed (0.09 W), which helps the pitch and roll wheels, since they hover near
+  zero speed. Fixes: PWM at 100 kHz or more (about 0.26 W), or series inductors. The worst case at
+  any modulation depth is 1.8 W at 11.1 V and 50 kHz.
+- **Higher voltage saves only driver and harness loss** (0.16 W at 11.1 V, 0.04 W at 22.2 V). It
+  needs more turns, which means narrower traces, more vias and higher-voltage MOSFETs. 7.4 V costs
+  about 1.4 W more per wheel, and the n=24 step only lands at 5150 rpm.
+- **Keeping the winding and raising the voltage** buys speed. Momentum, energy, bond shear and drag
+  scale with speed, speed squared, speed squared and speed respectively. Above about 16.7 V the
+  rotor passes the 6000 rpm hand-balance cap.
+- **Verdict:** 11.1 V (3S) with the n48 winding is a good match. Specify the PWM frequency
+  (≥100 kHz) or series inductance in the driver design. If KSC's bus is a different voltage, rewind
+  to suit it: n must be a multiple of 24, and two parallel paths give the in-between steps.
+- **Not modelled:** proximity loss from the ripple in wide traces, MOSFET switching loss (which
+  grows with f·V·I), and battery resistance.
 
 ## 6. KAOS-3 three-axis hanging payload: pitch and roll (2026-11-19)
 
