@@ -476,10 +476,17 @@ behind it (Tokgöz, Paul, Wang/CIOMP, CMU, Chulaee, Han, François & Dehez and o
 - **Don't stitch the layers in parallel** as CMU did: Km falls to 13, with 3.6 W circulating.
 - **Derating:** Paul 2019's built wave motor measured 15.5% below FEA on torque, so plan on a 5–15% derating
   until bench data exists.
-- **Next:**
-  - Generate a wave test layout. The open layout question is via staggering between the two layer pairs, with
-    2 strand vias per conductor end.
-  - Decide whether the high-momentum payload and the strand-test boards switch to it.
+- **Test boards (2026-11-19):** [`PCBMotorWaveTest/`](../../PCBMotorWaveTest/README.md) has solid,
+  2-strand-swapped and 2-strand-fixed wave stators. They use the strand-test rotor on JLC 4-layer all-2-oz
+  copper, drawn by `pcbmotor/wave_layout.py`.
+  - All three are DRC clean, fully connected and 0.15 mm clean between turns.
+  - The two layer pairs are nested to keep their through vias clear of each other.
+  - The strand swap is purely via placement.
+  - As built: Kt 22.4 mN·m/A and Km 19.4–19.7, against the spiral's 16.2.
+  - Coast-down drag at 2000 rpm: 1.70 (solid), 0.76 (swap) and 1.67 mN·m (fixed). The swap vs fixed
+    difference measures the strand circulating current directly.
+  - The nesting makes the board about 129 mm square, so a 90 mm payload version needs a different via
+    scheme. The options are in the board README.
 
 ## 6. KAOS-3 three-axis hanging payload: pitch and roll (2026-11-19)
 

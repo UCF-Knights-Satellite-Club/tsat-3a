@@ -27,6 +27,8 @@ python3 -m venv .venv
 .venv/bin/python -m pcbmotor.mechanical     # gap, flatness, back iron, magnet retention, balance, temperature, bearing loads
 .venv/bin/python -m pcbmotor.wave           # wave winding vs spiral coils on the high-momentum rotor (~2 min)
 .venv/bin/python tests/test_wave.py         # wave-winding model checks
+.venv/bin/python -m pcbmotor.wave_asbuilt   # wave test boards as laid out: Kt, R, eddy and strand circulating current (~10 s)
+.venv/bin/python tests/test_wave_layout.py  # wave test-board copper: series path, connectivity, spacing
 .venv/bin/python -m pcbmotor.layout_gallery # layout images of every evaluated stator (~15 min)
 .venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
 .venv/bin/python -m pcbmotor.strand_test    # solid vs stranded test boards as laid out (after PCBMotorStrandTest/gen_strand_test.py)
@@ -61,6 +63,8 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `pcbmotor/stacking.py` | Stacked stator boards (series/parallel), dual rotors and more-layer boards against one board, including eddy drag in the traces and the pull between rotors. |
 | `pcbmotor/wave.py` | Wave-winding variant of the high-momentum payload stator (series layer pairs; fill, capped, slit and full-length swapped/fixed strands; CMU-style stitched layers) against the spiral design, with eddy and circulating-current losses. |
 | `pcbmotor/layout_gallery.py` | Layout image of every evaluated stator (recommended spirals and every wave-study design), traces at true width, with an index: `results/layouts/README.md`. |
+| `pcbmotor/wave_layout.py` | As-built copper of the wave test boards (`PCBMotorWaveTest/`): nested layer pairs, strand lanes and their via crossings (swapped or fixed), loop breaks, jumpers, pads; series-path, connectivity and spacing checks. |
+| `pcbmotor/wave_asbuilt.py` | EM model of that copper: Kt, phase R, eddy drag and the current circulating between strands. |
 | `pcbmotor/designs.py` | Design sweep for the 40 mm test stator and the 1U payload stator; drive envelope; plots. |
 | `data/tsat1_swing.py` | Swing and excitation spectrum from the TSat-1 flight accelerometer log. |
 | `yaw/candidates.py` | Motor candidates (datasheet values, approximations flagged). |
@@ -71,6 +75,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `yaw/calibrate.py` | Fits the measured disturbance levels to the video statistics. |
 | `validation/cmu_wheel.py` | Rebuilds the CMU PCB reaction wheel from its paper and design files and compares the model with its measured resistance and torque constant. |
 | `tests/test_em_consistency.py` | Checks Lorentz-force torque against d(flux linkage)/d(angle). |
+| `tests/test_wave_layout.py` | Wave test boards: every variant is one correct series path per phase with 0.15 mm clearance, and the strand swap cancels the circulating current. |
 | `tests/test_wave.py` | Wave-winding checks: balanced phases, slot-filling widths, and template-shift torque against a direct sum over every conductor. |
 | `results/` | CSV/JSON outputs, plots and `RESULTS.md`. |
 

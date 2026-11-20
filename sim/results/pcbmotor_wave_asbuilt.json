@@ -1,0 +1,83 @@
+[
+  {
+    "name": "solid",
+    "strands": 1,
+    "swap": true,
+    "cap_mm": 1.2,
+    "stackup": "jlc4_2oz",
+    "Kt_mNm_per_A": 22.441789753984867,
+    "R_phase_ohm": 0.8928796638873936,
+    "R_links_ohm": 0.10375087463785966,
+    "Km_mNm_per_sqrtW": 19.39167813185804,
+    "ripple_pct": 4.648829774394091,
+    "noload_rpm": 4090.4162321291064,
+    "eddy_W_at_2000rpm": 0.3556164083324334,
+    "circulating_W_at_2000rpm": 0.0,
+    "drag_mNm_at_2000rpm": 1.69794327692078,
+    "loss_15mNm_2000rpm_W": 0.9539614962823133,
+    "board": {
+      "r_term": 53.635,
+      "r_rings": [
+        55.065,
+        56.315
+      ],
+      "r_pad": 58.915,
+      "vias": 258,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "swap",
+    "strands": 2,
+    "swap": true,
+    "cap_mm": 1.6,
+    "stackup": "jlc4_2oz",
+    "Kt_mNm_per_A": 22.3985967317975,
+    "R_phase_ohm": 0.8591125675280056,
+    "R_links_ohm": 0.12426615464983475,
+    "Km_mNm_per_sqrtW": 19.73104763702572,
+    "ripple_pct": 4.418278191493703,
+    "noload_rpm": 4098.304111945216,
+    "eddy_W_at_2000rpm": 0.15828288985647632,
+    "circulating_W_at_2000rpm": 0.0008678962059498024,
+    "drag_mNm_at_2000rpm": 0.7598890289638752,
+    "loss_15mNm_2000rpm_W": 0.7370900864746217,
+    "board": {
+      "r_term": 53.835,
+      "r_rings": [
+        55.265,
+        56.515
+      ],
+      "r_pad": 59.115,
+      "vias": 330,
+      "breaks": 24
+    }
+  },
+  {
+    "name": "fixed",
+    "strands": 2,
+    "swap": false,
+    "cap_mm": 1.6,
+    "stackup": "jlc4_2oz",
+    "Kt_mNm_per_A": 22.39907933007533,
+    "R_phase_ohm": 0.8587235510706637,
+    "R_links_ohm": 0.12426615464983475,
+    "Km_mNm_per_sqrtW": 19.73594160179389,
+    "ripple_pct": 4.417560926707239,
+    "noload_rpm": 4098.215812132652,
+    "eddy_W_at_2000rpm": 0.1582836179562324,
+    "circulating_W_at_2000rpm": 0.1905179214688076,
+    "drag_mNm_at_2000rpm": 1.6654046747267321,
+    "loss_15mNm_2000rpm_W": 0.9264542496205302,
+    "board": {
+      "r_term": 53.835,
+      "r_rings": [
+        55.265,
+        56.515
+      ],
+      "r_pad": 59.115,
+      "vias": 330,
+      "breaks": 24
+    }
+  }
+]

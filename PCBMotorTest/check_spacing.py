@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Copper spacing check that ignores nets (system Python with KiCad's pcbnew and scipy).
 
-    python3 PCBMotorTest/check_spacing.py [board.kicad_pcb] [--space 0.15]
+    python3 PCBMotorTest/check_spacing.py [board.kicad_pcb] [--space 0.15] [--dump violations.csv]
 
 Why: every turn of a phase winding is the same net, so KiCad's DRC never checks the gap
 between neighbouring turns. A turn-to-turn short would not show up in DRC, but it would
@@ -51,22 +51,78 @@ def sample_track(t):
     return pts, s
 
 
+def chain_tracks(tracks, blocked):
+    """Join tracks that meet end to end (exactly two track ends at the point, and no via or pad
+    there) into one item, with the distance along the joined trace. Curves drawn as many short
+    segments are then one piece of copper. Otherwise segment 1 and segment 3 of a bend would look
+    like separate copper that overlaps.
+    tracks: list of (pts, along, half_width); returns the same with per-point half widths."""
+    key = lambda e: (round(float(e[0]), 4), round(float(e[1]), 4))
+    ends = {}
+    for k, (pts, s, hw) in enumerate(tracks):
+        ends.setdefault(key(pts[0]), []).append((k, 0))
+        ends.setdefault(key(pts[-1]), []).append((k, 1))
+    joinable = {e for e, lst in ends.items() if len(lst) == 2 and e not in blocked}
+    used = [False] * len(tracks)
+    out = []
+
+    def walk(k, from_end):
+        """Follow the chain from track k entered at end `from_end`."""
+        pts_all, hw_all = [], []
+        while True:
+            used[k] = True
+            pts, s, hw = tracks[k]
+            seq = pts if from_end == 0 else pts[::-1]
+            pts_all.append(seq if not pts_all else seq[1:])
+            hw_all.append(np.full(len(seq) if len(hw_all) == 0 else len(seq) - 1, hw))
+            far = key(seq[-1])
+            if far not in joinable:
+                break
+            nxt = [(kk, ee) for kk, ee in ends[far] if kk != k]
+            if not nxt or used[nxt[0][0]]:
+                break
+            k, from_end = nxt[0]
+        P = np.vstack(pts_all)
+        S = np.r_[0, np.cumsum(np.linalg.norm(np.diff(P, axis=0), axis=1))]
+        return P, S, np.concatenate(hw_all)
+
+    # start from chain ends (an end that isn't joinable), then sweep up closed loops
+    for k, (pts, s, hw) in enumerate(tracks):
+        if used[k]:
+            continue
+        for e_i, e in ((0, pts[0]), (1, pts[-1])):
+            if key(e) not in joinable:
+                out.append(walk(k, e_i))
+                break
+    for k in range(len(tracks)):
+        if not used[k]:
+            out.append(walk(k, 0))
+    return out
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     path = args[0] if args else "PCBMotorTest/PCBMotorTest.kicad_pcb"
     space = float(sys.argv[sys.argv.index("--space") + 1]) if "--space" in sys.argv else 0.15
+    dump = open(sys.argv[sys.argv.index("--dump") + 1], "w") if "--dump" in sys.argv else None
+    if dump is not None:
+        args = [a for a in args if a != sys.argv[sys.argv.index("--dump") + 1]]
+        path = args[0] if args else path
+        dump.write("layer,gap_mm,x1,y1,x2,y2\n")
     b = pcbnew.LoadBoard(path)
     layers = [b.GetLayerID(n) for n in ("F.Cu", "In1.Cu", "In2.Cu", "B.Cu")]
     total = 0
     for lid in layers:
-        items = []      # (points, along, half_width, endpoints)
+        items = []      # (points, along, half_width (scalar or per point), endpoints)
+        tracks, blocked = [], set()
         for t in b.GetTracks():
             if t.GetClass() == "PCB_VIA":
                 c = mm(t.GetPosition())
                 items.append((c[None], np.zeros(1), pcbnew.ToMM(t.GetWidth(lid)) / 2, [c]))
+                blocked.add((round(float(c[0]), 4), round(float(c[1]), 4)))
             elif t.GetLayer() == lid:
                 pts, s = sample_track(t)
-                items.append((pts, s, pcbnew.ToMM(t.GetWidth()) / 2, [pts[0], pts[-1]]))
+                tracks.append((pts, s, pcbnew.ToMM(t.GetWidth()) / 2))
         for fp in b.GetFootprints():
             for p in fp.Pads():
                 if p.IsOnLayer(lid) and p.GetSizeX() > 0:
@@ -74,9 +130,12 @@ def main():
                     # inscribed circle: KiCad's DRC already checks pads against other nets
                     r = 0.5 * min(pcbnew.ToMM(p.GetSizeX()), pcbnew.ToMM(p.GetSizeY()))
                     items.append((c[None], np.zeros(1), r, [c]))
+                    blocked.add((round(float(c[0]), 4), round(float(c[1]), 4)))
+        for pts, s, hw in chain_tracks(tracks, blocked):
+            items.append((pts, s, hw, [pts[0], pts[-1]]))
         P = np.vstack([it[0] for it in items])
         S = np.concatenate([it[1] for it in items])
-        HW = np.concatenate([np.full(len(it[0]), it[2]) for it in items])
+        HW = np.concatenate([np.broadcast_to(np.asarray(it[2], float), (len(it[0]),)) for it in items])
         ID = np.concatenate([np.full(len(it[0]), k) for k, it in enumerate(items)])
         # joints: item endpoints that touch another item (endpoint inside a via/pad counts)
         ends = [(k, e) for k, it in enumerate(items) for e in it[3]]
@@ -84,7 +143,7 @@ def main():
         joints = {}
         for k, it in enumerate(items):
             for e in it[3]:
-                for m in etree.query_ball_point(e, max(it[2], 1e-3) + 1e-3):
+                for m in etree.query_ball_point(e, max(float(np.max(it[2])), 1e-3) + 1e-3):
                     j, ej = ends[m]
                     if j != k:
                         joints.setdefault((min(j, k), max(j, k)), []).append(0.5 * (e + ej))
@@ -101,8 +160,10 @@ def main():
         gap = np.linalg.norm(P[i] - P[j], axis=1) - HW[i] - HW[j]
         bad = gap < space - 1e-4
         i, j, gap = i[bad], j[bad], gap[bad]
-        # along one track, points closer than its own width + space are the same copper
-        near = np.maximum(NEAR, HW[i] + HW[j] + space + STEP)
+        # along one track (or one chain of joined tracks), nearby points are the same copper. The
+        # reach is twice the joint rule's radius: a bend excused within `near` of its joint on each
+        # side spans 2 * near of trace.
+        near = 2 * np.maximum(NEAR, HW[i] + HW[j] + space + STEP)
         same = (ID[i] == ID[j]) & (np.abs(S[i] - S[j]) <= near)
         i, j, gap = i[~same], j[~same], gap[~same]
         viol = []
@@ -115,6 +176,9 @@ def main():
                 continue
             viol.append((g, P[a], P[c]))
         name = b.GetLayerName(lid)
+        if dump is not None:
+            for g, pa, pc in viol:
+                dump.write(f"{name},{g:.4f},{pa[0]:.4f},{pa[1]:.4f},{pc[0]:.4f},{pc[1]:.4f}\n")
         print(f"{name:7s} {len(items):5d} items, {len(P):7d} samples: {len(viol)} spacing violations"
               + (f", worst gap {min(v[0] for v in viol):.3f} mm" if viol else ""))
         for g, pa, pc in sorted(viol, key=lambda v: v[0])[:10]:
