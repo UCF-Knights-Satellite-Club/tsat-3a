@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Generate the wave-winding test stators (KiCad 10): solid, 2 strands swapped, 2 strands fixed.
+"""Generate the wave-winding test stators (KiCad 10): solid, 2 strands swapped, 2 strands fixed,
+each with through vias (nested layer pairs) or blind vias (bv_*: shared via rings).
 
 Run with the system Python that ships KiCad's `pcbnew` module (not the sim venv):
 
@@ -59,9 +60,13 @@ class Builder(gs.Builder):
         self.cu = list(wl.LAYERS)
         self.via_drill, self.via_dia = via_drill, via_dia
 
-    def via(self, xy, net):
+    def via(self, xy, net, layers=(0, 3)):
         v = pcbnew.PCB_VIA(self.b)
         v.SetPosition(P(xy))
+        if tuple(layers) != (0, 3):
+            # blind via (L1-L2 from the top, L3-L4 from the bottom); a 4-layer board has no buried span
+            v.SetViaType(pcbnew.VIATYPE_BLIND)
+            v.SetLayerPair(gs.layer_id(self.b, wl.LAYERS[layers[0]]), gs.layer_id(self.b, wl.LAYERS[layers[1]]))
         v.SetDrill(pcbnew.FromMM(self.via_drill))
         v.SetWidth(pcbnew.FromMM(self.via_dia))
         v.SetNet(self.net(net))
@@ -134,7 +139,7 @@ def build(name):
                 B.track(tuple(a), tuple(b), wl.LAYERS[c.layer], w, c.net)
                 n_seg += 1
     for v in wb.vias:
-        B.via(v.xy, v.net)
+        B.via(v.xy, v.net, v.layers)
     for xy, nm, net in wb.pads:
         fp = B.footprint(*PAD_FP, nm, xy, value=nm)
         for pad in fp.Pads():
@@ -182,6 +187,8 @@ def build(name):
     # ---- silkscreen
     k = p.strands
     label = ("SOLID 1.2 mm" if k == 1 else f"{k} STRANDS, {'SWAPPED' if p.swap else 'FIXED'} AT VIAS")
+    if p.buried:
+        label += ", BLIND VIAS"
     tx = -h + 22
     B.text((tx, h - 3.0), "KSC TSat-3A wave test v0.1", "F.Silkscreen", size=1.2)
     B.text((tx, h - 5.0), label, "F.Silkscreen", size=1.2)
@@ -205,7 +212,7 @@ def build(name):
     note = write_stackup(board)
     fix_project(board, p)
 
-    out = dict(design=p.name, variant=name, strands=k, swap=p.swap, cap_mm=p.cap_mm, stackup=note,
+    out = dict(design=p.name, variant=name, strands=k, swap=p.swap, buried=p.buried, cap_mm=p.cap_mm, stackup=note,
                board_mm=round(2 * h, 1), segments=n_seg, vias=len(wb.vias), pads=[nm for _, nm, _ in wb.pads],
                radii_mm=dict(p1_vias=[p.p1_in_via, p.p1_out_via], p2_vias=[p.p2_in_via, p.p2_out_via],
                              p1_radial=[p.p1_in_rad, p.p1_out_rad], p2_radial=[p.r_a, p.r_b],

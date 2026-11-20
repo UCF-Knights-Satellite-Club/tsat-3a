@@ -117,6 +117,8 @@ def main():
         tracks, blocked = [], set()
         for t in b.GetTracks():
             if t.GetClass() == "PCB_VIA":
+                if not t.IsOnLayer(lid):          # blind / buried via that doesn't reach this layer
+                    continue
                 c = mm(t.GetPosition())
                 items.append((c[None], np.zeros(1), pcbnew.ToMM(t.GetWidth(lid)) / 2, [c]))
                 blocked.add((round(float(c[0]), 4), round(float(c[1]), 4)))

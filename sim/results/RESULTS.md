@@ -487,6 +487,14 @@ behind it (Tokgöz, Paul, Wang/CIOMP, CMU, Chulaee, Han, François & Dehez and o
     difference measures the strand circulating current directly.
   - The nesting makes the board about 129 mm square, so a 90 mm payload version needs a different via
     scheme. The options are in the board README.
+- **Blind-via variant (`bv_*`, 2026-11-19):** each pair's vias span only its own two layers, so both
+  pairs share via rings.
+  - Km 21.2 at 2 oz, and 23.6 at an assumed 3 oz ACE-style build (0.2 mm space, vias of 0.4 mm or
+    smaller).
+  - Loss 0.66 W and 0.61 W at 15 mN·m and 2000 rpm, against 1.63 W for the spiral.
+  - The copper's outer edge drops to r ≈ 45.4 mm, but the jumpers and pads outside it still make the
+    board about 117 mm. Fitting 90 mm needs a 6-layer build with jumper layers as well. See the board
+    README.
 
 ## 6. KAOS-3 three-axis hanging payload: pitch and roll (2026-11-19)
 

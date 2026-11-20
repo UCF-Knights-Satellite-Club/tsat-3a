@@ -79,6 +79,22 @@ class WaveLayoutParams:
     ring_pitch: float = 1.25
     cluster_deg: tuple = (10.0, 130.0, 250.0)   # where each phase's loop breaks gather
     ext_mm: float = 2.5         # slant extension past the outer via (for finding lane crossings)
+    # Blind/buried vias: each pair's vias span only its own two layers (L1-L2 from the top,
+    # L3-L4 from the bottom), so a via no longer blocks the other pair's copper. Both pairs then use
+    # pair 2's radii (no nesting): inner via p2_in_via, radial r_a..r_b, outer via p2_out_via.
+    buried: bool = False
+
+    def radii(self, pair):
+        """(inner via, start of radial, end of radial, outer via) radii of a pair."""
+        if pair == 1 and not self.buried:
+            return self.p1_in_via, self.p1_in_rad, self.p1_out_rad, self.p1_out_via
+        return self.p2_in_via, self.r_a, self.r_b, self.p2_out_via
+
+    def via_span(self, pair):
+        """Layers a conductor via of this pair spans (through vias: all four)."""
+        if not self.buried:
+            return (0, 3)
+        return (0, 1) if pair == 1 else (2, 3)
 
     @property
     def delta(self):
@@ -98,10 +114,7 @@ def _centreline(p: WaveLayoutParams, pair: int, sigma: int, ds=0.1):
     """(r, theta, dtheta/dr) along one conductor of `pair` centred on angle 0, from the inner via to
     past the outer via (the extension is cut back once the via crossing is known)."""
     tau = p.tau
-    if pair == 1:
-        r_iv, r_ir, r_or, r_ov = p.p1_in_via, p.p1_in_rad, p.p1_out_rad, p.p1_out_via
-    else:
-        r_iv, r_ir, r_or, r_ov = p.p2_in_via, p.r_a, p.r_b, p.p2_out_via
+    r_iv, r_ir, r_or, r_ov = p.radii(pair)
     k_in = sigma * tau / 2 / (r_ir - r_iv)
     k_out = sigma * tau / 2 / (r_ov - r_or)
     r = r_iv + ds * np.arange(int(round((r_ov + p.ext_mm - r_iv) / ds)) + 1)
@@ -128,14 +141,14 @@ def _width(p: WaveLayoutParams, pair, r, sl):
     fill = r * p.delta * cos_psi - p.space_mm - FILL_MARGIN_MM
     if p.strands > 1:
         # strand vias (0.6 mm) are wider than the lanes they end: room for them near the outer vias
-        r_ov = p.p1_out_via if pair == 1 else p.p2_out_via
+        r_ov = p.radii(pair)[3]
         fill = np.where(np.abs(r - r_ov) < 1.5, fill - VIA_BAND_MM, fill)
     w = np.minimum(fill, p.cap_mm)
     # at a kink between a slant and the radial section the neighbour is closer than the
     # perpendicular pitch says: use the narrowest width within KINK_MM of each point
     win = np.abs(r[:, None] - r[None, :]) <= KINK_MM
     w = np.where(win, w[None, :], np.inf).min(axis=1)
-    if pair == 1:
+    if pair == 1 and not p.buried:          # through vias: pair 1 passes pair 2's via rings
         lim = r * p.delta - 2 * (p.via_dia / 2 + p.space_mm)
         for rv in (p.p2_in_via, p.p2_out_via):
             w = np.where(np.abs(r - rv) < 1.6, np.minimum(w, lim), w)
@@ -242,6 +255,10 @@ class Via:
     xy: tuple
     net: str
     tag: str
+    layers: tuple = (0, 3)     # first and last copper layer it spans (0, 3) = through
+
+    def on(self, layer):
+        return self.layers[0] <= layer <= self.layers[1]
 
 
 @dataclass
@@ -304,13 +321,13 @@ def build(p: WaveLayoutParams) -> WaveBoard:
         copper.append(Copper(layer, pts, np.broadcast_to(np.asarray(w, float), (len(pts),)).copy(),
                              net, tag, cond, strand))
 
-    def add_via(xy, net, tag):
-        vias.append(Via((float(xy[0]), float(xy[1])), net, tag))
+    def add_via(xy, net, tag, layers=(0, 3)):
+        vias.append(Via((float(xy[0]), float(xy[1])), net, tag, tuple(layers)))
         return len(vias) - 1
 
     # ---- outer via sites
     for pair in (1, 2):
-        rv = p.p1_out_via if pair == 1 else p.p2_out_via
+        rv = p.radii(pair)[3]
         for j in range(p.n):
             T = (pair, top_layer(pair), j)
             Bk = (pair, bot_layer(pair), (j + sh) % p.n)
@@ -329,14 +346,14 @@ def build(p: WaveLayoutParams) -> WaveBoard:
                 ia, jb, xy = hit
                 lanes[T][it] = [np.vstack([A[:ia + 1], xy]), np.r_[wa[:ia + 1], wa[ia]]]
                 lanes[Bk][ib] = [np.vstack([Bp[:jb + 1], xy]), np.r_[wb[:jb + 1], wb[jb]]]
-                add_via(xy, net, f"outer p{pair} j{j} s{it}")
+                add_via(xy, net, f"outer p{pair} j{j} s{it}", p.via_span(pair))
 
     # ---- inner via sites: top j and bottom j - sh meet exactly on the inner ring
     for pair in (1, 2):
         for j in range(p.n):
             T = (pair, top_layer(pair), j)
             xy = solids[T][0][0] if solids[T] is not None else lanes[T][0][0][0]
-            add_via(xy, "PHASE_" + conductors[T]["phase"], f"inner p{pair} j{j}")
+            add_via(xy, "PHASE_" + conductors[T]["phase"], f"inner p{pair} j{j}", p.via_span(pair))
 
     for key, c in conductors.items():
         net = "PHASE_" + c["phase"]
@@ -347,12 +364,13 @@ def build(p: WaveLayoutParams) -> WaveBoard:
 
     # ---- breaks: merge bars on the via ring, radial stubs to terminal vias
     vr = p.via_dia / 2
-    r_term = p.p1_out_via + 0.5 * (p.cap_mm + p.space_mm) + vr + p.term_gap + vr
+    rv_max = max(p.radii(1)[3], p.radii(2)[3])
+    r_term = rv_max + 0.5 * (p.cap_mm + p.space_mm) + vr + p.term_gap + vr
     dterm = (p.via_dia + p.space_mm + 0.2) / r_term
     stub_end = {}
     for b in breaks:
         pair, j, v = b["pair"], b["j"], b["angle"]
-        rv = p.p1_out_via if pair == 1 else p.p2_out_via
+        rv = p.radii(pair)[3]
         net = "PHASE_" + b["phase"]
         # each stub leaves on the side its conductor doesn't arrive from (a top conductor reaches
         # the ring from smaller angles, a bottom one from larger), so the stub doesn't sit on its end
@@ -462,7 +480,8 @@ def adjacency(wb: WaveBoard, tol=0.01):
             edges.add((min(ia, ib), max(ia, ib)))
     for vi, v in enumerate(wb.vias):
         for e in tree.query_ball_point(v.xy, tol):
-            edges.add((own[e], ("v", vi)))
+            if v.on(wb.copper[own[e]].layer):       # a blind via only connects its own layers
+                edges.add((own[e], ("v", vi)))
     for i, c in enumerate(wb.copper):
         if c.tag not in ("break bar", "jumper arc"):
             continue
@@ -587,11 +606,14 @@ def check_spacing(wb: WaveBoard, space=None, ds=0.1):
         adj.add((nid(a), nid(b)))
         adj.add((nid(b), nid(a)))
     tag = lambda o: wb.copper[o].tag if o >= 0 else (wb.vias[-1 - o].tag if o > PAD0 else "pad")
-    cxy = np.array([v.xy for v in wb.vias] + [xy for xy, _, _ in wb.pads])
-    cd = np.r_[np.full(len(wb.vias), p.via_dia), np.full(len(wb.pads), PAD_D)]
-    cid = np.r_[-1 - np.arange(len(wb.vias)), PAD0 - np.arange(len(wb.pads))]
+    cxy_all = np.array([v.xy for v in wb.vias] + [xy for xy, _, _ in wb.pads])
+    cd_all = np.r_[np.full(len(wb.vias), p.via_dia), np.full(len(wb.pads), PAD_D)]
+    cid_all = np.r_[-1 - np.arange(len(wb.vias)), PAD0 - np.arange(len(wb.pads))]
+    span = [v.layers for v in wb.vias] + [(0, 3)] * len(wb.pads)
     out = []
     for L in range(4):
+        on = np.array([lo <= L <= hi for lo, hi in span])       # vias and pads present on this layer
+        cxy, cd, cid = cxy_all[on], cd_all[on], cid_all[on]
         P, W, O = [], [], []
         for i, c in enumerate(wb.copper):
             if c.layer != L:
@@ -620,7 +642,7 @@ def check_spacing(wb: WaveBoard, space=None, ds=0.1):
                 g = np.linalg.norm(P[nb] - xy, axis=1) - d / 2 - W[nb] / 2
                 for q, gg in zip(nb[g < space - TOL_MM], g[g < space - TOL_MM]):
                     found.append((o, O[q], gg, (P[q] + xy) / 2))
-        if L == 0:                                           # vias and pads against each other (once)
+        if len(cxy) > 1:                                     # vias and pads sharing this layer
             for a, b in cKDTree(cxy).query_pairs(cd.max() + space):
                 g = np.linalg.norm(cxy[a] - cxy[b]) - (cd[a] + cd[b]) / 2
                 if g < space - TOL_MM:
@@ -640,6 +662,10 @@ VARIANTS = {
     "solid": dict(strands=1, cap_mm=1.2),
     "swap": dict(strands=2, cap_mm=1.6, swap=True),
     "fixed": dict(strands=2, cap_mm=1.6, swap=False),
+    # blind/buried vias: both pairs share pair 2's via rings, no nesting
+    "bv_solid": dict(strands=1, cap_mm=1.2, buried=True),
+    "bv_swap": dict(strands=2, cap_mm=1.6, swap=True, buried=True),
+    "bv_fixed": dict(strands=2, cap_mm=1.6, swap=False, buried=True),
 }
 
 

@@ -25,6 +25,11 @@ from . import wave_layout as wl
 
 OUT = pathlib.Path(__file__).resolve().parents[1] / "results"
 STACKUP = "jlc4_2oz"           # the strand-test boards' stackup (2 oz on all four layers)
+# ASSUMED heavy-copper build (ACE-style, not a quoted stackup): 3 oz on all four layers at the same
+# layer depths, with the typical heavy-copper minimum space of 0.2 mm. ACE doesn't publish its spacing
+# at heavy copper; ask before relying on it.
+STACKUPS.setdefault("ace4_3oz", dict(fab="ACE (assumed)", z_mm=[0.0, 0.21, 1.39, 1.6], oz=[3.0] * 4,
+                                     min_trace_mm=0.2, min_space_mm=0.2))
 SIGMA_CU = 1 / RHO_CU_20C
 VIA_PLATING_M = 25e-6
 BOARD_T_MM = 1.6
@@ -84,10 +89,19 @@ def _shift(thetas, curve, x):
     return np.interp(x % P, np.r_[thetas, P], np.r_[curve, curve[0]])
 
 
-def analyse(name, n_theta=72):
+def analyse(name, n_theta=72, stackup=STACKUP):
+    """As-built model of layout variant `name` on `stackup`. The copper is laid out at that
+    stackup's minimum space (heavier copper needs wider gaps)."""
+    from dataclasses import replace
     p = wl.variant(name)
+    sp = STACKUPS[stackup].get("min_space_mm", p.space_mm)
+    if sp > p.space_mm:
+        # wider gaps leave narrower strand lanes (0.30 mm at 3 oz), and a 0.56 mm via pad would reach
+        # past its lane into the gap: use 0.4 / 0.2 mm vias (blind vias in an HDI build are smaller still)
+        p = replace(p, space_mm=sp, min_trace_mm=max(p.min_trace_mm, STACKUPS[stackup].get("min_trace_mm", 0)),
+                    via_dia=min(p.via_dia, 0.4), via_drill=min(p.via_drill, 0.2))
     wb = wl.build(p)
-    st = STACKUPS[STACKUP]
+    st = STACKUPS[stackup]
     t_cu = [oz * OZ_TO_M for oz in st["oz"]]
     rot = wave.hm_rotor()
     period = 2 * (2 * math.pi / rot.n_poles)
@@ -163,7 +177,7 @@ def analyse(name, n_theta=72):
     m = drive_metrics(kt, R, float("nan"), kt * 2 / 3, J, BOARD_AREA_M2, 1.0)
     w2k = 2000 * 2 * math.pi / 60
     km = m["Km_mNm_per_sqrtW"]
-    return dict(name=name, strands=k, swap=p.swap, cap_mm=p.cap_mm, stackup=STACKUP,
+    return dict(name=name, strands=k, swap=p.swap, cap_mm=p.cap_mm, stackup=stackup, buried=p.buried, space_mm=p.space_mm, via_mm=[p.via_drill, p.via_dia],
                 Kt_mNm_per_A=kt * 1e3, R_phase_ohm=R, R_links_ohm=extra, Km_mNm_per_sqrtW=km,
                 ripple_pct=ripple * 100, noload_rpm=m["noload_rpm"],
                 eddy_W_at_2000rpm=c_eddy * w2k ** 2, circulating_W_at_2000rpm=c_circ * w2k ** 2,
@@ -175,8 +189,10 @@ def analyse(name, n_theta=72):
 
 def main():
     rows = []
-    for name in wl.VARIANTS:
-        r = analyse(name)
+    runs = [(name, STACKUP) for name in wl.VARIANTS]
+    runs += [(name, "ace4_3oz") for name in ("bv_solid", "bv_swap", "bv_fixed")]
+    for name, st in runs:
+        r = analyse(name, stackup=st)
         rows.append(r)
         print({k_: (round(v, 4) if isinstance(v, float) else v) for k_, v in r.items() if k_ != "board"}, flush=True)
     (OUT / "pcbmotor_wave_asbuilt.json").write_text(json.dumps(rows, indent=2, default=float))

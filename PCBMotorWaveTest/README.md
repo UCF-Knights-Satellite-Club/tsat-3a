@@ -111,6 +111,44 @@ Drag grows linearly with speed: at 3000 rpm it is 2.5, 1.1 and 2.5 mN·m.
 Phase resistance includes about 0.1 Ω of jumpers, stubs and vias. Plan on a 5–15% torque derating
 before trusting Kt to better than that: Paul et al. 2019 measured a wave PCB motor 15.5% below FEA.
 
+## Blind-via boards (`WaveTest_bv_*`, 2026-11-19)
+
+`bv_solid`, `bv_swap` and `bv_fixed` are the same three windings built with **blind vias**. Pair 1's
+vias span only L1–L2 (from the top) and pair 2's only L3–L4 (from the bottom). A via then no longer
+blocks the other pair's copper, so the two pairs share via rings at 18.6 and 44.6 mm, and pair 1 no
+longer runs the long way round pair 2's rings.
+- The terminal and jumper vias outside the winding stay through vias.
+- `wave_layout.py`: `WaveLayoutParams(buried=True)`. Vias carry their layer span, and the
+  connectivity and spacing checks only count a via on the layers it reaches. `check_spacing.py` now
+  does the same.
+- All three boards are DRC clean, fully connected and pass the net-blind spacing check.
+
+| As built, at 15 mN·m and 2000 rpm | Km mN·m/√W | R phase Ω | Loss | Drag (swap / fixed) |
+|---|---|---|---|---|
+| Through vias, 2 oz (this folder's main boards), swap | 19.7 | 0.86 | 0.74 W | 0.76 / 1.67 mN·m |
+| Blind vias, 2 oz, swap | 21.2 | 0.76 | 0.66 W | 0.75 / 1.77 mN·m |
+| Blind vias, 3 oz (ASSUMED ACE-style build, 0.2 mm space, 0.4 / 0.2 mm vias), swap | 23.6 | 0.61 | 0.61 W | 0.99 / 2.43 mN·m |
+| Spiral coils (the current payload design), for reference | 16.2 | 1.21 | 1.63 W | – |
+
+Kt is about 22.5 mN·m/A for all of them. With heavier copper the strand lanes narrow to 0.30 mm, so
+0.56 mm vias no longer fit: 3 oz needs vias of 0.4 mm pad or smaller. Laser blind vias in an HDI build
+are about 0.1 / 0.3 mm.
+
+**Board size.** Blind vias bring the copper's outer edge in from r ≈ 51.7 mm to ≈ 45.4 mm. But the
+loop breaks, jumper rings and phase pads still sit outside the winding, so the board is still about
+117 mm square. **Blind vias alone don't fit the 90 mm payload.** What would:
+- a 6-layer build with two layers just for the jumpers (L1–L2 pair 1, L3–L4 jumpers, L5–L6 pair 2);
+- breaks taken at the inner via ring, with the jumper arcs running under the winding on the jumper
+  layers and the phase leads running out to pads in the board corners.
+
+That needs blind vias spanning L1–L3 and L4–L6 as well as L1–L2 and L5–L6. It hasn't been laid out yet.
+
+**Fab questions:**
+- JLC's HDI service lists laser blind vias on 4–24 layers, but whether it allows 2 oz copper with
+  them isn't checked. Laser vias need about 1:1 aspect ratio, so a thin L1–L2 and L3–L4 dielectric.
+- ACE lists blind/buried vias, sequential lamination and 3 oz inner copper. Ask whether these combine,
+  and at what spacing.
+
 ## Bench tests (same rig and rotor as the strand-test boards)
 
 1. DC resistance of each phase, cold, with board temperature logged. Compare with R above.
@@ -124,10 +162,10 @@ before trusting Kt to better than that: Paul et al. 2019 measured a wave PCB mot
 
 - **Rotor and rig.** These need the same rotor and spin rig as the strand-test boards. That is Murilo's
   rotor review task in Notion.
-- **Board size.** The nested via rings push pair 1's outer vias to r = 51 mm, and the jumpers and pads
+- **Board size (through-via boards).** The nested via rings push pair 1's outer vias to r = 51 mm, and the jumpers and pads
   out to about 59 mm, so this board is about 129 mm square. **This layout does not fit the 90 × 90 mm
   payload.** Options for the payload:
-  - blind or buried vias, if JLC offers them on 4 or 6 layers at a sensible price (not checked);
+  - blind vias: modelled in the `bv_*` boards. They shrink the winding, but not enough on their own (see above);
   - solid traces only (no strands, so the via ends can be steeper and shorter);
   - a smaller active band, at some cost in Kt;
   - a 6-layer board with the jumpers on their own layers.
