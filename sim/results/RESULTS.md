@@ -496,6 +496,30 @@ behind it (Tokgöz, Paul, Wang/CIOMP, CMU, Chulaee, Han, François & Dehez and o
     board about 117 mm. Fitting 90 mm needs a 6-layer build with jumper layers as well. See the board
     README.
 
+### 5g. Slotless stator yoke behind the PCB ([`pcbmotor_stator_yoke.md`](pcbmotor_stator_yoke.md), 2026-11-19)
+
+`pcbmotor/stator_yoke.py` adds an ideal soft-magnetic plane 0.15 mm behind the bottom copper, using
+the method of images like the rotor back iron. It also estimates the yoke's pull, its thickness and
+mass, and its iron loss (assumed SMC and ferrite coefficients). Marignetti 2018 built this kind of
+slotless core.
+
+| Design | Km without → with yoke | Top rpm at 11.1 V | Momentum at top speed |
+|---|---|---|---|
+| Spiral (current payload) | 16.2 → 29.6 | 4215 → 2301 | 90 → 49 mN·m·s |
+| Wave, blind vias, 2 oz, 2 strands swapped | 21.2 → 39.4 | 4057 → 2185 | 87 → 47 mN·m·s |
+| Wave, blind vias, 3 oz (assumed) | 23.6 → 43.7 | 4057 → 2191 | 87 → 47 mN·m·s |
+
+- **The gain:** Km nearly doubles, so copper loss at a given torque falls about 3.5×.
+- **Axial pull:** about 410 N on the yoke.
+- **SMC yoke:** 4.8 mm and 280 g to stay below 1.2 T. Iron loss about 2.8 W at 2000 rpm, which is
+  about 13 mN·m of drag at any speed (assumed coefficients). That's twice the control margin.
+- **Ferrite yoke:** only about 0.6 mN·m of drag, but about 16.5 mm and 625 g to stay below 0.35 T.
+- **Speed halves** on the same bus voltage, unless the winding is redone with half the turns.
+- **Not modelled:** the rotor back iron would need to carry about twice the flux.
+- **Verdict:** not worth it for the KAOS-3 wheels. With the wave winding the motor already uses
+  0.5–0.7 W at the design torque, so a yoke trades little copper saving for mass, drag and pull. It
+  only pays for slow, mass-tolerant drives.
+
 ## 6. KAOS-3 three-axis hanging payload: pitch and roll (2026-11-19)
 
 `hang/model.py` and `hang/run.py` test the KAOS-3 senior design architecture against the D&C demo

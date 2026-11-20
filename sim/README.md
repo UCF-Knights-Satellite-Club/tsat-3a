@@ -29,6 +29,7 @@ python3 -m venv .venv
 .venv/bin/python tests/test_wave.py         # wave-winding model checks
 .venv/bin/python -m pcbmotor.wave_asbuilt   # wave test boards as laid out: Kt, R, eddy and strand circulating current (~10 s)
 .venv/bin/python tests/test_wave_layout.py  # wave test-board copper: series path, connectivity, spacing
+.venv/bin/python -m pcbmotor.stator_yoke    # slotless stator yoke: gain vs pull, mass and iron-loss drag (~15 min)
 .venv/bin/python -m pcbmotor.layout_gallery # layout images of every evaluated stator (~15 min)
 .venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
 .venv/bin/python -m pcbmotor.strand_test    # solid vs stranded test boards as laid out (after PCBMotorStrandTest/gen_strand_test.py)
@@ -65,6 +66,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `pcbmotor/layout_gallery.py` | Layout image of every evaluated stator (recommended spirals and every wave-study design), traces at true width, with an index: `results/layouts/README.md`. |
 | `pcbmotor/wave_layout.py` | As-built copper of the wave test boards (`PCBMotorWaveTest/`): nested layer pairs, strand lanes and their via crossings (swapped or fixed), loop breaks, jumpers, pads; series-path, connectivity and spacing checks. |
 | `pcbmotor/wave_asbuilt.py` | EM model of that copper: Kt, phase R, eddy drag and the current circulating between strands. |
+| `pcbmotor/stator_yoke.py` | Slotless soft-magnetic yoke behind the stator (method of images on both iron planes): Kt/Km gain, axial pull, yoke thickness and mass, iron-loss drag, for the spiral and wave designs. |
 | `pcbmotor/designs.py` | Design sweep for the 40 mm test stator and the 1U payload stator; drive envelope; plots. |
 | `data/tsat1_swing.py` | Swing and excitation spectrum from the TSat-1 flight accelerometer log. |
 | `yaw/candidates.py` | Motor candidates (datasheet values, approximations flagged). |
