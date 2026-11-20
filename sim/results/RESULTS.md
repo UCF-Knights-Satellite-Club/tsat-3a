@@ -398,6 +398,8 @@ common-mode current through all three phases (a fourth inverter leg) does.
 
 ### 5f. Wave winding vs spiral coils ([`pcbmotor_wave.md`](pcbmotor_wave.md), 2026-11-19)
 
+Layout images of every design in this study and the recommended spiral designs are in [`layouts/`](layouts/README.md).
+
 `pcbmotor/wave.py` models a full-pitch two-layer radial wave winding. It uses the same rotor, board and
 drive as the high-momentum spiral design. All four layers are in series as two wave pairs. The literature
 behind it (Tokgöz, Paul, Wang/CIOMP, CMU, Chulaee, Han, François & Dehez and others) is in `~/KSC/research`.
