@@ -31,6 +31,7 @@ python3 -m venv .venv
 .venv/bin/python tests/test_wave_layout.py  # wave test-board copper: series path, connectivity, spacing
 .venv/bin/python -m pcbmotor.stator_yoke    # slotless stator yoke: gain vs pull, mass and iron-loss drag (~15 min)
 .venv/bin/python -m pcbmotor.bus_voltage    # bus voltage and turn count: speed, momentum, inductance, PWM ripple loss (~6 min)
+.venv/bin/python -m pcbmotor.dual_stator    # rotor between two stator boards (coreless) vs single board (~1 min)
 .venv/bin/python tests/test_bus_voltage.py  # parallel paths, inductance shortcut vs brute force, ripple model
 .venv/bin/python -m pcbmotor.layout_gallery # layout images of every evaluated stator (~15 min)
 .venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
