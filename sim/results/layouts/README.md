@@ -12,119 +12,119 @@ spiral only). The spiral test/payload designs use other rotors; see RESULTS.md s
 | [spiral_test](spiral_test.png) | yes | 10.5 | 2.0 | - |
 | [spiral_payload](spiral_payload.png) | yes | 26.7 | 20.5 | - |
 | [spiral_payload_osh6](spiral_payload_osh6.png) | yes | 38.6 | 15.8 | - |
-| [spiral_payload_high_momentum](spiral_payload_high_momentum.png) | yes | 21.8 | 16.2 | 1.63 |
+| [spiral_payload_high_momentum](spiral_payload_high_momentum.png) | yes | 21.8 | 16.2 | 1.75 |
 
 ## Wave, width capped
 
 | Design | Layout OK | Kt mN·m/A | Km mN·m/√W | Loss W |
 |---|---|---|---|---|
-| [wave_env21-41_e4_n48_cap1.2](wave_env21-41_e4_n48_cap1.2.png) | yes | 20.2 | 17.4 | 1.22 |
-| [wave_env21-41_e5_n48_cap1.2](wave_env21-41_e5_n48_cap1.2.png) | yes | 19.5 | 17.4 | 1.27 |
-| [wave_env15-44_act21-41_n48_cap1.2](wave_env15-44_act21-41_n48_cap1.2.png) | yes | 23.1 | 17.2 | 1.06 |
-| [wave_env15-44_act22-40_n48_cap1.2](wave_env15-44_act22-40_n48_cap1.2.png) | yes | 23.0 | 18.5 | 0.99 |
-| [wave_env21-41_e4_n72_cap1.2](wave_env21-41_e4_n72_cap1.2.png) | yes | 30.1 | 17.9 | 1.09 |
-| [wave_env21-41_e5_n72_cap1.2](wave_env21-41_e5_n72_cap1.2.png) | yes | 29.0 | 19.0 | 1.09 |
-| [wave_env15-44_act21-41_n72_cap1.2](wave_env15-44_act21-41_n72_cap1.2.png) | yes | 34.4 | 18.1 | 1.13 |
-| [wave_env15-44_act22-40_n72_cap1.2](wave_env15-44_act22-40_n72_cap1.2.png) | yes | 34.2 | 20.0 | 1.01 |
+| [wave_env21-41_e4_n48_cap1.2](wave_env21-41_e4_n48_cap1.2.png) | yes | 20.2 | 17.4 | 1.24 |
+| [wave_env21-41_e5_n48_cap1.2](wave_env21-41_e5_n48_cap1.2.png) | yes | 19.5 | 17.4 | 1.30 |
+| [wave_env15-44_act21-41_n48_cap1.2](wave_env15-44_act21-41_n48_cap1.2.png) | yes | 23.1 | 17.2 | 1.07 |
+| [wave_env15-44_act22-40_n48_cap1.2](wave_env15-44_act22-40_n48_cap1.2.png) | yes | 23.0 | 18.5 | 1.00 |
+| [wave_env21-41_e4_n72_cap1.2](wave_env21-41_e4_n72_cap1.2.png) | yes | 30.1 | 17.9 | 1.11 |
+| [wave_env21-41_e5_n72_cap1.2](wave_env21-41_e5_n72_cap1.2.png) | yes | 29.0 | 19.0 | 1.11 |
+| [wave_env15-44_act21-41_n72_cap1.2](wave_env15-44_act21-41_n72_cap1.2.png) | yes | 34.4 | 18.1 | 1.15 |
+| [wave_env15-44_act22-40_n72_cap1.2](wave_env15-44_act22-40_n72_cap1.2.png) | yes | 34.2 | 20.0 | 1.02 |
 | [wave_env21-41_e5_n48_cap0.8](wave_env21-41_e5_n48_cap0.8.png) | yes | 19.5 | 14.4 | 1.24 |
-| [wave_env21-41_e5_n48_cap1.6](wave_env21-41_e5_n48_cap1.6.png) | yes | 19.5 | 18.9 | 1.60 |
-| [wave_env21-41_e5_n48_cap2](wave_env21-41_e5_n48_cap2.png) | yes | 19.5 | 19.3 | 1.95 |
-| [wave_env21-41_e5_n48_cap2.5](wave_env21-41_e5_n48_cap2.5.png) | yes | 19.5 | 19.7 | 2.64 |
+| [wave_env21-41_e5_n48_cap1.6](wave_env21-41_e5_n48_cap1.6.png) | yes | 19.5 | 18.9 | 1.65 |
+| [wave_env21-41_e5_n48_cap2](wave_env21-41_e5_n48_cap2.png) | yes | 19.5 | 19.3 | 2.01 |
+| [wave_env21-41_e5_n48_cap2.5](wave_env21-41_e5_n48_cap2.5.png) | yes | 19.5 | 19.7 | 2.73 |
 | [wave_env15-44_act22-40_n48_cap0.8](wave_env15-44_act22-40_n48_cap0.8.png) | yes | 23.0 | 15.4 | 1.05 |
-| [wave_env15-44_act22-40_n48_cap1.6](wave_env15-44_act22-40_n48_cap1.6.png) | yes | 23.0 | 19.8 | 1.29 |
-| [wave_env15-44_act22-40_n48_cap2](wave_env15-44_act22-40_n48_cap2.png) | yes | 23.0 | 20.5 | 1.89 |
-| [wave_env15-44_act22-40_n48_cap2.5](wave_env15-44_act22-40_n48_cap2.5.png) | yes | 23.0 | 21.1 | 3.10 |
-| [wave_env21-41_e5_n72_cap0.8](wave_env21-41_e5_n72_cap0.8.png) | yes | 29.0 | 17.6 | 0.96 |
-| [wave_env21-41_e5_n72_cap1.6](wave_env21-41_e5_n72_cap1.6.png) | yes | 29.0 | 19.5 | 1.40 |
-| [wave_env21-41_e5_n72_cap2](wave_env21-41_e5_n72_cap2.png) | yes | 29.0 | 19.8 | 1.93 |
-| [wave_env21-41_e5_n72_cap2.5](wave_env21-41_e5_n72_cap2.5.png) | yes | 29.0 | 20.0 | 2.81 |
-| [wave_env15-44_act22-40_n72_cap0.8](wave_env15-44_act22-40_n72_cap0.8.png) | yes | 34.2 | 18.4 | 0.81 |
-| [wave_env15-44_act22-40_n72_cap1.6](wave_env15-44_act22-40_n72_cap1.6.png) | yes | 34.2 | 20.7 | 1.54 |
-| [wave_env15-44_act22-40_n72_cap2](wave_env15-44_act22-40_n72_cap2.png) | yes | 34.2 | 21.2 | 2.45 |
-| [wave_env15-44_act22-40_n72_cap2.5](wave_env15-44_act22-40_n72_cap2.5.png) | yes | 34.2 | 21.5 | 3.82 |
+| [wave_env15-44_act22-40_n48_cap1.6](wave_env15-44_act22-40_n48_cap1.6.png) | yes | 23.0 | 19.8 | 1.32 |
+| [wave_env15-44_act22-40_n48_cap2](wave_env15-44_act22-40_n48_cap2.png) | yes | 23.0 | 20.5 | 1.95 |
+| [wave_env15-44_act22-40_n48_cap2.5](wave_env15-44_act22-40_n48_cap2.5.png) | yes | 23.0 | 21.1 | 3.21 |
+| [wave_env21-41_e5_n72_cap0.8](wave_env21-41_e5_n72_cap0.8.png) | yes | 29.0 | 17.6 | 0.97 |
+| [wave_env21-41_e5_n72_cap1.6](wave_env21-41_e5_n72_cap1.6.png) | yes | 29.0 | 19.5 | 1.43 |
+| [wave_env21-41_e5_n72_cap2](wave_env21-41_e5_n72_cap2.png) | yes | 29.0 | 19.8 | 1.98 |
+| [wave_env21-41_e5_n72_cap2.5](wave_env21-41_e5_n72_cap2.5.png) | yes | 29.0 | 20.0 | 2.90 |
+| [wave_env15-44_act22-40_n72_cap0.8](wave_env15-44_act22-40_n72_cap0.8.png) | yes | 34.2 | 18.4 | 0.82 |
+| [wave_env15-44_act22-40_n72_cap1.6](wave_env15-44_act22-40_n72_cap1.6.png) | yes | 34.2 | 20.7 | 1.59 |
+| [wave_env15-44_act22-40_n72_cap2](wave_env15-44_act22-40_n72_cap2.png) | yes | 34.2 | 21.2 | 2.53 |
+| [wave_env15-44_act22-40_n72_cap2.5](wave_env15-44_act22-40_n72_cap2.5.png) | yes | 34.2 | 21.5 | 3.97 |
 
 ## Wave, full-length strands (swapped or fixed lanes)
 
 | Design | Layout OK | Kt mN·m/A | Km mN·m/√W | Loss W |
 |---|---|---|---|---|
 | [wave_env21-41_e5_n48_cap1.6_s2swap](wave_env21-41_e5_n48_cap1.6_s2swap.png) | yes | 19.5 | 18.0 | 0.88 |
-| [wave_env21-41_e5_n48_cap1.6_s2fixed](wave_env21-41_e5_n48_cap1.6_s2fixed.png) | yes | 19.5 | 18.0 | 0.99 |
+| [wave_env21-41_e5_n48_cap1.6_s2fixed](wave_env21-41_e5_n48_cap1.6_s2fixed.png) | yes | 19.5 | 18.0 | 1.00 |
 | [wave_env21-41_e5_n48_cap1.6_s3swap](wave_env21-41_e5_n48_cap1.6_s3swap.png) | yes | 19.5 | 17.0 | 0.84 |
 | [wave_env21-41_e5_n48_cap1.6_s3fixed](wave_env21-41_e5_n48_cap1.6_s3fixed.png) | yes | 19.5 | 17.0 | 0.96 |
-| [wave_env21-41_e5_n48_cap2_s2swap](wave_env21-41_e5_n48_cap2_s2swap.png) | yes | 19.5 | 18.4 | 0.92 |
-| [wave_env21-41_e5_n48_cap2_s2fixed](wave_env21-41_e5_n48_cap2_s2fixed.png) | yes | 19.5 | 18.4 | 1.07 |
+| [wave_env21-41_e5_n48_cap2_s2swap](wave_env21-41_e5_n48_cap2_s2swap.png) | yes | 19.5 | 18.4 | 0.93 |
+| [wave_env21-41_e5_n48_cap2_s2fixed](wave_env21-41_e5_n48_cap2_s2fixed.png) | yes | 19.5 | 18.4 | 1.08 |
 | [wave_env21-41_e5_n48_cap2_s3swap](wave_env21-41_e5_n48_cap2_s3swap.png) | yes | 19.5 | 17.4 | 0.83 |
 | [wave_env21-41_e5_n48_cap2_s3fixed](wave_env21-41_e5_n48_cap2_s3fixed.png) | yes | 19.5 | 17.4 | 0.99 |
-| [wave_env21-41_e5_n48_cap2.5_s2swap](wave_env21-41_e5_n48_cap2.5_s2swap.png) | yes | 19.5 | 18.8 | 1.05 |
-| [wave_env21-41_e5_n48_cap2.5_s2fixed](wave_env21-41_e5_n48_cap2.5_s2fixed.png) | yes | 19.5 | 18.8 | 1.25 |
+| [wave_env21-41_e5_n48_cap2.5_s2swap](wave_env21-41_e5_n48_cap2.5_s2swap.png) | yes | 19.5 | 18.8 | 1.07 |
+| [wave_env21-41_e5_n48_cap2.5_s2fixed](wave_env21-41_e5_n48_cap2.5_s2fixed.png) | yes | 19.5 | 18.8 | 1.27 |
 | [wave_env21-41_e5_n48_cap2.5_s3swap](wave_env21-41_e5_n48_cap2.5_s3swap.png) | yes | 19.5 | 17.8 | 0.86 |
 | [wave_env21-41_e5_n48_cap2.5_s3fixed](wave_env21-41_e5_n48_cap2.5_s3fixed.png) | yes | 19.5 | 17.8 | 1.07 |
-| [wave_env21-41_e5_n48_fill_s2swap](wave_env21-41_e5_n48_fill_s2swap.png) | yes | 19.5 | 19.3 | 2.01 |
-| [wave_env21-41_e5_n48_fill_s2fixed](wave_env21-41_e5_n48_fill_s2fixed.png) | yes | 19.5 | 19.3 | 2.38 |
-| [wave_env21-41_e5_n48_fill_s3swap](wave_env21-41_e5_n48_fill_s3swap.png) | yes | 19.5 | 18.3 | 1.22 |
-| [wave_env21-41_e5_n48_fill_s3fixed](wave_env21-41_e5_n48_fill_s3fixed.png) | yes | 19.5 | 18.3 | 1.60 |
-| [wave_env15-44_act22-40_n48_cap1.6_s2swap](wave_env15-44_act22-40_n48_cap1.6_s2swap.png) | yes | 23.0 | 18.8 | 0.77 |
+| [wave_env21-41_e5_n48_fill_s2swap](wave_env21-41_e5_n48_fill_s2swap.png) | yes | 19.5 | 19.3 | 2.07 |
+| [wave_env21-41_e5_n48_fill_s2fixed](wave_env21-41_e5_n48_fill_s2fixed.png) | yes | 19.5 | 19.3 | 2.44 |
+| [wave_env21-41_e5_n48_fill_s3swap](wave_env21-41_e5_n48_fill_s3swap.png) | yes | 19.5 | 18.3 | 1.25 |
+| [wave_env21-41_e5_n48_fill_s3fixed](wave_env21-41_e5_n48_fill_s3fixed.png) | yes | 19.5 | 18.3 | 1.62 |
+| [wave_env15-44_act22-40_n48_cap1.6_s2swap](wave_env15-44_act22-40_n48_cap1.6_s2swap.png) | yes | 23.0 | 18.8 | 0.78 |
 | [wave_env15-44_act22-40_n48_cap1.6_s2fixed](wave_env15-44_act22-40_n48_cap1.6_s2fixed.png) | yes | 23.0 | 18.8 | 0.86 |
 | [wave_env15-44_act22-40_n48_cap1.6_s3swap](wave_env15-44_act22-40_n48_cap1.6_s3swap.png) | no | 23.0 | 17.6 | 0.77 |
-| [wave_env15-44_act22-40_n48_cap1.6_s3fixed](wave_env15-44_act22-40_n48_cap1.6_s3fixed.png) | no | 23.0 | 17.6 | 0.85 |
-| [wave_env15-44_act22-40_n48_cap2_s2swap](wave_env15-44_act22-40_n48_cap2_s2swap.png) | yes | 23.0 | 19.5 | 0.86 |
-| [wave_env15-44_act22-40_n48_cap2_s2fixed](wave_env15-44_act22-40_n48_cap2_s2fixed.png) | yes | 23.0 | 19.5 | 0.99 |
-| [wave_env15-44_act22-40_n48_cap2_s3swap](wave_env15-44_act22-40_n48_cap2_s3swap.png) | no | 23.0 | 18.3 | 0.76 |
+| [wave_env15-44_act22-40_n48_cap1.6_s3fixed](wave_env15-44_act22-40_n48_cap1.6_s3fixed.png) | no | 23.0 | 17.6 | 0.86 |
+| [wave_env15-44_act22-40_n48_cap2_s2swap](wave_env15-44_act22-40_n48_cap2_s2swap.png) | yes | 23.0 | 19.5 | 0.87 |
+| [wave_env15-44_act22-40_n48_cap2_s2fixed](wave_env15-44_act22-40_n48_cap2_s2fixed.png) | yes | 23.0 | 19.5 | 1.00 |
+| [wave_env15-44_act22-40_n48_cap2_s3swap](wave_env15-44_act22-40_n48_cap2_s3swap.png) | no | 23.0 | 18.3 | 0.77 |
 | [wave_env15-44_act22-40_n48_cap2_s3fixed](wave_env15-44_act22-40_n48_cap2_s3fixed.png) | no | 23.0 | 18.3 | 0.90 |
-| [wave_env15-44_act22-40_n48_cap2.5_s2swap](wave_env15-44_act22-40_n48_cap2.5_s2swap.png) | yes | 23.0 | 20.0 | 1.10 |
-| [wave_env15-44_act22-40_n48_cap2.5_s2fixed](wave_env15-44_act22-40_n48_cap2.5_s2fixed.png) | yes | 23.0 | 20.0 | 1.30 |
-| [wave_env15-44_act22-40_n48_cap2.5_s3swap](wave_env15-44_act22-40_n48_cap2.5_s3swap.png) | no | 23.0 | 18.9 | 0.83 |
-| [wave_env15-44_act22-40_n48_cap2.5_s3fixed](wave_env15-44_act22-40_n48_cap2.5_s3fixed.png) | no | 23.0 | 18.9 | 1.04 |
-| [wave_env15-44_act22-40_n48_fill_s2swap](wave_env15-44_act22-40_n48_fill_s2swap.png) | yes | 23.0 | 20.8 | 3.05 |
-| [wave_env15-44_act22-40_n48_fill_s2fixed](wave_env15-44_act22-40_n48_fill_s2fixed.png) | yes | 23.0 | 20.8 | 3.53 |
-| [wave_env15-44_act22-40_n48_fill_s3swap](wave_env15-44_act22-40_n48_fill_s3swap.png) | no | 23.0 | 19.6 | 1.60 |
-| [wave_env15-44_act22-40_n48_fill_s3fixed](wave_env15-44_act22-40_n48_fill_s3fixed.png) | no | 23.0 | 19.6 | 2.09 |
+| [wave_env15-44_act22-40_n48_cap2.5_s2swap](wave_env15-44_act22-40_n48_cap2.5_s2swap.png) | yes | 23.0 | 20.0 | 1.12 |
+| [wave_env15-44_act22-40_n48_cap2.5_s2fixed](wave_env15-44_act22-40_n48_cap2.5_s2fixed.png) | yes | 23.0 | 20.0 | 1.32 |
+| [wave_env15-44_act22-40_n48_cap2.5_s3swap](wave_env15-44_act22-40_n48_cap2.5_s3swap.png) | no | 23.0 | 18.9 | 0.84 |
+| [wave_env15-44_act22-40_n48_cap2.5_s3fixed](wave_env15-44_act22-40_n48_cap2.5_s3fixed.png) | no | 23.0 | 18.9 | 1.05 |
+| [wave_env15-44_act22-40_n48_fill_s2swap](wave_env15-44_act22-40_n48_fill_s2swap.png) | yes | 23.0 | 20.8 | 3.17 |
+| [wave_env15-44_act22-40_n48_fill_s2fixed](wave_env15-44_act22-40_n48_fill_s2fixed.png) | yes | 23.0 | 20.8 | 3.65 |
+| [wave_env15-44_act22-40_n48_fill_s3swap](wave_env15-44_act22-40_n48_fill_s3swap.png) | no | 23.0 | 19.6 | 1.64 |
+| [wave_env15-44_act22-40_n48_fill_s3fixed](wave_env15-44_act22-40_n48_fill_s3fixed.png) | no | 23.0 | 19.6 | 2.13 |
 
 ## Wave, full fill
 
 | Design | Layout OK | Kt mN·m/A | Km mN·m/√W | Loss W |
 |---|---|---|---|---|
-| [wave_env21-41_e4_n48_fill](wave_env21-41_e4_n48_fill.png) | yes | 20.2 | 19.3 | 8.04 |
-| [wave_env21-41_e5_n48_fill](wave_env21-41_e5_n48_fill.png) | yes | 19.5 | 20.2 | 6.99 |
-| [wave_env15-44_act21-41_n48_fill](wave_env15-44_act21-41_n48_fill.png) | yes | 23.1 | 20.0 | 12.74 |
-| [wave_env15-44_act22-40_n48_fill](wave_env15-44_act22-40_n48_fill.png) | yes | 23.0 | 21.9 | 11.78 |
-| [wave_env21-41_e4_n72_fill](wave_env21-41_e4_n72_fill.png) | yes | 30.1 | 19.0 | 3.73 |
-| [wave_env21-41_e5_n72_fill](wave_env21-41_e5_n72_fill.png) | yes | 29.0 | 20.1 | 3.24 |
-| [wave_env15-44_act21-41_n72_fill](wave_env15-44_act21-41_n72_fill.png) | yes | 34.4 | 19.5 | 5.72 |
-| [wave_env15-44_act22-40_n72_fill](wave_env15-44_act22-40_n72_fill.png) | yes | 34.2 | 21.6 | 5.24 |
+| [wave_env21-41_e4_n48_fill](wave_env21-41_e4_n48_fill.png) | yes | 20.2 | 19.3 | 8.35 |
+| [wave_env21-41_e5_n48_fill](wave_env21-41_e5_n48_fill.png) | yes | 19.5 | 20.2 | 7.25 |
+| [wave_env15-44_act21-41_n48_fill](wave_env15-44_act21-41_n48_fill.png) | yes | 23.1 | 20.0 | 13.35 |
+| [wave_env15-44_act22-40_n48_fill](wave_env15-44_act22-40_n48_fill.png) | yes | 23.0 | 21.9 | 12.31 |
+| [wave_env21-41_e4_n72_fill](wave_env21-41_e4_n72_fill.png) | yes | 30.1 | 19.0 | 3.86 |
+| [wave_env21-41_e5_n72_fill](wave_env21-41_e5_n72_fill.png) | yes | 29.0 | 20.1 | 3.35 |
+| [wave_env15-44_act21-41_n72_fill](wave_env15-44_act21-41_n72_fill.png) | yes | 34.4 | 19.5 | 5.98 |
+| [wave_env15-44_act22-40_n72_fill](wave_env15-44_act22-40_n72_fill.png) | yes | 34.2 | 21.6 | 5.46 |
 
 ## Wave, slit radial sections
 
 | Design | Layout OK | Kt mN·m/A | Km mN·m/√W | Loss W |
 |---|---|---|---|---|
-| [wave_env21-41_e4_n48_fill_slit2](wave_env21-41_e4_n48_fill_slit2.png) | yes | 20.2 | 19.3 | 6.18 |
-| [wave_env21-41_e4_n48_fill_slit3](wave_env21-41_e4_n48_fill_slit3.png) | yes | 20.2 | 19.2 | 5.65 |
-| [wave_env21-41_e4_n48_fill_slit4](wave_env21-41_e4_n48_fill_slit4.png) | yes | 20.2 | 19.2 | 5.32 |
-| [wave_env21-41_e5_n48_fill_slit2](wave_env21-41_e5_n48_fill_slit2.png) | yes | 19.5 | 20.2 | 5.69 |
-| [wave_env21-41_e5_n48_fill_slit3](wave_env21-41_e5_n48_fill_slit3.png) | yes | 19.5 | 20.1 | 5.27 |
-| [wave_env21-41_e5_n48_fill_slit4](wave_env21-41_e5_n48_fill_slit4.png) | yes | 19.5 | 20.1 | 4.98 |
-| [wave_env15-44_act21-41_n48_fill_slit2](wave_env15-44_act21-41_n48_fill_slit2.png) | yes | 23.1 | 19.9 | 7.93 |
-| [wave_env15-44_act21-41_n48_fill_slit3](wave_env15-44_act21-41_n48_fill_slit3.png) | yes | 23.1 | 19.9 | 6.78 |
-| [wave_env15-44_act21-41_n48_fill_slit4](wave_env15-44_act21-41_n48_fill_slit4.png) | yes | 23.1 | 19.8 | 6.30 |
-| [wave_env15-44_act22-40_n48_fill_slit2](wave_env15-44_act22-40_n48_fill_slit2.png) | yes | 23.0 | 21.9 | 7.65 |
-| [wave_env15-44_act22-40_n48_fill_slit3](wave_env15-44_act22-40_n48_fill_slit3.png) | yes | 23.0 | 21.8 | 6.64 |
-| [wave_env15-44_act22-40_n48_fill_slit4](wave_env15-44_act22-40_n48_fill_slit4.png) | yes | 23.0 | 21.7 | 6.21 |
-| [wave_env21-41_e4_n72_fill_slit2](wave_env21-41_e4_n72_fill_slit2.png) | yes | 30.1 | 18.9 | 3.01 |
-| [wave_env21-41_e4_n72_fill_slit3](wave_env21-41_e4_n72_fill_slit3.png) | yes | 30.1 | 18.8 | 2.79 |
-| [wave_env21-41_e4_n72_fill_slit4](wave_env21-41_e4_n72_fill_slit4.png) | yes | 30.1 | 18.7 | 2.63 |
-| [wave_env21-41_e5_n72_fill_slit2](wave_env21-41_e5_n72_fill_slit2.png) | yes | 29.0 | 20.0 | 2.75 |
-| [wave_env21-41_e5_n72_fill_slit3](wave_env21-41_e5_n72_fill_slit3.png) | yes | 29.0 | 19.9 | 2.59 |
-| [wave_env21-41_e5_n72_fill_slit4](wave_env21-41_e5_n72_fill_slit4.png) | yes | 29.0 | 19.8 | 2.45 |
-| [wave_env15-44_act21-41_n72_fill_slit2](wave_env15-44_act21-41_n72_fill_slit2.png) | yes | 34.4 | 19.4 | 3.79 |
-| [wave_env15-44_act21-41_n72_fill_slit3](wave_env15-44_act21-41_n72_fill_slit3.png) | yes | 34.4 | 19.3 | 3.26 |
-| [wave_env15-44_act21-41_n72_fill_slit4](wave_env15-44_act21-41_n72_fill_slit4.png) | yes | 34.4 | 19.1 | 2.99 |
-| [wave_env15-44_act22-40_n72_fill_slit2](wave_env15-44_act22-40_n72_fill_slit2.png) | yes | 34.2 | 21.5 | 3.60 |
-| [wave_env15-44_act22-40_n72_fill_slit3](wave_env15-44_act22-40_n72_fill_slit3.png) | yes | 34.2 | 21.4 | 3.12 |
-| [wave_env15-44_act22-40_n72_fill_slit4](wave_env15-44_act22-40_n72_fill_slit4.png) | yes | 34.2 | 21.2 | 2.88 |
+| [wave_env21-41_e4_n48_fill_slit2](wave_env21-41_e4_n48_fill_slit2.png) | yes | 20.2 | 19.3 | 6.26 |
+| [wave_env21-41_e4_n48_fill_slit3](wave_env21-41_e4_n48_fill_slit3.png) | yes | 20.2 | 19.2 | 5.69 |
+| [wave_env21-41_e4_n48_fill_slit4](wave_env21-41_e4_n48_fill_slit4.png) | yes | 20.2 | 19.2 | 5.35 |
+| [wave_env21-41_e5_n48_fill_slit2](wave_env21-41_e5_n48_fill_slit2.png) | yes | 19.5 | 20.2 | 5.78 |
+| [wave_env21-41_e5_n48_fill_slit3](wave_env21-41_e5_n48_fill_slit3.png) | yes | 19.5 | 20.1 | 5.32 |
+| [wave_env21-41_e5_n48_fill_slit4](wave_env21-41_e5_n48_fill_slit4.png) | yes | 19.5 | 20.1 | 5.03 |
+| [wave_env15-44_act21-41_n48_fill_slit2](wave_env15-44_act21-41_n48_fill_slit2.png) | yes | 23.1 | 19.9 | 8.07 |
+| [wave_env15-44_act21-41_n48_fill_slit3](wave_env15-44_act21-41_n48_fill_slit3.png) | yes | 23.1 | 19.9 | 6.84 |
+| [wave_env15-44_act21-41_n48_fill_slit4](wave_env15-44_act21-41_n48_fill_slit4.png) | yes | 23.1 | 19.8 | 6.33 |
+| [wave_env15-44_act22-40_n48_fill_slit2](wave_env15-44_act22-40_n48_fill_slit2.png) | yes | 23.0 | 21.9 | 7.77 |
+| [wave_env15-44_act22-40_n48_fill_slit3](wave_env15-44_act22-40_n48_fill_slit3.png) | yes | 23.0 | 21.8 | 6.70 |
+| [wave_env15-44_act22-40_n48_fill_slit4](wave_env15-44_act22-40_n48_fill_slit4.png) | yes | 23.0 | 21.7 | 6.24 |
+| [wave_env21-41_e4_n72_fill_slit2](wave_env21-41_e4_n72_fill_slit2.png) | yes | 30.1 | 18.9 | 3.05 |
+| [wave_env21-41_e4_n72_fill_slit3](wave_env21-41_e4_n72_fill_slit3.png) | yes | 30.1 | 18.8 | 2.80 |
+| [wave_env21-41_e4_n72_fill_slit4](wave_env21-41_e4_n72_fill_slit4.png) | yes | 30.1 | 18.7 | 2.64 |
+| [wave_env21-41_e5_n72_fill_slit2](wave_env21-41_e5_n72_fill_slit2.png) | yes | 29.0 | 20.0 | 2.78 |
+| [wave_env21-41_e5_n72_fill_slit3](wave_env21-41_e5_n72_fill_slit3.png) | yes | 29.0 | 19.9 | 2.61 |
+| [wave_env21-41_e5_n72_fill_slit4](wave_env21-41_e5_n72_fill_slit4.png) | yes | 29.0 | 19.8 | 2.47 |
+| [wave_env15-44_act21-41_n72_fill_slit2](wave_env15-44_act21-41_n72_fill_slit2.png) | yes | 34.4 | 19.4 | 3.84 |
+| [wave_env15-44_act21-41_n72_fill_slit3](wave_env15-44_act21-41_n72_fill_slit3.png) | yes | 34.4 | 19.3 | 3.28 |
+| [wave_env15-44_act21-41_n72_fill_slit4](wave_env15-44_act21-41_n72_fill_slit4.png) | yes | 34.4 | 19.1 | 3.00 |
+| [wave_env15-44_act22-40_n72_fill_slit2](wave_env15-44_act22-40_n72_fill_slit2.png) | yes | 34.2 | 21.5 | 3.65 |
+| [wave_env15-44_act22-40_n72_fill_slit3](wave_env15-44_act22-40_n72_fill_slit3.png) | yes | 34.2 | 21.4 | 3.14 |
+| [wave_env15-44_act22-40_n72_fill_slit4](wave_env15-44_act22-40_n72_fill_slit4.png) | yes | 34.2 | 21.2 | 2.89 |
 
 ## Wave, CMU-style stitched layers
 
 | Design | Layout OK | Kt mN·m/A | Km mN·m/√W | Loss W |
 |---|---|---|---|---|
-| [wave_stitched_act21-41_n48_fill](wave_stitched_act21-41_n48_fill.png) | yes | 5.6 | 14.0 | 17.15 |
-| [wave_stitched_act21-41_n96_fill](wave_stitched_act21-41_n96_fill.png) | yes | 11.1 | 13.1 | 7.65 |
+| [wave_stitched_act21-41_n48_fill](wave_stitched_act21-41_n48_fill.png) | yes | 5.6 | 14.0 | 17.76 |
+| [wave_stitched_act21-41_n96_fill](wave_stitched_act21-41_n96_fill.png) | yes | 11.1 | 13.1 | 7.78 |

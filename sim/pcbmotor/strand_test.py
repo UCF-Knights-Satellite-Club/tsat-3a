@@ -39,7 +39,7 @@ import numpy as np
 from .geometry import StatorDesign, RotorDesign, OZ_TO_M
 from .bundle import strand_test_coil, strand_test_design, check_bundle, STRAND_TEST
 from .layout import path_points
-from .em import rotor_magnets, foc_torque, RHO_CU_20C, ALPHA_CU
+from .em import rotor_magnets, foc_torque, RHO_CU_20C, ALPHA_CU, mean_dbz_dtheta2, rotor_bz
 from .stacking import coil_curves, SIGMA_CU
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -86,9 +86,8 @@ def lane_curves(bc, r: RotorDesign, n_theta=48, max_seg_mm=0.2):
         tz = mids[:, 0] * F[:, 1] - mids[:, 1] * F[:, 0]
         tq[:, i] = -np.bincount(own, weights=tz, minlength=len(keys))   # torque on the rotor
         Bz[i] = B[:, 2]
-    dth = thetas[1] - thetas[0]
-    dBdth = (np.roll(Bz, -1, axis=0) - np.roll(Bz, 1, axis=0)) / (2 * dth)
-    pe = SIGMA_CU * w ** 2 / 12 * np.mean(dBdth ** 2, axis=0) * vols
+    bz, key = rotor_bz(rotor_magnets, r)
+    pe = SIGMA_CU * w ** 2 / 12 * mean_dbz_dtheta2(bz, key, r.n_poles, mids) * vols
     eddy = np.bincount(own, weights=pe, minlength=len(keys))
     return thetas, {k: tq[i] for i, k in enumerate(keys)}, {k: eddy[i] for i, k in enumerate(keys)}
 

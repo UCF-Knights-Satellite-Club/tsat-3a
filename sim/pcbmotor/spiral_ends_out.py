@@ -54,7 +54,7 @@ from dataclasses import asdict, replace
 import numpy as np
 
 from .geometry import StatorDesign, OZ_TO_M, phase_map, coil_angles
-from .em import analyse, analyse_layout, rotor_magnets, RHO_CU_20C, MU0
+from .em import analyse, analyse_layout, rotor_magnets, RHO_CU_20C, MU0, mean_dbz_dtheta2, rotor_bz
 from .designs import drive_metrics
 from .stacking import coil_curves, SIGMA_CU
 from .layout import coil_layout, check_layout, path_points
@@ -167,11 +167,11 @@ def layout_curves(lay, rot, n_theta=72, max_seg_mm=0.25):
         F = np.cross(dls, B)
         tq[i] = np.sum(mids[:, 0] * F[:, 1] - mids[:, 1] * F[:, 0])
         Bz[i] = B[:, 2]
-    dth = thetas[1] - thetas[0]
-    dBdth = (np.roll(Bz, -1, axis=0) - np.roll(Bz, 1, axis=0)) / (2 * dth)
+    bz, key = rotor_bz(rotor_magnets, rot)
+    g = mean_dbz_dtheta2(bz, key, rot.n_poles, mids)
     w = d.trace_mm / 1e3
     vol = w * t_cu * np.linalg.norm(dls, axis=1)
-    c_eddy = d.n_coils * float(np.sum(SIGMA_CU * w ** 2 / 12 * np.mean(dBdth ** 2, axis=0) * vol))
+    c_eddy = d.n_coils * float(np.sum(SIGMA_CU * w ** 2 / 12 * g * vol))
     return thetas, -tq, c_eddy
 
 

@@ -99,11 +99,11 @@ swap, each strand in that loop links the same flux to first order.
 
 | | Kt mN·m/A | R phase Ω | Km mN·m/√W | Eddy drag @2000 rpm | Strand circulating @2000 rpm | Total drag @2000 rpm |
 |---|---|---|---|---|---|---|
-| solid | 22.4 | 0.89 | 19.4 | 0.36 W | – | **1.70 mN·m** |
-| swap | 22.4 | 0.86 | 19.7 | 0.16 W | 0.001 W | **0.76 mN·m** |
-| fixed | 22.4 | 0.86 | 19.7 | 0.16 W | 0.19 W | **1.67 mN·m** |
+| solid | 22.4 | 0.89 | 19.4 | 0.40 W | – | **1.92 mN·m** |
+| swap | 22.4 | 0.86 | 19.7 | 0.18 W | 0.001 W | **0.86 mN·m** |
+| fixed | 22.4 | 0.86 | 19.7 | 0.18 W | 0.19 W | **1.77 mN·m** |
 
-Drag grows linearly with speed: at 3000 rpm it is 2.5, 1.1 and 2.5 mN·m.
+Drag grows linearly with speed: at 3000 rpm it is 2.9, 1.3 and 2.6 mN·m.
 
 - **swap vs solid:** stranding halves the eddy drag.
 - **fixed vs swap:** the about 0.9 mN·m difference is the circulating current alone.
@@ -125,10 +125,10 @@ longer runs the long way round pair 2's rings.
 
 | As built, at 15 mN·m and 2000 rpm | Km mN·m/√W | R phase Ω | Loss | Drag (swap / fixed) |
 |---|---|---|---|---|
-| Through vias, 2 oz (this folder's main boards), swap | 19.7 | 0.86 | 0.74 W | 0.76 / 1.67 mN·m |
-| Blind vias, 2 oz, swap | 21.2 | 0.76 | 0.66 W | 0.75 / 1.77 mN·m |
-| Blind vias, 3 oz (ASSUMED ACE-style build, 0.2 mm space, 0.4 / 0.2 mm vias), swap | 23.6 | 0.61 | 0.61 W | 0.99 / 2.43 mN·m |
-| Spiral coils (the current payload design), for reference | 16.2 | 1.21 | 1.63 W | – |
+| Through vias, 2 oz (this folder's main boards), swap | 19.7 | 0.86 | 0.76 W | 0.86 / 1.77 mN·m |
+| Blind vias, 2 oz, swap | 21.2 | 0.76 | 0.68 W | 0.85 / 1.87 mN·m |
+| Blind vias, 3 oz (ASSUMED ACE-style build, 0.2 mm space, 0.4 / 0.2 mm vias), swap | 23.6 | 0.61 | 0.64 W | 1.13 / 2.56 mN·m |
+| Spiral coils (the current payload design), for reference | 16.2 | 1.21 | 1.75 W | – |
 
 Kt is about 22.5 mN·m/A for all of them. With heavier copper the strand lanes narrow to 0.30 mm, so
 0.56 mm vias no longer fit: 3 oz needs vias of 0.4 mm pad or smaller. Laser blind vias in an HDI build

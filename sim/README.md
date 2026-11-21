@@ -18,6 +18,7 @@ python3 -m venv .venv
 .venv/bin/python -m yaw.calibrate           # fit measured disturbance levels (~1 min); copy values into yaw/sim.py
 .venv/bin/python -m yaw.sim                 # yaw Monte Carlo for all motor candidates (~2 min)
 .venv/bin/python tests/test_em_consistency.py   # torque model cross-check
+.venv/bin/python tests/test_eddy.py              # eddy field average against a brute-force finite difference
 .venv/bin/python -m validation.cmu_wheel    # model vs. the measured CMU PCB wheel (~2 min)
 .venv/bin/python -m pcbmotor.stacking       # stacked boards / dual rotor vs single board (~2 min)
 .venv/bin/python -m pcbmotor.ace_stackups   # custom heavy-copper stackups and stranded traces (~1 min)
@@ -84,6 +85,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `yaw/calibrate.py` | Fits the measured disturbance levels to the video statistics. |
 | `validation/cmu_wheel.py` | Rebuilds the CMU PCB reaction wheel from its paper and design files and compares the model with its measured resistance and torque constant. |
 | `tests/test_em_consistency.py` | Checks Lorentz-force torque against d(flux linkage)/d(angle). |
+| `tests/test_eddy.py` | The eddy model's field average (`em.mean_dbz_dtheta2`) against a brute-force central difference at 2048 rotor angles. |
 | `tests/test_wave_layout.py` | Wave test boards: every variant is one correct series path per phase with 0.15 mm clearance, and the strand swap cancels the circulating current. |
 | `tests/test_spiral_ends_out.py` | Parallel coils halve Kt and keep Km; the wiring-ring band fits a 90 mm board at r_out 42; the JLC-via spiral layout is continuous and its L2–L3 via clears the ring; stranded bundles fit the 90 mm board and series wiring doubles Kt. |
 | `tests/test_wave.py` | Wave-winding checks: balanced phases, slot-filling widths, and template-shift torque against a direct sum over every conductor. |
@@ -112,7 +114,11 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
   radial trace edges were sampled once), which is now fixed.
 - **Eddy loss and strand currents.** Each trace is treated as a thin strip in the axial field of
   the passing magnets: loss per volume σ·w²/12·⟨(dB/dt)²⟩, so drag power grows with speed squared
-  and with trace width squared (`stacking.py`, `wave.py`, `strand_test.py`). Parallel strands also
+  and with trace width squared (`stacking.py`, `wave.py`, `strand_test.py`). The rotor field turns
+  rigidly, so ⟨(dBz/dθ)²⟩ at a point depends only on its radius and layer: `em.mean_dbz_dtheta2`
+  averages it round the circle at 1440 samples per electrical period (FFT derivative) and interpolates
+  for each segment. Before 2026-11-20 each study took a finite difference over its 36–144 torque
+  angles, which read 4–29% low. Parallel strands also
   carry a circulating current driven by the EMF difference between their lanes, which is why the
   recommended strands swap lanes at every via.
 - **Inductance.** Neumann integral of the mean turn, with the winding's geometric mean distance for

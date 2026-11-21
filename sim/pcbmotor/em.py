@@ -124,6 +124,58 @@ def rotor_magnets(r: RotorDesign, theta=0.0):
     return magpy.Collection(*mags)
 
 
+# ---------------------------------------------------------------- eddy-loss field average
+EDDY_N_AZ = 1440           # azimuth samples per electrical period for the eddy average
+EDDY_DR_MM = 0.1           # radial step of the profile that segments are interpolated on
+_EDDY_CACHE = {}
+
+
+def mean_dbz_dtheta2(field_bz, key, n_poles, pts_m):
+    """Mean over one electrical period of (dBz/dtheta)^2 [T^2/rad^2] at stator points pts_m (N x 3, m)
+    while the rotor turns. This is the field term of the eddy model sigma*w^2/12*(dBz/dt)^2.
+
+    The rotor field turns rigidly about z, so at a point (r, phi, z) the time average over one period
+    equals the average of (dBz/dphi)^2 round the circle of radius r at height z: it depends only on
+    (r, z). It is sampled at EDDY_N_AZ azimuths per electrical period (derivative by FFT, exact for a
+    periodic field) on an EDDY_DR_MM radial grid per height, then interpolated. Before 2026-11-20 the
+    callers took a central difference over their 36-144 torque angles, which read 10-30% low on sharp
+    magnet edges.
+
+    field_bz(points_m) -> Bz [T] of the rotor at angle 0 (the caller's rotor_magnets, so studies that
+    swap the field model are honoured). key: hashable description of that field; it is cached on
+    (key, z, radial range)."""
+    period = 4 * math.pi / n_poles
+    r = np.hypot(pts_m[:, 0], pts_m[:, 1]) * 1e3
+    out = np.empty(len(pts_m))
+    for z in np.unique(np.round(pts_m[:, 2], 9)):
+        sel = np.abs(pts_m[:, 2] - z) < 1e-9
+        lo = math.floor(r[sel].min() / 5.0) * 5.0
+        hi = math.ceil(r[sel].max() / 5.0) * 5.0 + 5.0
+        ck = (key, n_poles, float(z), lo, hi)
+        if ck not in _EDDY_CACHE:
+            rg = np.arange(lo, hi + EDDY_DR_MM / 2, EDDY_DR_MM)
+            ph = np.arange(EDDY_N_AZ) * period / EDDY_N_AZ
+            R, P = np.meshgrid(rg / 1e3, ph, indexing="ij")
+            pts = np.c_[(R * np.cos(P)).ravel(), (R * np.sin(P)).ravel(), np.full(R.size, z)]
+            bz = field_bz(pts).reshape(R.shape)
+            k = np.fft.rfftfreq(EDDY_N_AZ, d=period / EDDY_N_AZ) * 2 * math.pi       # rad^-1
+            spec = np.fft.rfft(bz, axis=1) * (1j * k)
+            dbz = np.fft.irfft(spec, n=EDDY_N_AZ, axis=1)
+            _EDDY_CACHE[ck] = (rg, np.mean(dbz ** 2, axis=1))
+        rg, g = _EDDY_CACHE[ck]
+        out[sel] = np.interp(r[sel], rg, g)
+    return out
+
+
+def rotor_bz(magnets_fn, rot, theta=0.0):
+    """field_bz and cache key for mean_dbz_dtheta2 from a rotor_magnets-style function. The function
+    object itself is in the key, so a study that swaps rotor_magnets for its own field gets its own
+    cache entries (the key holds a reference, so its id can't be reused)."""
+    from dataclasses import astuple
+    coll = magnets_fn(rot, theta)
+    return (lambda p: coll.getB(p)[:, 2]), (magnets_fn, astuple(rot))
+
+
 def _subdivide(poly, max_len_mm):
     out = [poly[:1]]
     for a, b in zip(poly[:-1], poly[1:]):

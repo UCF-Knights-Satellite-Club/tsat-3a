@@ -1,5 +1,8 @@
 # Wave winding vs spiral coils: high-momentum payload stator (2026-11-19)
 
+> Eddy, drag and loss figures rerun 2026-11-20 after the eddy-model fix (RESULTS.md section 7). Superseded
+> for the payload winding by the ends-out spiral, [`pcbmotor_spiral_ends_out.md`](pcbmotor_spiral_ends_out.md).
+
 `pcbmotor/wave.py`, checked by `tests/test_wave.py`. Full table: [`pcbmotor_wave_table.md`](pcbmotor_wave_table.md);
 raw numbers: `pcbmotor_wave.json`; layout of the recommended design (centrelines): `pcbmotor_wave_layout.png`.
 
@@ -44,17 +47,17 @@ at r = 22–40 mm.
 
 | Design | Kt mN·m/A | R Ω | Km mN·m/√W | Ripple | Top rpm | H mN·m·s | Eddy @2000 / top rpm | Loss |
 |---|---|---|---|---|---|---|---|---|
-| **Spiral, current recommendation** (6c/8p, 1.2 mm, r 21–41) | 21.8 | 1.21 | 16.2 | 3.0% | 4215 | 90 | 0.77 / 3.43 W | 1.63 W |
-| Wave, same 21–41 envelope, N = 48, width ≤ 1.2 mm | 19.5 | 0.83 | 17.4 | 3.3% | 4713 | 101 | 0.53 / 2.93 W | 1.27 W |
-| Wave, ends out, N = 48, width ≤ 1.2 mm | 23.0 | 1.03 | 18.5 | 4.8% | 3997 | 85 | 0.33 / 1.31 W | 0.99 W |
-| **Wave, ends out, N = 48, width ≤ 1.6 mm, 2 strands swapped at every via** | 23.0 | 1.00 | 18.8 | 4.8% | 3997 | 85 | 0.13 / 0.53 W | **0.77 W** |
-| same, 2 strands, lanes not swapped | 23.0 | 1.00 | 18.8 | 4.8% | 3997 | 85 | 0.13 / 0.53 W | 0.86 W (0.09 W circulating) |
-| same, width ≤ 2.0 mm, 2 strands swapped | 23.0 | 0.93 | 19.5 | 4.8% | 3997 | 85 | 0.27 / 1.06 W | 0.86 W |
-| Wave, same 21–41 envelope, width ≤ 2.0 mm, 3 strands swapped | 19.5 | – | 17.4 | 3.3% | 4713 | 101 | 0.08 / 0.46 W | 0.83 W |
-| Wave, ends out, N = 72, width ≤ 0.8 mm | 34.2 | 2.32 | 18.4 | 3.1% | 2681 | 57 | 0.14 W | 0.81 W |
-| Wave, full fill (traces up to 5 mm) | 23.0 | 0.73 | 21.9 | 4.8% | 3997 | 85 | 11.3 W | 11.8 W |
-| Wave, full fill, slit radial section (strands merge in the end turns) | 23.0 | 0.74 | 21.8 | 4.8% | 3997 | 85 | 0.6–2.6 W | 6.2–7.7 W (4.6–5.2 W circulating) |
-| Wave, CMU-style stitched layers (N = 96) | 11.1 | 0.48 | 13.1 | 3.2% | (6000 cap) | – | 2.8 W | 7.7 W (3.6 W circulating) |
+| **Spiral, current recommendation** (6c/8p, 1.2 mm, r 21–41) | 21.8 | 1.21 | 16.2 | 3.0% | 4215 | 90 | 0.89 / 3.96 W | 1.75 W |
+| Wave, same 21–41 envelope, N = 48, width ≤ 1.2 mm | 19.5 | 0.83 | 17.4 | 3.3% | 4713 | 101 | 0.55 / 3.07 W | 1.30 W |
+| Wave, ends out, N = 48, width ≤ 1.2 mm | 23.0 | 1.03 | 18.5 | 4.8% | 3997 | 85 | 0.34 / 1.37 W | 1.00 W |
+| **Wave, ends out, N = 48, width ≤ 1.6 mm, 2 strands swapped at every via** | 23.0 | 1.00 | 18.8 | 4.8% | 3997 | 85 | 0.14 / 0.55 W | **0.78 W** |
+| same, 2 strands, lanes not swapped | 23.0 | 1.00 | 18.8 | 4.8% | 3997 | 85 | 0.14 / 0.55 W | 0.86 W (0.09 W circulating) |
+| same, width ≤ 2.0 mm, 2 strands swapped | 23.0 | 0.93 | 19.5 | 4.8% | 3997 | 85 | 0.28 / 1.11 W | 0.87 W |
+| Wave, same 21–41 envelope, width ≤ 2.0 mm, 3 strands swapped | 19.5 | – | 17.4 | 3.3% | 4713 | 101 | 0.09 / 0.48 W | 0.83 W |
+| Wave, ends out, N = 72, width ≤ 0.8 mm | 34.2 | 2.32 | 18.4 | 3.1% | 2681 | 57 | 0.15 W | 0.82 W |
+| Wave, full fill (traces up to 5 mm) | 23.0 | 0.73 | 21.9 | 4.8% | 3997 | 85 | 11.8 W | 12.3 W |
+| Wave, full fill, slit radial section (strands merge in the end turns) | 23.0 | 0.74 | 21.8 | 4.8% | 3997 | 85 | 0.6–2.7 W | 6.2–7.8 W (4.6–5.2 W circulating) |
+| Wave, CMU-style stitched layers (N = 96) | 11.1 | 0.48 | 13.1 | 3.2% | (6000 cap) | – | 2.9 W | 7.8 W (3.6 W circulating) |
 
 Three strands in the ends-out envelope fail the via check: 3 vias per conductor don't fit at r = 15 mm with
 48 conductors. They fit in the 21–41 mm envelope, but that envelope has lower Km.
@@ -62,13 +65,13 @@ Three strands in the ends-out envelope fail the via check: 3 vias per conductor 
 ## Findings
 
 1. **A wave winding beats the spiral on this rotor.**
-   - In the same r = 21–41 mm envelope with 1.2 mm traces: Km +8% and loss −22%.
+   - In the same r = 21–41 mm envelope with 1.2 mm traces: Km +8% and loss −26%.
    - With the end turns outside the magnets (vias at r = 15 and 44 mm, still inside the 90 mm board), the same
-     traces give Km +14% and loss −39%, with Kt and momentum within a few percent of the spiral.
+     traces give Km +14% and loss −43%, with Kt and momentum within a few percent of the spiral.
    - Some of the gain is the higher winding factor: 0.955 against 0.866 for the 3-coils-per-4-poles spiral.
    - Chulaee 2023/2024 also found the best designs keep magnets off the end turns.
 2. **Recommended: 1.6 mm traces split into 2 strands that swap lanes at every layer via.** Total loss is
-   0.77 W, 53% below the spiral, and eddy drag at top speed is 0.53 W against 3.4 W.
+   0.78 W, 55% below the spiral, and eddy drag at top speed is 0.55 W against 4.0 W.
    - Swapping at the vias (L2 and L4 carry the reversed lane order) balances the two strands' EMFs. Circulating
      current falls from 0.09–0.5 W with fixed lanes to about 0.001 W.
    - This is François & Dehez's "parallel connection", which cut eddy loss about 81% for about 13% more
