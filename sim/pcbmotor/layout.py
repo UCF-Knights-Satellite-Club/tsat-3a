@@ -149,6 +149,8 @@ class CoilLayout:
     term_s: tuple                # start terminal on L1 (outer edge of the winding)
     term_e: tuple                # end terminal on L4
     clearance_c: float           # via centre to trace centre distance used
+    via_dia_mm: float = VIA_DIA_MM
+    via_drill_mm: float = VIA_DRILL_MM
 
     def turns_per_layer(self):
         """Turns actually wound on each layer (angle swept round the coil centre / 2 pi)."""
@@ -198,16 +200,18 @@ def _inward_spiral(d: StatorDesign, n_turns, theta_start, end, c):
     raise AssertionError("unreachable")
 
 
-def coil_layout(d: StatorDesign, theta_s=None, margin_mm=0.02) -> CoilLayout:
+def coil_layout(d: StatorDesign, theta_s=None, margin_mm=0.02, via_dia_mm=VIA_DIA_MM,
+                via_drill_mm=VIA_DRILL_MM) -> CoilLayout:
     """Build the 4-layer series coil. theta_s is the angle of the S terminal (default: halfway
-    between the coil axis and its left boundary). The E terminal is its mirror image."""
+    between the coil axis and its left boundary). The E terminal is its mirror image. The via
+    size defaults to OSH Park's; pass the fab's own for other boards."""
     assert d.layers == 4, "this layout is written for 4-layer boards"
     d.check_rules()
     beta = math.pi / d.n_coils
     theta_s = -beta / 2 if theta_s is None else theta_s
     # via centre to neighbouring trace centre
-    c = VIA_DIA_MM / 2 + d.space_mm + d.trace_mm / 2 + margin_mm
-    via_gap = VIA_DIA_MM + d.space_mm + margin_mm      # via pad to via pad, centre to centre
+    c = via_dia_mm / 2 + d.space_mm + d.trace_mm / 2 + margin_mm
+    via_gap = via_dia_mm + d.space_mm + margin_mm      # via pad to via pad, centre to centre
     p = d.pitch_mm
     n = 0
     while True:   # largest turn count whose centre opening still holds both vias
@@ -237,7 +241,8 @@ def coil_layout(d: StatorDesign, theta_s=None, margin_mm=0.02) -> CoilLayout:
     return CoilLayout(design=d, n_turns=n, layers=[L1, L2, L3, L4],
                       via_in=polar(r1_L + c, 0.0), via_out=polar(r2_0 + c, 0.0),
                       via_core=polar(r2_L - c, 0.0),
-                      term_s=polar(r2_0, theta_s), term_e=polar(r2_0, -theta_s), clearance_c=c)
+                      term_s=polar(r2_0, theta_s), term_e=polar(r2_0, -theta_s), clearance_c=c,
+                      via_dia_mm=via_dia_mm, via_drill_mm=via_drill_mm)
 
 
 def check_layout(lay: CoilLayout):

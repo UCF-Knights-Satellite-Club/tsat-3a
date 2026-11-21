@@ -33,6 +33,8 @@ python3 -m venv .venv
 .venv/bin/python -m pcbmotor.bus_voltage    # bus voltage and turn count: speed, momentum, inductance, PWM ripple loss (~6 min)
 .venv/bin/python -m pcbmotor.dual_stator    # rotor between two stator boards (coreless) vs single board (~1 min)
 .venv/bin/python tests/test_bus_voltage.py  # parallel paths, inductance shortcut vs brute force, ripple model
+.venv/bin/python -m pcbmotor.spiral_ends_out  # spiral coils with end turns outside the magnets vs the wave, solid and stranded (~10 min; --reuse ~3 min)
+.venv/bin/python tests/test_spiral_ends_out.py  # parallel coils halve Kt, wiring-ring band, JLC-via spiral layout, stranded fit and series wiring
 .venv/bin/python -m pcbmotor.layout_gallery # layout images of every evaluated stator (~15 min)
 .venv/bin/python -m pcbmotor.asbuilt        # test stator as laid out (after PCBMotorTest/gen_stator.py)
 .venv/bin/python -m pcbmotor.strand_test    # solid vs stranded test boards as laid out (after PCBMotorStrandTest/gen_strand_test.py)
@@ -71,6 +73,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `pcbmotor/wave_asbuilt.py` | EM model of that copper: Kt, phase R, eddy drag and the current circulating between strands. |
 | `pcbmotor/stator_yoke.py` | Slotless soft-magnetic yoke behind the stator (method of images on both iron planes): Kt/Km gain, axial pull, yoke thickness and mass, iron-loss drag, for the spiral and wave designs. |
 | `pcbmotor/bus_voltage.py` | Wave stator on 2S–8S supplies: same winding vs rewound (24–120 conductors per layer, 1 or 2 parallel paths); Neumann phase inductance; SVPWM ripple current and its loss; speed, momentum, bond shear, driver loss. |
+| `pcbmotor/spiral_ends_out.py` | Spiral coils given the wave's envelope (end turns outside the magnets) on the high-momentum rotor: envelope/width/series-parallel sweep, as-built spirals with JLC vias and the wiring ring, Neumann inductance on the real path, PWM ripple, tilt circulating current between parallel coils; the same envelope wound with transposed strand bundles (`bundle.py`), coils in parallel or series. |
 | `pcbmotor/designs.py` | Design sweep for the 40 mm test stator and the 1U payload stator; drive envelope; plots. |
 | `data/tsat1_swing.py` | Swing and excitation spectrum from the TSat-1 flight accelerometer log. |
 | `yaw/candidates.py` | Motor candidates (datasheet values, approximations flagged). |
@@ -82,6 +85,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | `validation/cmu_wheel.py` | Rebuilds the CMU PCB reaction wheel from its paper and design files and compares the model with its measured resistance and torque constant. |
 | `tests/test_em_consistency.py` | Checks Lorentz-force torque against d(flux linkage)/d(angle). |
 | `tests/test_wave_layout.py` | Wave test boards: every variant is one correct series path per phase with 0.15 mm clearance, and the strand swap cancels the circulating current. |
+| `tests/test_spiral_ends_out.py` | Parallel coils halve Kt and keep Km; the wiring-ring band fits a 90 mm board at r_out 42; the JLC-via spiral layout is continuous and its L2–L3 via clears the ring; stranded bundles fit the 90 mm board and series wiring doubles Kt. |
 | `tests/test_wave.py` | Wave-winding checks: balanced phases, slot-filling widths, and template-shift torque against a direct sum over every conductor. |
 | `results/` | CSV/JSON outputs, plots and `RESULTS.md`. |
 

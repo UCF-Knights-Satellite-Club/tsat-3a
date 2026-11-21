@@ -5,7 +5,7 @@ assumptions). Full Monte Carlo tables: [`yaw_tables.md`](yaw_tables.md). Raw dat
 `pcbmotor_sweep.csv`, `pcbmotor_designs.json`, `yaw_summary.csv`, `yaw_requirements.json`,
 `tsat1_swing.json`, `video_spin_tsat2b_full.*`, `video_phases_tsat2b_full.*`, `yaw_calibration.json`,
 `hang_summary.json`. Sections 5 and 6 (PCB motor design studies, KAOS-3 hanging payload) were added
-2026-11-18/19, 5e–5h on 2026-11-19 and 5i on 2026-11-20. Short summaries of each study are on the
+2026-11-18/19, 5e–5h on 2026-11-19, and 5i and 5k on 2026-11-20. Short summaries of each study are on the
 club Notion under TSat-3A Home → Design Studies & Simulations; this file and the per-study files
 hold the full data.
 
@@ -14,7 +14,9 @@ hold the full data.
 Points 1–6 were written 2026-11-17/19 after calibrating the disturbance model to the TSat-2B onboard
 flight video (section 2b). The video showed far more spin than the original "medium" assumption, so
 the requirements and the recommended payload design changed. Points 7–10 were added 2026-11-20 from
-the winding and stator studies (5f–5i); they change the recommended winding in point 2.
+the winding and stator studies (5f–5i); they change the recommended winding in point 2. Point 7 was
+revised the same day after section 5k gave the spiral the same envelope as the wave, and again when
+5k added a stranded spiral.
 
 1. **Put a swivel or slip ring at the payload attachment.** TSat-2B, flown without one, spun at
    172 °/s RMS (median 15 rpm, 1 s peaks up to 128 rpm) and the camera was steady (under 2 °/s) only
@@ -49,17 +51,29 @@ the winding and stator studies (5f–5i); they change the recommended winding in
    (section 6): it holds within 0.7° through a ±10° swing and passes the D&C demo specs S1–S3 at eye
    heights of 2–6 mm. Pitch/roll momentum is set by the centre-of-mass error at release (about 100
    mN·m·s per mm), so pre-trim before release or size the wheels for about 70 mN·m·s.
-7. **Use a wave winding instead of spiral coils** (section 5f). Same rotor, board and drive as the
-   high-momentum design in point 2: 48 conductors per layer, traces up to 1.6 mm split into 2 strands
-   that swap lanes at every via. Km 18.8 against the spiral's 16.2, and 0.77 W against 1.63 W at
-   15 mN·m and 2000 rpm. With blind vias Km is 21.2 (JLC 2 oz) or 23.6 (assumed 3 oz). Plan on a
-   5–15% torque derating until the wave test boards are measured. The spiral stays as the fallback.
-   Open item: the wave layout doesn't fit the 90 mm payload board yet (test boards are 117–129 mm);
-   90 mm needs a 6-layer build with jumper layers.
+7. **Use stranded spiral coils with their end turns outside the magnets** (section 5k). Same rotor,
+   board and drive as point 2: JLC 4-layer 2 oz on every layer, winding r 15–41.8 mm, 13 turns per
+   layer of a 0.75 mm bundle of 2 strands (0.30 mm, 0.15 mm apart) that swap lanes at every via, the
+   two coils of each phase in parallel.
+   - As modelled: Km 21.7, loss 0.52 W at 15 mN·m and 2000 rpm, no-load 4080 rpm (H 87 mN·m·s).
+   - Eddy drag is 0.21 mN·m at 2000 rpm, 3.5% of the 6 mN·m control margin. The solid 0.8 mm spiral
+     takes 2.1 mN·m (35%) and the stranded wave 0.75 mN·m (13%).
+   - Against the solid 0.8 mm spiral: 10% less Km, but 9× less eddy, so it loses less power above
+     about 1000 rpm at 15 mN·m, and at every torque the 1 A drive can give at 2000 rpm.
+   - Against the wave: Km 21.7 against 21.2 (blind vias) and 19.7 (through vias), loss 0.52 against
+     0.66 and 0.74 W. It fits the 90 mm payload board with through vias, a 3-track wiring ring and
+     no jumpers. The wave boards are 117–129 mm.
+   - PWM ripple loss is 0.14 W at 50 kHz against the wave's 1.05 W, because Ls is 19.1 µH against 8.1.
+   - The solid 0.8 mm spiral (Km 24.5, 0.82 W) is the fallback if the strand-test board shows the
+     strands don't behave as modelled; the wave is no longer needed as one.
+   - 5f's "wave wins" came from a spiral kept inside r 21–41, with its end turns over the magnets.
+   - Plan on a 5–15% torque derating until a board is measured.
 8. **Drive at 11.1 V (3S) with PWM at 100 kHz or more** (section 5h). Turn count doesn't change Km,
    so the bus voltage only sets the rewind (n must be a multiple of 24). The phase inductance is only
    8.1 µH, so at 50 kHz the PWM ripple costs about 1 W per wheel at 2000 rpm, more than the copper
-   loss. 100 kHz cuts it to about 0.26 W; series inductors also work.
+   loss. 100 kHz cuts it to about 0.26 W; series inductors also work. That applies to the wave. The
+   stranded ends-out spiral in point 7 has 2.4× the inductance and loses only 0.14 W at 50 kHz
+   (section 5k).
 9. **One stator board, one rotor, no stator iron** (sections 1, 5g, 5i). Stacked boards, dual rotors,
    a slotless stator yoke and a dual stator all lose at the payload's operating point (speed, eddy drag,
    axial pull or mass). The cheap gain is thicker magnets: two stacked blocks per pole on the existing
@@ -482,6 +496,9 @@ that drives the 2 m SPIDER gondola wheel.
 
 Layout images of every design in this study and the recommended spiral designs are in [`layouts/`](layouts/README.md).
 
+> **Superseded for the payload winding by 5k (2026-11-20).** The spiral below is confined to r 21–41;
+> given the wave's r 15–44 envelope it beats every wave here (as built Km 24.5 on a 90 mm board).
+
 `pcbmotor/wave.py` models a full-pitch two-layer radial wave winding. It uses the same rotor, board and
 drive as the high-momentum spiral design. All four layers are in series as two wave pairs. The literature
 behind it (Tokgöz, Paul, Wang/CIOMP, CMU, Chulaee, Han, François & Dehez and others) is in `~/KSC/research`.
@@ -643,6 +660,145 @@ Wave (blind vias, 2 oz, 2 strands swapped), loss at 15 mN·m and 2000 rpm:
   dominates (large slow wheels, §5e), or where the drive is thermally limited, since two boards have twice the
   cooling faces.
 
+### 5k. Spiral coils with the end turns outside the magnets ([`pcbmotor_spiral_ends_out.md`](pcbmotor_spiral_ends_out.md), 2026-11-20)
+
+5f gave the wave an envelope of r 15–44 mm, with its end turns outside the magnets (r 21.5–40.5), but
+kept the spiral inside r 21–41, where its end turns sit over the magnets. `pcbmotor/spiral_ends_out.py`
+gives the spiral the same room, on the same rotor, drive and operating point.
+- **Ideal sweep:** r_in 13–21, r_out 41–44, traces 0.5–1.6 mm, both JLC stackups.
+- **As built:** real 4-layer spirals from `layout.py`, with JLC 0.3/0.56 mm vias (two in the coil
+  centre, one outside), the phase-wiring ring and leads.
+- **Losses:** eddy loss on the actual paths; Ls by a Neumann integral over every coil's path.
+- **Wiring:** the two coils of each phase in parallel. That halves Kt to about 22, which keeps the
+  11.1 V speed range of the 5f designs.
+
+**Board fit.** Every coil terminal and the L2–L3 via sit at the outer edge, so the wiring ring goes
+outside the winding: the via, 3 ring tracks at 0.68 mm pitch and 0.3 mm edge clearance take 2.9 mm. A
+90 mm board therefore allows r_out up to 42.1 mm. No jumpers or break vias are needed.
+
+As built, JLC 4L with 2 oz on every layer. Loss is copper + eddy at 15 mN·m and 2000 rpm; ripple is the
+PWM ripple loss at 50 / 100 kHz (§5h method, 0.25 Ω driver).
+
+| Design | Kt | Km | No-load rpm / H | Drag @2000 | Loss | Ls µH | Ripple 50 / 100 kHz | Board |
+|---|---|---|---|---|---|---|---|---|
+| Spiral r 21–41, 1.2 mm, 6 turns, series (current) | 19.2 | 18.2 | 4793 / 102 | 4.3 mN·m | 1.58 W | 19.7 | 0.12 / 0.03 W | 90 mm |
+| Spiral r 15–42, 0.6 mm, 16 turns, parallel | 27.7 | 24.3 | 3308 / 71 | 1.1 mN·m | 0.62 W | 29.2 | 0.08 / 0.02 W | 90 mm |
+| Spiral r 15–42, 0.8 mm, 13 turns, parallel | 21.8 | **24.5** | 4213 / 90 | 2.1 mN·m | 0.82 W | 19.4 | 0.10 / 0.03 W | 90 mm |
+| **Spiral r 15–41.8, 2 × 0.30 mm strands, 13 turns, parallel** | 22.5 | 21.7 | 4077 / 87 | **0.21 mN·m** | **0.52 W** | 19.1 | 0.14 / 0.03 W | **90 mm** |
+| Spiral r 15–42, 1.0 mm, 11 turns, parallel | 17.9 | 24.4 | 5132 / 109 | 3.4 mN·m | 1.10 W | 12.5 | 0.16 / 0.04 W | 90 mm |
+| Spiral r 15–44, 0.8 mm, 14 turns, parallel | 25.0 | 26.6 | 3672 / 78 | 2.1 mN·m | 0.77 W | 23.1 | 0.09 / 0.02 W | ~94 mm |
+| Wave, 2 strands swapped, through vias (as built) | 22.4 | 19.7 | ~4100 / 85 | 0.76 mN·m | 0.74 W | 8.1 | 1.05 / 0.26 W | ~129 mm |
+| Wave, 2 strands swapped, blind vias (as built) | 22.6 | 21.2 | ~4060 / 87 | 0.75 mN·m | 0.66 W | 8.1 | 1.05 / 0.26 W | ~117 mm |
+
+- **With the same room, the spiral beats the wave on Km.** It gives 24.5 against 21.2 (blind vias) and
+  19.7 (through vias), on a board that fits the 90 mm payload. With 2 oz outer and 1 oz inner (the 5f
+  stackup) it is 20.0 against the ideal wave's 18.8.
+- **Why it wins:**
+  - The spiral needs only 3 vias per coil and no jumpers, so its wiring is 0.03 Ω of a 0.53 Ω phase.
+    The wave's vias and jumpers are 0.10–0.12 Ω.
+  - Its many turns fill the copper envelope, while the wave is held to 48 conductors by the via pitch
+    at r 15.
+  - Moving r_in in from 21 to 15 adds the most. Below about 15, the 60° sector gets too narrow at the
+    inner edge, and turns are lost.
+- **The wave's lower winding factor argument (0.955 against 0.866) doesn't decide it.** The 5f spiral was
+  losing to its envelope, not to its winding factor.
+- **Eddy drag is the spiral's weak point:**
+  - At 0.8 mm it is 0.45 W at 2000 rpm, against 0.16 W for the stranded wave.
+  - That is 2.1 mN·m of the 6 mN·m control margin, against 0.75.
+  - Total loss is therefore 0.82 W, against 0.66 W (blind vias) and 0.74 W (through vias).
+  - The 0.6 mm version halves the drag (1.1 mN·m, 0.62 W), but its top speed falls to 3300 rpm and
+    momentum to 71 mN·m·s, against 85–90.
+  - Transposed strands fix it (below).
+- **Counting PWM ripple, the spiral uses less power overall.**
+  - The spiral's Ls is 2.4× the wave's (19.4 against 8.1 µH): each coil's turns link their own flux.
+  - At 50 kHz the spiral loses 0.10 W to ripple, against 1.05 W for the wave. That makes 0.92 W in
+    total, against 1.71 W (blind vias).
+  - At 100 kHz the totals are 0.85 W and 0.92 W.
+  - So the spiral relaxes the §5h demand for 100 kHz PWM or series inductors.
+- **Torque ripple** is 0.3–0.8%, against 5% for the current spiral and about 4% for the wave.
+- **Parallel coils are safe.** The two coils of a phase are diametrically opposite. A tilted rotor
+  (gap ±0.05 / ±0.1 mm at opposite coils) circulates only 2 / 8 mW between them at 2000 rpm.
+- **Same hub limit as the wave:** the board must be clear of hardware from r ≈ 15 mm outward.
+- **r_out 44 on a ~94 mm board** adds 9% Km (26.6), if the payload outline allows it.
+- **Model fixes made for this study:**
+  - `em.foc_torque` now halves Kt for parallel coils. Before, `series=False` changed only R and L; no
+    earlier study used it.
+  - `layout.coil_layout` takes the via size as a parameter.
+  - `stacking.coil_curves` now counts segments the same way as the torque model. It could trip its
+    own assertion on some envelopes; earlier results are unchanged.
+  - `em.phase_inductance` (middle turn × n²) reads about 4× high for these coils (83 against 19.7 µH
+    for the current spiral). It has only fed the sweep's ripple bound and time constant.
+
+**Stranded spiral (part 4).** The same envelope wound with `bundle.py` bundles: 1–4 strands, 0.15 mm
+apart, swapping lane order at every layer via as on the strand-test board. Each lane is analysed on its
+own path (`strand_test.lane_curves`): Kt, strand resistance, eddy on the strand width, and the current
+circulating between strands. r_out is the largest that fits 90 mm with the ring outside the out vias
+and terminal buses. Each bundle is run with the coils of a phase in parallel and in series. The
+solid row is the 0.8 mm coil built by the same code (it reads Km 24.1 and 0.40 W eddy against 24.5 and
+0.45 W from `layout.py`, whose opening and via stubs differ slightly).
+
+| Strands × width (bundle) | Coils | Turns | Kt | Km | No-load rpm / H | Eddy | Circulating (untransposed) | Drag @2000 | Loss | Ls µH | Ripple 50 kHz |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 × 0.8 mm (solid) | parallel | 13 | 21.4 | 24.1 | 4297 / 92 | 0.40 W | – | 1.9 mN·m | 0.79 W | 19.0 | 0.11 W |
+| **2 × 0.30 mm (0.75)** | parallel | 13 | 22.5 | 21.7 | 4077 / 87 | 0.044 W | 0.01 mW (15 mW) | **0.21 mN·m** | **0.52 W** | 19.1 | 0.14 W |
+| 2 × 0.325 mm (0.8) | parallel | 13 | 21.4 | 21.9 | 4299 / 92 | 0.054 W | 0.01 mW (18 mW) | 0.26 mN·m | 0.52 W | 18.0 | 0.14 W |
+| 2 × 0.375 mm (0.9) | parallel | 11 | 18.9 | 22.0 | 4858 / 104 | 0.072 W | 0.02 mW (21 mW) | 0.35 mN·m | 0.54 W | 14.5 | 0.16 W |
+| 2 × 0.525 mm (1.2) | parallel | 9 | 14.3 | 21.8 | 6440 / 128 | 0.16 W | 0.07 mW (41 mW) | 0.74 mN·m | 0.63 W | 7.7 | 0.30 W |
+| 2 × 0.525 mm (1.2) | series | 9 | 28.5 | 22.2 | 3220 / 69 | 0.16 W | 0.07 mW (41 mW) | 0.74 mN·m | 0.61 W | 30.8 | 0.09 W |
+| 3 × 0.30 mm (1.2) | series | 8 | 27.8 | 20.5 | 3307 / 71 | 0.041 W | 0.10 mW (34 mW) | 0.20 mN·m | 0.58 W | 31.7 | 0.09 W |
+| 3 × 0.433 mm (1.6) | series | 6 | 20.0 | 20.1 | 4588 / 98 | 0.093 W | 0.46 mW (59 mW) | 0.45 mN·m | 0.65 W | 17.2 | 0.15 W |
+| 4 × 0.338 mm (1.8) | series | 5 | 16.8 | 18.4 | 5462 / 117 | 0.050 W | 1.0 mW (62 mW) | 0.24 mN·m | 0.71 W | 12.0 | 0.24 W |
+
+All 24 rows (11 bundles × 2 wirings) are in the per-study file.
+
+- **The model checks out:**
+  - Eddy falls as (strand / bundle width)² × copper fraction: 0.134 against 0.134 for 2 strands in
+    0.8 mm, 0.167 against 0.167 (2 in 1.2 mm), 0.044 against 0.047 (3 in 1.2 mm).
+  - Transposed, the strands circulate 0.01–1.3 mW at 2000 rpm. Kept on one lane they would
+    circulate 15–99 mW, so the lane swaps cancel 98–99.9% of it.
+  - Series doubles Kt exactly and multiplies R by 3.8–4.0 (4× the coils, plus the ring and leads);
+    Km is up to 3% higher in series because the wiring is a smaller share.
+- **Copper fraction sets the cost.** Each strand gap takes 0.15 mm, so the fill is w_s / (w_s + 0.15)
+  whatever the strand count: 67% at 0.30 mm against 84% for the solid 0.8 mm trace. Km drops about
+  10% (24.1 to 21.7–21.9). Eddy goes as about w_s³ / (w_s + 0.15), so 0.3–0.4 mm strands are the best
+  trade for total loss.
+- **Turns set the wiring.** No-load 4000–4300 rpm (H 85–90) needs 13 turns in parallel or 6–7 in
+  series. Two strands in a 0.75–0.8 mm bundle keep the solid design's 13 turns, so they keep its
+  speed and wiring.
+- **Wide bundles in series don't beat it.** They come close to the speed window (3 × 0.433 mm in a
+  1.6 mm bundle: 4590 rpm), but lose more to the extra gaps and the via row: 0.65 W and 0.45 mN·m at best.
+  In parallel they have too few turns. 9 turns gives Kt 14 and 6400+ rpm, and 15 mN·m needs more than
+  the 1 A drive gives.
+- **`bundle.py` can't lay out** 3 × 1.0, 3 × 1.8, 4 × 1.6 or 4 × 2.0 mm bundles: the via row in the
+  coil opening doesn't fit. Fill depends only on strand width and their turn counts match bundles
+  already run, so they would not change the answer.
+- **Against the solid spiral (same code):**
+  - Copper loss at 15 mN·m is 23% higher (0.48 against 0.39 W).
+  - Eddy is 9× lower (0.044 against 0.40 W at 2000 rpm; 0.18 against 1.84 W at top speed).
+  - The stranded coil loses less above about 1000 rpm at 15 mN·m. At 2000 rpm it loses less up to
+    30 mN·m, above the 22.5 mN·m that 1 A gives.
+- **Counting PWM ripple at 50 kHz:** 0.66 W in total, against 0.92 W for the solid spiral and 1.71 W
+  for the blind-via wave. At 100 kHz: 0.55, 0.85 and 0.92 W.
+- **Not modelled:** the tilt circulating current between the two parallel coils is not recomputed. It
+  is 2 mW for the solid coil and should be lower here, since the branches have more resistance. The
+  0.15 mm strand gap is JLC's 2 oz minimum. A short between strands of one turn costs only part of the
+  eddy gain; it doesn't break the coil.
+- **Verdict:** the stranded ends-out spiral is the payload winding:
+  - JLC 4L, 2 oz on every layer, r 15–41.8 mm, 13 turns per layer of a 0.75 mm bundle of 2 × 0.30 mm
+    strands, two coils per phase in parallel, 6 through vias per coil;
+  - Km 21.7, loss 0.52 W, no-load 4080 rpm, H 87 mN·m·s;
+  - drag 0.21 mN·m at 2000 rpm, 3.5% of the 6 mN·m control margin;
+  - it fits the 90 mm board with no jumpers, and its ripple loss is a seventh of the wave's.
+  - 2 × 0.325 mm in a 0.8 mm bundle (the solid design's pitch) is equivalent: 0.52 W, 0.26 mN·m, H 92.
+  - The solid 0.8 mm spiral is the fallback if the strand-test board shows more circulating current
+    than modelled.
+  - Plan on the same 5–15% torque derating until a board is measured.
+- **The small test board is a separate question.** A subagent found that a true wave fits
+  `PCBMotorTest`'s 50 mm outline (48 conductors per layer, layer pairs in parallel, through vias only).
+  As built it gives Km 2.30 against the spiral's 2.10, with Kt 1.9 against 11.5 mN·m/A. That 10%
+  difference is inside the derating being measured, so the spiral stays the bench board. Its scripts
+  are not in the repo.
+
 ## 6. KAOS-3 three-axis hanging payload: pitch and roll (2026-11-19)
 
 `hang/model.py` and `hang/run.py` test the KAOS-3 senior design architecture against the D&C demo
@@ -727,7 +883,9 @@ target's azimuth drifts slowly). Payload inertia and trim-stage parameters are a
     simulation (section 6) include it. Proximity loss from PWM ripple in wide traces
     is not modelled.
   - 10% allowance for via and link resistance.
-  - Inductance is a Neumann integral of the mean turn (section 5h); treat it as ±30–50%.
+  - Inductance is a Neumann integral of the mean turn (section 5h); treat it as ±30–50%. For spiral
+    coils `em.phase_inductance` (middle turn × n²) reads about 4× high; section 5k integrates the
+    as-built path instead.
   - The only check against built hardware is the CMU wheel (about 10%). Paul 2019's wave motor
     measured 15.5% below FEA on torque, so plan on 5–15% derating.
   - Thermal limit assumes natural convection on both board faces (rotor airflow ignored, so

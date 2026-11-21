@@ -176,10 +176,14 @@ def foc_torque(d: StatorDesign, r: RotorDesign, thetas, tq_coil, n_eval=360):
         x = (theta - phi) % P
         return np.interp(x, np.r_[thetas, P], np.r_[tq_coil, tq_coil[0]])
 
-    # per-phase torque constant k_ph(theta) [Nm/A] = sum of its coils with signs
+    # per-phase torque constant k_ph(theta) [Nm/A] = sum of its coils with signs. With the coils of a
+    # phase in parallel each carries 1/n of the phase current (they are identical copies, so it splits
+    # evenly), which halves Kt for n = 2. Before 2026-11-20 this ignored d.series; no study used
+    # series=False until spiral_ends_out.py.
+    share = 1.0 if d.series else 1.0 / (d.n_coils // 3)
     kph = np.zeros((3, n_eval))
     for (ph, sgn), phi in zip(pm, coil_angles(d)):
-        kph[ph] += sgn * coil_k(th, phi)
+        kph[ph] += share * sgn * coil_k(th, phi)
     best = None
     for delta in np.linspace(0, 2 * math.pi, 180, endpoint=False):
         i = np.array([np.cos(pp * th + delta - k * 2 * math.pi / 3) for k in range(3)])
@@ -236,14 +240,14 @@ def layout_torque_curve(lay, r: RotorDesign, n_theta=72, max_seg_mm=0.25):
 
 def layout_coil_resistance(lay, temp_c=20.0, n_vias=3):
     """Resistance of one as-built coil: exact trace lengths per layer plus its layer vias."""
-    from .layout import path_length, VIA_DRILL_MM
+    from .layout import path_length
     rho = RHO_CU_20C * (1 + ALPHA_CU * (temp_c - 20.0))
     d = lay.design
     r = sum(rho * (path_length(p) / 1e3) / ((d.trace_mm / 1e3) * oz * OZ_TO_M)
             for p, oz in zip(lay.layers, d.stack["oz"]))
     # plated via barrel: 1.6 mm long, ~25 um plating (OSH Park nominal ~1 mil)
     t_pl = 25e-6
-    a_via = math.pi * ((VIA_DRILL_MM / 1e3) * t_pl)
+    a_via = math.pi * ((lay.via_drill_mm / 1e3) * t_pl)
     return r + n_vias * rho * 1.6e-3 / a_via
 
 

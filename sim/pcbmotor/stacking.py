@@ -41,7 +41,7 @@ import numpy as np
 import magpylib as magpy
 
 from .geometry import StatorDesign, RotorDesign, STACKUPS, OSHPARK_STACKUPS, coil_turns, OZ_TO_M
-from .em import (_coil_segments, rotor_magnets, foc_torque, phase_resistance, phase_inductance,
+from .em import (_coil_segments, _subdivide, rotor_magnets, foc_torque, phase_resistance, phase_inductance,
                  RHO_CU_20C)
 from .designs import drive_metrics, V_BUS
 
@@ -104,8 +104,9 @@ def coil_curves(d: StatorDesign, r: RotorDesign, dual: bool, n_theta=72):
     for z, oz in zip(d.stack["z_mm"], d.stack["oz"]):
         n = 0
         for poly in turns:
-            sub = np.linalg.norm(np.diff(poly, axis=0), axis=1)
-            n += int(np.sum(np.maximum(1, np.ceil(sub / 0.25))))
+            # count with em._subdivide itself: recomputing ceil(length / 0.25) here can round a
+            # segment that is a whole number of 0.25 mm steps differently (seen at r_in = 15 mm)
+            n += len(_subdivide(poly, 0.25)) - 1
         per_layer.append((n, oz * OZ_TO_M))
     t_cu = np.concatenate([np.full(n, t) for n, t in per_layer])
     assert len(t_cu) == len(mids)
