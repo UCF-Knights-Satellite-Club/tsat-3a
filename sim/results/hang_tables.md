@@ -8,17 +8,17 @@ Peak tilt error (°) after 5 s, worst over the three swing patterns. Pass is und
 
 | Wheel | Period s | d = 2 mm | d = 3 mm | d = 4 mm | d = 5 mm | d = 6 mm |
 |---|---|---|---|---|---|---|
-| JLC 4L solid traces, 1 A driver | 3 | 0.3 | 0.3 | 0.3 | 0.4 | 1.3* |
-| JLC 4L solid traces, 1 A driver | 5 | 0.4 | 0.3 | 0.3 | 0.3* | 2.6* |
-| JLC 4L solid traces, 1 A driver | 7 | 0.4 | 0.4 | 0.4 | 0.4* | 3.3* |
-| JLC 4L solid traces, 1 A driver | 10 | 0.7 | 0.6 | 0.6 | 3.1* | 4.8* |
+| JLC 4L solid traces, 1 A driver | 3 | 0.3 | 0.3 | 0.3 | 0.4 | 1.4* |
+| JLC 4L solid traces, 1 A driver | 5 | 0.4 | 0.3 | 0.3 | 0.3* | 2.7* |
+| JLC 4L solid traces, 1 A driver | 7 | 0.4 | 0.4 | 0.4 | 0.5* | 3.3* |
+| JLC 4L solid traces, 1 A driver | 10 | 0.7 | 0.6 | 0.6* | 3.4* | 5.0* |
 | JLC 4L solid traces, 2 A driver | 3 | 0.3 | 0.3 | 0.3 | 0.4 | 0.4 |
 | JLC 4L solid traces, 2 A driver | 5 | 0.4 | 0.3 | 0.3 | 0.3 | 0.3 |
 | JLC 4L solid traces, 2 A driver | 7 | 0.4 | 0.4 | 0.4 | 0.4 | 0.4 |
 | JLC 4L solid traces, 2 A driver | 10 | 0.7 | 0.6 | 0.6 | 0.6 | 0.6 |
 | JLC 4L 3 strands, 2 A driver | 3 | 0.3 | 0.3 | 0.3 | 0.3 | 1.2* |
 | JLC 4L 3 strands, 2 A driver | 5 | 0.4 | 0.3 | 0.3 | 0.3* | 2.7* |
-| JLC 4L 3 strands, 2 A driver | 7 | 0.4 | 0.4 | 0.4 | 0.6* | 3.4* |
+| JLC 4L 3 strands, 2 A driver | 7 | 0.4 | 0.4 | 0.4 | 0.5* | 3.4* |
 | JLC 4L 3 strands, 2 A driver | 10 | 0.7 | 0.6 | 0.6 | 2.3* | 4.2* |
 | ACE 6L 3 oz 3 strands, 2 A driver | 3 | 0.3 | 0.3 | 0.3 | 0.3 | 1.2* |
 | ACE 6L 3 oz 3 strands, 2 A driver | 5 | 0.4 | 0.3 | 0.3 | 0.3* | 2.6* |
@@ -33,11 +33,11 @@ Demand on the pitch/roll wheels, 2 A driver (worst over patterns and periods):
 
 | d mm | Peak wheel momentum mN·m·s | Peak current A | Mean copper + eddy W (all wheels) | Peak estimator error ° |
 |---|---|---|---|---|
-| 2 | 20 | 0.55 | 0.27 | 0.69 |
-| 3 | 30 | 0.77 | 0.59 | 0.66 |
-| 4 | 40 | 0.99 | 1.03 | 0.69 |
-| 5 | 49 | 1.23 | 1.61 | 0.66 |
-| 6 | 60 | 1.49 | 2.31 | 0.70 |
+| 2 | 20 | 0.56 | 0.29 | 0.69 |
+| 3 | 30 | 0.78 | 0.63 | 0.66 |
+| 4 | 40 | 1.01 | 1.12 | 0.69 |
+| 5 | 50 | 1.25 | 1.74 | 0.66 |
+| 6 | 60 | 1.52 | 2.50 | 0.70 |
 
 ## S2: hold a 15° tilt
 
@@ -46,13 +46,13 @@ Peak tilt error (°) during the hold (t = 30-120 s; the slew ends at 20 s), wors
 | Mode | Swing | d = 2 mm | d = 3 mm | d = 4 mm | d = 5 mm | d = 6 mm |
 |---|---|---|---|---|---|---|
 | wheels + trim, 1 A driver | none | 0.2 (6) | 0.3 (8) | 0.4 (9) | 0.2 (13) | 0.4 (15) |
-| wheels + trim, 1 A driver | 10°, 7 s | 0.5 (6) | 0.5 (8) | 0.5 (10) | 1.2 (13) | 3.6 (15) |
+| wheels + trim, 1 A driver | 10°, 7 s | 0.5 (6) | 0.5 (8) | 0.5 (10) | 1.5 (13) | 3.8 (15) |
 | wheels + trim, 2 A driver | none | 0.2 (6) | 0.3 (8) | 0.4 (9) | 0.2 (13) | 0.4 (15) |
 | wheels + trim, 2 A driver | 10°, 7 s | 0.5 (6) | 0.5 (8) | 0.5 (10) | 0.5 (13) | 0.4 (15) |
 | trim only | none | 0.5 (6) | 0.8 (8) | 0.3 (9) | 0.9 (12) | 1.7 (14) |
 | trim only | 10°, 7 s | 14.7 (6) | 12.8 (8) | 11.7 (10) | 10.8 (12) | 10.7 (14) |
 | no control | none | 15.0 (0) | 15.0 (0) | 15.0 (0) | 15.0 (0) | 15.0 (0) |
-| no control | 10°, 7 s | 25.8 (0) | 25.8 (0) | 24.3 (0) | 24.3 (0) | 24.6 (0) |
+| no control | 10°, 7 s | 25.8 (0) | 25.8 (0) | 24.3 (0) | 24.3 (0) | 24.5 (0) |
 
 ## S3: recover level after a 20 g mass moves 30 mm
 
@@ -71,21 +71,21 @@ Random top-of-line motion scaled to the RMS line swing shown; line 5-20 m, d 2-6
 
 | Configuration | Line swing RMS | Within 2° % | Tilt RMS ° | Saturated runs | Peak momentum mN·m·s | Mean W | Peak current A |
 |---|---|---|---|---|---|---|---|
-| JLC 4L solid traces, 1 A driver | 3.2° | 100 / 100 | 0.12 | 0/8 | 65 | 0.30 | 0.94 |
-| JLC 4L solid traces, 1 A driver | 6.4° | 100 / 90 | 0.21 | 0/8 | 66 | 0.72 | 1.00 |
-| JLC 4L solid traces, 1 A driver | 10.4° | 97 / 48 | 0.94 | 0/8 | 70 | 1.16 | 1.00 |
-| JLC 4L solid traces, 2 A driver | 3.2° | 100 / 100 | 0.12 | 0/8 | 65 | 0.30 | 0.94 |
-| JLC 4L solid traces, 2 A driver | 6.4° | 100 / 100 | 0.19 | 0/8 | 66 | 0.72 | 1.76 |
-| JLC 4L solid traces, 2 A driver | 10.4° | 100 / 96 | 0.30 | 0/8 | 62 | 1.20 | 2.00 |
+| JLC 4L solid traces, 1 A driver | 3.2° | 100 / 100 | 0.12 | 0/8 | 63 | 0.35 | 0.94 |
+| JLC 4L solid traces, 1 A driver | 6.4° | 100 / 89 | 0.21 | 0/8 | 64 | 0.76 | 1.00 |
+| JLC 4L solid traces, 1 A driver | 10.4° | 96 / 52 | 1.00 | 0/8 | 61 | 1.24 | 1.00 |
+| JLC 4L solid traces, 2 A driver | 3.2° | 100 / 100 | 0.12 | 0/8 | 63 | 0.35 | 0.94 |
+| JLC 4L solid traces, 2 A driver | 6.4° | 100 / 100 | 0.19 | 0/8 | 64 | 0.77 | 1.77 |
+| JLC 4L solid traces, 2 A driver | 10.4° | 100 / 96 | 0.30 | 0/8 | 61 | 1.26 | 2.00 |
 | JLC 4L 3 strands, 2 A driver | 3.2° | 100 / 100 | 0.12 | 0/8 | 70 | 0.24 | 1.98 |
 | JLC 4L 3 strands, 2 A driver | 6.4° | 100 / 91 | 0.20 | 0/8 | 73 | 0.77 | 2.00 |
-| JLC 4L 3 strands, 2 A driver | 10.4° | 97 / 49 | 0.88 | 0/8 | 67 | 1.26 | 2.00 |
+| JLC 4L 3 strands, 2 A driver | 10.4° | 97 / 48 | 0.88 | 0/8 | 67 | 1.26 | 2.00 |
 | ACE 6L 3 oz 3 strands, 2 A driver | 3.2° | 100 / 100 | 0.12 | 0/8 | 70 | 0.14 | 1.98 |
 | ACE 6L 3 oz 3 strands, 2 A driver | 6.4° | 100 / 91 | 0.20 | 0/8 | 73 | 0.40 | 2.00 |
-| ACE 6L 3 oz 3 strands, 2 A driver | 10.4° | 97 / 48 | 0.88 | 0/8 | 67 | 0.64 | 2.00 |
-| Trim only (yaw wheel on) | 3.2° | 19 / 14 | 4.38 | 0/8 | 0 | 0.08 | 0.38 |
-| Trim only (yaw wheel on) | 6.4° | 7 / 3 | 8.75 | 0/8 | 0 | 0.07 | 2.00 |
-| Trim only (yaw wheel on) | 10.4° | 2 / 0 | 14.77 | 0/8 | 1 | 0.23 | 2.00 |
+| ACE 6L 3 oz 3 strands, 2 A driver | 10.4° | 97 / 48 | 0.88 | 0/8 | 67 | 0.65 | 2.00 |
+| Trim only (yaw wheel on) | 3.2° | 19 / 14 | 4.38 | 0/8 | 0 | 0.10 | 0.41 |
+| Trim only (yaw wheel on) | 6.4° | 7 / 3 | 8.75 | 0/8 | 0 | 0.08 | 2.00 |
+| Trim only (yaw wheel on) | 10.4° | 2 / 0 | 14.77 | 0/8 | 0 | 0.29 | 2.00 |
 | No control | 3.2° | 4 / 0 | 7.33 | 0/8 | 0 | 0.00 | 0.00 |
 | No control | 6.4° | 4 / 2 | 9.78 | 0/8 | 0 | 0.00 | 0.00 |
 | No control | 10.3° | 2 / 1 | 14.69 | 0/8 | 0 | 0.00 | 0.00 |

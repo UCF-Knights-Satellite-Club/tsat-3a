@@ -31,12 +31,12 @@
     "H_max_mNms": 89.90366323298174,
     "tau_at_1A_mNm": 21.779504701659828,
     "copper_g": 5.993350194101816,
-    "eddy_W_at_2000rpm": 0.7729290978833323,
-    "eddy_W_at_max_speed": 3.4326826329781714,
+    "eddy_W_at_2000rpm": 0.8912509327512672,
+    "eddy_W_at_max_speed": 3.95816590015694,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.8610690036635251,
-    "loss_15mNm_2000rpm_W": 1.6339981015468574
+    "loss_15mNm_2000rpm_W": 1.7523199364147923
   },
   {
     "name": "wave_env21-41_e4_n48_fill",
@@ -70,12 +70,12 @@
     "H_max_mNms": 96.83436787833722,
     "tau_at_1A_mNm": 20.220685062345556,
     "copper_g": 6.771216957206703,
-    "eddy_W_at_2000rpm": 7.440432729512623,
-    "eddy_W_at_max_speed": 38.33508742307677,
+    "eddy_W_at_2000rpm": 7.750652398535307,
+    "eddy_W_at_max_speed": 39.93342162817905,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.6038848807698821,
-    "loss_15mNm_2000rpm_W": 8.044317610282505
+    "loss_15mNm_2000rpm_W": 8.35453727930519
   },
   {
     "name": "wave_env21-41_e4_n48_cap1.2",
@@ -109,12 +109,12 @@
     "H_max_mNms": 96.83436787833722,
     "tau_at_1A_mNm": 20.220685062345556,
     "copper_g": 3.8611459583680214,
-    "eddy_W_at_2000rpm": 0.47280355916125827,
-    "eddy_W_at_max_speed": 2.4360096291840194,
+    "eddy_W_at_2000rpm": 0.49622777794132955,
+    "eddy_W_at_max_speed": 2.556697431546575,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.7461267734542705,
-    "loss_15mNm_2000rpm_W": 1.2189303326155287
+    "loss_15mNm_2000rpm_W": 1.2423545513956
   },
   {
     "name": "wave_env21-41_e4_n48_fill_slit2",
@@ -148,12 +148,12 @@
     "H_max_mNms": 96.83436787833722,
     "tau_at_1A_mNm": 20.220685062345556,
     "copper_g": 6.609628791649536,
-    "eddy_W_at_2000rpm": 1.881603210313924,
-    "eddy_W_at_max_speed": 9.694519954036473,
+    "eddy_W_at_2000rpm": 1.9636395229964478,
+    "eddy_W_at_max_speed": 10.117192845907026,
     "circulating_W_at_2000rpm": 3.688955557264945,
     "circulating_W_at_max_speed": 19.006479720818586,
     "P_cu_at_15mNm_W": 0.606556478909327,
-    "loss_15mNm_2000rpm_W": 6.177115246488196
+    "loss_15mNm_2000rpm_W": 6.25915155917072
   },
   {
     "name": "wave_env21-41_e4_n48_fill_slit3",
@@ -187,12 +187,12 @@
     "H_max_mNms": 96.83436787833722,
     "tau_at_1A_mNm": 20.220685062345556,
     "copper_g": 6.448040626092371,
-    "eddy_W_at_2000rpm": 0.9130565987497836,
-    "eddy_W_at_max_speed": 4.704310328141742,
+    "eddy_W_at_2000rpm": 0.9552660530005368,
+    "eddy_W_at_max_speed": 4.921784657607116,
     "circulating_W_at_2000rpm": 4.123183735088233,
     "circulating_W_at_max_speed": 21.24373873028341,
     "P_cu_at_15mNm_W": 0.6094601125441532,
-    "loss_15mNm_2000rpm_W": 5.645700446382169
+    "loss_15mNm_2000rpm_W": 5.687909900632923
   },
   {
     "name": "wave_env21-41_e4_n48_fill_slit4",
@@ -226,12 +226,12 @@
     "H_max_mNms": 96.83436787833722,
     "tau_at_1A_mNm": 20.220685062345556,
     "copper_g": 6.2864524605352035,
-    "eddy_W_at_2000rpm": 0.5944356739608692,
-    "eddy_W_at_max_speed": 3.0626906199013733,
+    "eddy_W_at_2000rpm": 0.6235189030986914,
+    "eddy_W_at_max_speed": 3.212535148045749,
     "circulating_W_at_2000rpm": 4.114946282690154,
     "circulating_W_at_max_speed": 21.201297185644314,
     "P_cu_at_15mNm_W": 0.6126279577173752,
-    "loss_15mNm_2000rpm_W": 5.322009914368398
+    "loss_15mNm_2000rpm_W": 5.351093143506221
   },
   {
     "name": "wave_env21-41_e5_n48_fill",
@@ -265,12 +265,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 6.789859049048585,
-    "eddy_W_at_2000rpm": 6.435347017774123,
-    "eddy_W_at_max_speed": 35.73690245050399,
+    "eddy_W_at_2000rpm": 6.7003016327344715,
+    "eddy_W_at_max_speed": 37.20825391026162,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5502149134498314,
-    "loss_15mNm_2000rpm_W": 6.9855619312239545
+    "loss_15mNm_2000rpm_W": 7.250516546184303
   },
   {
     "name": "wave_env21-41_e5_n48_cap1.2",
@@ -304,12 +304,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 3.92401931144424,
-    "eddy_W_at_2000rpm": 0.5278087558424721,
-    "eddy_W_at_max_speed": 2.931038523325575,
+    "eddy_W_at_2000rpm": 0.5531640258952325,
+    "eddy_W_at_max_speed": 3.0718419345447403,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.742723434373194,
-    "loss_15mNm_2000rpm_W": 1.270532190215666
+    "loss_15mNm_2000rpm_W": 1.2958874602684265
   },
   {
     "name": "wave_env21-41_e5_n48_fill_slit2",
@@ -343,12 +343,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 6.655199005201164,
-    "eddy_W_at_2000rpm": 1.8939799708990064,
-    "eddy_W_at_max_speed": 10.517688832674212,
+    "eddy_W_at_2000rpm": 1.978146037637624,
+    "eddy_W_at_max_speed": 10.985081579075159,
     "circulating_W_at_2000rpm": 3.248008494800107,
     "circulating_W_at_max_speed": 18.036908097805686,
     "P_cu_at_15mNm_W": 0.5525822503376862,
-    "loss_15mNm_2000rpm_W": 5.694570716036799
+    "loss_15mNm_2000rpm_W": 5.778736782775416
   },
   {
     "name": "wave_env21-41_e5_n48_fill_slit3",
@@ -382,12 +382,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 6.520538961353741,
-    "eddy_W_at_2000rpm": 1.1020709676444558,
-    "eddy_W_at_max_speed": 6.120043341169335,
+    "eddy_W_at_2000rpm": 1.1546676573826882,
+    "eddy_W_at_max_speed": 6.412124368844013,
     "circulating_W_at_2000rpm": 3.615142445748147,
     "circulating_W_at_max_speed": 20.07568396413593,
     "P_cu_at_15mNm_W": 0.5551519654535721,
-    "loss_15mNm_2000rpm_W": 5.272365378846175
+    "loss_15mNm_2000rpm_W": 5.324962068584407
   },
   {
     "name": "wave_env21-41_e5_n48_fill_slit4",
@@ -421,12 +421,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 6.385878917506321,
-    "eddy_W_at_2000rpm": 0.8413002677397534,
-    "eddy_W_at_max_speed": 4.67192608522261,
+    "eddy_W_at_2000rpm": 0.8834857557627579,
+    "eddy_W_at_max_speed": 4.906191411729659,
     "circulating_W_at_2000rpm": 3.585052613974129,
     "circulating_W_at_max_speed": 19.90858848662863,
     "P_cu_at_15mNm_W": 0.5579515344515708,
-    "loss_15mNm_2000rpm_W": 4.984304416165454
+    "loss_15mNm_2000rpm_W": 5.026489904188458
   },
   {
     "name": "wave_env15-44_act21-41_n48_fill",
@@ -460,12 +460,12 @@
     "H_max_mNms": 84.92073755180368,
     "tau_at_1A_mNm": 23.057468794176522,
     "copper_g": 9.416135453798034,
-    "eddy_W_at_2000rpm": 12.175284218531914,
-    "eddy_W_at_max_speed": 48.24428148684616,
+    "eddy_W_at_2000rpm": 12.783384823630927,
+    "eddy_W_at_max_speed": 50.653866038479386,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5626449937774203,
-    "loss_15mNm_2000rpm_W": 12.737929212309334
+    "loss_15mNm_2000rpm_W": 13.346029817408347
   },
   {
     "name": "wave_env15-44_act21-41_n48_cap1.2",
@@ -499,12 +499,12 @@
     "H_max_mNms": 84.92073755180368,
     "tau_at_1A_mNm": 23.057468794176522,
     "copper_g": 4.422887654569822,
-    "eddy_W_at_2000rpm": 0.2983817181832162,
-    "eddy_W_at_max_speed": 1.1823306416657637,
+    "eddy_W_at_2000rpm": 0.3111479596120668,
+    "eddy_W_at_max_speed": 1.2329165773998187,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.7575928542581009,
-    "loss_15mNm_2000rpm_W": 1.055974572441317
+    "loss_15mNm_2000rpm_W": 1.0687408138701677
   },
   {
     "name": "wave_env15-44_act21-41_n48_fill_slit2",
@@ -538,12 +538,12 @@
     "H_max_mNms": 84.92073755180368,
     "tau_at_1A_mNm": 23.057468794176522,
     "copper_g": 9.146811477653353,
-    "eddy_W_at_2000rpm": 2.7382352586116525,
-    "eddy_W_at_max_speed": 10.850193738606341,
+    "eddy_W_at_2000rpm": 2.8757452230239924,
+    "eddy_W_at_max_speed": 11.395073785041514,
     "circulating_W_at_2000rpm": 4.625999707146047,
     "circulating_W_at_max_speed": 18.330416606613923,
     "P_cu_at_15mNm_W": 0.5663376357175566,
-    "loss_15mNm_2000rpm_W": 7.930572601475256
+    "loss_15mNm_2000rpm_W": 8.068082565887595
   },
   {
     "name": "wave_env15-44_act21-41_n48_fill_slit3",
@@ -577,12 +577,12 @@
     "H_max_mNms": 84.92073755180368,
     "tau_at_1A_mNm": 23.057468794176522,
     "copper_g": 8.877487501508668,
-    "eddy_W_at_2000rpm": 1.0920340854084136,
-    "eddy_W_at_max_speed": 4.32715974954273,
+    "eddy_W_at_2000rpm": 1.1471908835306825,
+    "eddy_W_at_max_speed": 4.5457172835404664,
     "circulating_W_at_2000rpm": 5.119398942273501,
     "circulating_W_at_max_speed": 20.285499638569107,
     "P_cu_at_15mNm_W": 0.5703810750848393,
-    "loss_15mNm_2000rpm_W": 6.781814102766754
+    "loss_15mNm_2000rpm_W": 6.836970900889023
   },
   {
     "name": "wave_env15-44_act21-41_n48_fill_slit4",
@@ -616,12 +616,12 @@
     "H_max_mNms": 84.92073755180368,
     "tau_at_1A_mNm": 23.057468794176522,
     "copper_g": 8.608163525363983,
-    "eddy_W_at_2000rpm": 0.5498674833413725,
-    "eddy_W_at_max_speed": 2.178837156541023,
+    "eddy_W_at_2000rpm": 0.577808973937616,
+    "eddy_W_at_max_speed": 2.2895546653311203,
     "circulating_W_at_2000rpm": 5.173433091626836,
     "circulating_W_at_max_speed": 20.499608702843496,
     "P_cu_at_15mNm_W": 0.5748303850011659,
-    "loss_15mNm_2000rpm_W": 6.298130959969374
+    "loss_15mNm_2000rpm_W": 6.326072450565618
   },
   {
     "name": "wave_env15-44_act22-40_n48_fill",
@@ -655,12 +655,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 9.433460928282036,
-    "eddy_W_at_2000rpm": 11.310294255531074,
-    "eddy_W_at_max_speed": 45.16581899384164,
+    "eddy_W_at_2000rpm": 11.84325752199918,
+    "eddy_W_at_max_speed": 47.29412104149997,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.46789247994366656,
-    "loss_15mNm_2000rpm_W": 11.77818673547474
+    "loss_15mNm_2000rpm_W": 12.311150001942845
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap1.2",
@@ -694,12 +694,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 4.773049277296816,
-    "eddy_W_at_2000rpm": 0.32685822672728987,
-    "eddy_W_at_max_speed": 1.3052551217041382,
+    "eddy_W_at_2000rpm": 0.34209881350087223,
+    "eddy_W_at_max_speed": 1.3661159240867935,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.6597259713811604,
-    "loss_15mNm_2000rpm_W": 0.9865841981084502
+    "loss_15mNm_2000rpm_W": 1.0018247848820327
   },
   {
     "name": "wave_env15-44_act22-40_n48_fill_slit2",
@@ -733,12 +733,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 9.191074125417721,
-    "eddy_W_at_2000rpm": 2.58022790699022,
-    "eddy_W_at_max_speed": 10.303720131152955,
+    "eddy_W_at_2000rpm": 2.703501729851173,
+    "eddy_W_at_max_speed": 10.795994075952747,
     "circulating_W_at_2000rpm": 4.599179028580878,
     "circulating_W_at_max_speed": 18.36607278573431,
     "P_cu_at_15mNm_W": 0.4711580878429355,
-    "loss_15mNm_2000rpm_W": 7.650565023414034
+    "loss_15mNm_2000rpm_W": 7.773838846274987
   },
   {
     "name": "wave_env15-44_act22-40_n48_fill_slit3",
@@ -772,12 +772,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 8.948687322553406,
-    "eddy_W_at_2000rpm": 1.0570396322734579,
-    "eddy_W_at_max_speed": 4.221115704150016,
+    "eddy_W_at_2000rpm": 1.1086068805136315,
+    "eddy_W_at_max_speed": 4.42704111576229,
     "circulating_W_at_2000rpm": 5.113094519116244,
     "circulating_W_at_max_speed": 20.418310640845867,
     "P_cu_at_15mNm_W": 0.4747255023081405,
-    "loss_15mNm_2000rpm_W": 6.644859653697842
+    "loss_15mNm_2000rpm_W": 6.696426901938015
   },
   {
     "name": "wave_env15-44_act22-40_n48_fill_slit4",
@@ -811,12 +811,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 8.706300519689094,
-    "eddy_W_at_2000rpm": 0.5552483259867869,
-    "eddy_W_at_max_speed": 2.21729380523312,
+    "eddy_W_at_2000rpm": 0.5831132914842689,
+    "eddy_W_at_max_speed": 2.3285680090243654,
     "circulating_W_at_2000rpm": 5.1761353932496865,
     "circulating_W_at_max_speed": 20.670054109759793,
     "P_cu_at_15mNm_W": 0.4786403527055212,
-    "loss_15mNm_2000rpm_W": 6.210024071941994
+    "loss_15mNm_2000rpm_W": 6.237889037439476
   },
   {
     "name": "wave_env21-41_e4_n72_fill",
@@ -850,12 +850,12 @@
     "H_max_mNms": 64.9686604722222,
     "tau_at_1A_mNm": 30.138488955245556,
     "copper_g": 6.517315824020253,
-    "eddy_W_at_2000rpm": 3.108847503096857,
-    "eddy_W_at_max_speed": 7.2101859312530685,
+    "eddy_W_at_2000rpm": 3.2383644886265546,
+    "eddy_W_at_max_speed": 7.510567839981076,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.6258674958270637,
-    "loss_15mNm_2000rpm_W": 3.734714998923921
+    "loss_15mNm_2000rpm_W": 3.8642319844536184
   },
   {
     "name": "wave_env21-41_e4_n72_cap1.2",
@@ -889,12 +889,12 @@
     "H_max_mNms": 64.9686604722222,
     "tau_at_1A_mNm": 30.138488955245556,
     "copper_g": 4.334391570188821,
-    "eddy_W_at_2000rpm": 0.39430170470114073,
-    "eddy_W_at_max_speed": 0.914483132760048,
+    "eddy_W_at_2000rpm": 0.41135745189284467,
+    "eddy_W_at_max_speed": 0.9540396270320032,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.6990550944766856,
-    "loss_15mNm_2000rpm_W": 1.0933567991778264
+    "loss_15mNm_2000rpm_W": 1.1104125463695302
   },
   {
     "name": "wave_env21-41_e4_n72_fill_slit2",
@@ -928,12 +928,12 @@
     "H_max_mNms": 64.9686604722222,
     "tau_at_1A_mNm": 30.138488955245556,
     "copper_g": 6.2749335756845035,
-    "eddy_W_at_2000rpm": 0.7337771554126334,
-    "eddy_W_at_max_speed": 1.701810628331175,
+    "eddy_W_at_2000rpm": 0.7657183128987135,
+    "eddy_W_at_max_speed": 1.7758900690578943,
     "circulating_W_at_2000rpm": 1.6508911803848796,
     "circulating_W_at_max_speed": 3.828824781847134,
     "P_cu_at_15mNm_W": 0.6301918360862618,
-    "loss_15mNm_2000rpm_W": 3.014860171883775
+    "loss_15mNm_2000rpm_W": 3.0468013293698553
   },
   {
     "name": "wave_env21-41_e4_n72_fill_slit3",
@@ -967,12 +967,12 @@
     "H_max_mNms": 64.9686604722222,
     "tau_at_1A_mNm": 30.138488955245556,
     "copper_g": 6.032551327348754,
-    "eddy_W_at_2000rpm": 0.3348459123876421,
-    "eddy_W_at_max_speed": 0.7765904516802401,
+    "eddy_W_at_2000rpm": 0.3503538339876311,
+    "eddy_W_at_max_speed": 0.8125571557504244,
     "circulating_W_at_2000rpm": 1.8167154492225561,
     "circulating_W_at_max_speed": 4.213412256479688,
     "P_cu_at_15mNm_W": 0.6351203023632926,
-    "loss_15mNm_2000rpm_W": 2.786681663973491
+    "loss_15mNm_2000rpm_W": 2.80218958557348
   },
   {
     "name": "wave_env21-41_e4_n72_fill_slit4",
@@ -1006,12 +1006,12 @@
     "H_max_mNms": 64.9686604722222,
     "tau_at_1A_mNm": 30.138488955245556,
     "copper_g": 5.790169079013004,
-    "eddy_W_at_2000rpm": 0.20879572078412362,
-    "eddy_W_at_max_speed": 0.4842488951303924,
+    "eddy_W_at_2000rpm": 0.2190955212731114,
+    "eddy_W_at_max_speed": 0.5081366787886247,
     "circulating_W_at_2000rpm": 1.7770477078336344,
     "circulating_W_at_max_speed": 4.121412957510511,
     "P_cu_at_15mNm_W": 0.6407919616636498,
-    "loss_15mNm_2000rpm_W": 2.626635390281408
+    "loss_15mNm_2000rpm_W": 2.6369351907703957
   },
   {
     "name": "wave_env21-41_e5_n72_fill",
@@ -1045,12 +1045,12 @@
     "H_max_mNms": 67.44912864056134,
     "tau_at_1A_mNm": 29.030134199564237,
     "copper_g": 6.54460784208332,
-    "eddy_W_at_2000rpm": 2.676323273915253,
-    "eddy_W_at_max_speed": 6.690067159851068,
+    "eddy_W_at_2000rpm": 2.786285691075171,
+    "eddy_W_at_max_speed": 6.964942756169896,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5594419261897599,
-    "loss_15mNm_2000rpm_W": 3.2357652001050132
+    "loss_15mNm_2000rpm_W": 3.345727617264931
   },
   {
     "name": "wave_env21-41_e5_n72_cap1.2",
@@ -1084,12 +1084,12 @@
     "H_max_mNms": 67.44912864056134,
     "tau_at_1A_mNm": 29.030134199564237,
     "copper_g": 4.725479369356156,
-    "eddy_W_at_2000rpm": 0.4655465808072163,
-    "eddy_W_at_max_speed": 1.1637375506894512,
+    "eddy_W_at_2000rpm": 0.4868894410973744,
+    "eddy_W_at_max_speed": 1.2170887919674125,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.6253805937290469,
-    "loss_15mNm_2000rpm_W": 1.0909271745362632
+    "loss_15mNm_2000rpm_W": 1.1122700348264214
   },
   {
     "name": "wave_env21-41_e5_n72_fill_slit2",
@@ -1123,12 +1123,12 @@
     "H_max_mNms": 67.44912864056134,
     "tau_at_1A_mNm": 29.030134199564237,
     "copper_g": 6.3426177763121885,
-    "eddy_W_at_2000rpm": 0.736849400864621,
-    "eddy_W_at_max_speed": 1.8419194820470084,
+    "eddy_W_at_2000rpm": 0.769554844056811,
+    "eddy_W_at_max_speed": 1.9236740344887822,
     "circulating_W_at_2000rpm": 1.4496236611005018,
     "circulating_W_at_max_speed": 3.623657778488024,
     "P_cu_at_15mNm_W": 0.5632700708825651,
-    "loss_15mNm_2000rpm_W": 2.749743132847688
+    "loss_15mNm_2000rpm_W": 2.7824485760398776
   },
   {
     "name": "wave_env21-41_e5_n72_fill_slit3",
@@ -1162,12 +1162,12 @@
     "H_max_mNms": 67.44912864056134,
     "tau_at_1A_mNm": 29.030134199564237,
     "copper_g": 6.1406277105410565,
-    "eddy_W_at_2000rpm": 0.41092797876052256,
-    "eddy_W_at_max_speed": 1.0272061684640874,
+    "eddy_W_at_2000rpm": 0.43062344264079333,
+    "eddy_W_at_max_speed": 1.0764393748512484,
     "circulating_W_at_2000rpm": 1.610756038297956,
     "circulating_W_at_max_speed": 4.026444106875182,
     "P_cu_at_15mNm_W": 0.5676236752235436,
-    "loss_15mNm_2000rpm_W": 2.5893076922820217
+    "loss_15mNm_2000rpm_W": 2.609003156162293
   },
   {
     "name": "wave_env21-41_e5_n72_fill_slit4",
@@ -1201,12 +1201,12 @@
     "H_max_mNms": 67.44912864056134,
     "tau_at_1A_mNm": 29.030134199564237,
     "copper_g": 5.9386376447699245,
-    "eddy_W_at_2000rpm": 0.30787121406352635,
-    "eddy_W_at_max_speed": 0.7695927912537731,
+    "eddy_W_at_2000rpm": 0.3234431089264748,
+    "eddy_W_at_max_speed": 0.8085182168384268,
     "circulating_W_at_2000rpm": 1.5727349191414017,
     "circulating_W_at_max_speed": 3.931401836335894,
     "P_cu_at_15mNm_W": 0.5726207607219311,
-    "loss_15mNm_2000rpm_W": 2.453226893926859
+    "loss_15mNm_2000rpm_W": 2.4687987887898077
   },
   {
     "name": "wave_env15-44_act21-41_n72_fill",
@@ -1240,12 +1240,12 @@
     "H_max_mNms": 56.97536189261028,
     "tau_at_1A_mNm": 34.366736621520744,
     "copper_g": 9.104799424422415,
-    "eddy_W_at_2000rpm": 5.129721036730649,
-    "eddy_W_at_max_speed": 9.149706276073184,
+    "eddy_W_at_2000rpm": 5.386546311353253,
+    "eddy_W_at_max_speed": 9.607796649846474,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.593294104499334,
-    "loss_15mNm_2000rpm_W": 5.723015141229983
+    "loss_15mNm_2000rpm_W": 5.979840415852586
   },
   {
     "name": "wave_env15-44_act21-41_n72_cap1.2",
@@ -1279,12 +1279,12 @@
     "H_max_mNms": 56.97536189261028,
     "tau_at_1A_mNm": 34.366736621520744,
     "copper_g": 5.466503598969992,
-    "eddy_W_at_2000rpm": 0.4431462733792737,
-    "eddy_W_at_max_speed": 0.7904247053054096,
+    "eddy_W_at_2000rpm": 0.46203494075157364,
+    "eddy_W_at_max_speed": 0.8241157690426961,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.6845240335443107,
-    "loss_15mNm_2000rpm_W": 1.1276703069235845
+    "loss_15mNm_2000rpm_W": 1.1465589742958844
   },
   {
     "name": "wave_env15-44_act21-41_n72_fill_slit2",
@@ -1318,12 +1318,12 @@
     "H_max_mNms": 56.97536189261028,
     "tau_at_1A_mNm": 34.366736621520744,
     "copper_g": 8.70081346020539,
-    "eddy_W_at_2000rpm": 1.0884934895253324,
-    "eddy_W_at_max_speed": 1.9415082499149323,
+    "eddy_W_at_2000rpm": 1.1434410594445918,
+    "eddy_W_at_max_speed": 2.0395163329559627,
     "circulating_W_at_2000rpm": 2.099887327388307,
     "circulating_W_at_max_speed": 3.745496513529063,
     "P_cu_at_15mNm_W": 0.5993031350608699,
-    "loss_15mNm_2000rpm_W": 3.7876839519745094
+    "loss_15mNm_2000rpm_W": 3.8426315218937686
   },
   {
     "name": "wave_env15-44_act21-41_n72_fill_slit3",
@@ -1357,12 +1357,12 @@
     "H_max_mNms": 56.97536189261028,
     "tau_at_1A_mNm": 34.366736621520744,
     "copper_g": 8.296827495988367,
-    "eddy_W_at_2000rpm": 0.4074397222772532,
-    "eddy_W_at_max_speed": 0.726736163106767,
+    "eddy_W_at_2000rpm": 0.42819224389082355,
+    "eddy_W_at_max_speed": 0.7637517192924589,
     "circulating_W_at_2000rpm": 2.2447203092443018,
     "circulating_W_at_max_speed": 4.00383010196037,
     "P_cu_at_15mNm_W": 0.6062405359489018,
-    "loss_15mNm_2000rpm_W": 3.258400567470457
+    "loss_15mNm_2000rpm_W": 3.279153089084027
   },
   {
     "name": "wave_env15-44_act21-41_n72_fill_slit4",
@@ -1396,12 +1396,12 @@
     "H_max_mNms": 56.97536189261028,
     "tau_at_1A_mNm": 34.366736621520744,
     "copper_g": 7.89284153177134,
-    "eddy_W_at_2000rpm": 0.19146747994863966,
-    "eddy_W_at_max_speed": 0.3415139323183379,
+    "eddy_W_at_2000rpm": 0.20131441909624795,
+    "eddy_W_at_max_speed": 0.35907757764599957,
     "circulating_W_at_2000rpm": 2.1852559375443286,
     "circulating_W_at_max_speed": 3.8977655555551802,
     "P_cu_at_15mNm_W": 0.6143535330484282,
-    "loss_15mNm_2000rpm_W": 2.9910769505413963
+    "loss_15mNm_2000rpm_W": 3.0009238896890045
   },
   {
     "name": "wave_env15-44_act22-40_n72_fill",
@@ -1435,12 +1435,12 @@
     "H_max_mNms": 57.19697269824888,
     "tau_at_1A_mNm": 34.23358201856573,
     "copper_g": 9.129962571650537,
-    "eddy_W_at_2000rpm": 4.759232179027875,
-    "eddy_W_at_max_speed": 8.555043034631753,
+    "eddy_W_at_2000rpm": 4.983873589655128,
+    "eddy_W_at_max_speed": 8.958851225319581,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.4808557645398002,
-    "loss_15mNm_2000rpm_W": 5.2400879435676755
+    "loss_15mNm_2000rpm_W": 5.464729354194929
   },
   {
     "name": "wave_env15-44_act22-40_n72_cap1.2",
@@ -1474,12 +1474,12 @@
     "H_max_mNms": 57.19697269824888,
     "tau_at_1A_mNm": 34.23358201856573,
     "copper_g": 5.855524110086718,
-    "eddy_W_at_2000rpm": 0.44103036749571367,
-    "eddy_W_at_max_speed": 0.7927820353315838,
+    "eddy_W_at_2000rpm": 0.4597065835133437,
+    "eddy_W_at_max_speed": 0.8263538018990934,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5641665807306262,
-    "loss_15mNm_2000rpm_W": 1.0051969482263399
+    "loss_15mNm_2000rpm_W": 1.02387316424397
   },
   {
     "name": "wave_env15-44_act22-40_n72_fill_slit2",
@@ -1513,12 +1513,12 @@
     "H_max_mNms": 57.19697269824888,
     "tau_at_1A_mNm": 34.23358201856573,
     "copper_g": 8.766382367354067,
-    "eddy_W_at_2000rpm": 1.0227814219542233,
-    "eddy_W_at_max_speed": 1.8385190616246647,
+    "eddy_W_at_2000rpm": 1.0718099216748167,
+    "eddy_W_at_max_speed": 1.926651119329566,
     "circulating_W_at_2000rpm": 2.088885339730429,
     "circulating_W_at_max_speed": 3.7549132514597,
     "P_cu_at_15mNm_W": 0.48616030340986105,
-    "loss_15mNm_2000rpm_W": 3.5978270650945134
+    "loss_15mNm_2000rpm_W": 3.6468555648151066
   },
   {
     "name": "wave_env15-44_act22-40_n72_fill_slit3",
@@ -1552,12 +1552,12 @@
     "H_max_mNms": 57.19697269824888,
     "tau_at_1A_mNm": 34.23358201856573,
     "copper_g": 8.402802163057595,
-    "eddy_W_at_2000rpm": 0.3932520790488175,
-    "eddy_W_at_max_speed": 0.7068973172912597,
+    "eddy_W_at_2000rpm": 0.41255013433932874,
+    "eddy_W_at_max_speed": 0.7415868821800123,
     "circulating_W_at_2000rpm": 2.234878375464017,
     "circulating_W_at_max_speed": 4.017345647374557,
     "P_cu_at_15mNm_W": 0.4922593076097618,
-    "loss_15mNm_2000rpm_W": 3.1203897621225964
+    "loss_15mNm_2000rpm_W": 3.1396878174131073
   },
   {
     "name": "wave_env15-44_act22-40_n72_fill_slit4",
@@ -1591,12 +1591,12 @@
     "H_max_mNms": 57.19697269824888,
     "tau_at_1A_mNm": 34.23358201856573,
     "copper_g": 8.039221958761127,
-    "eddy_W_at_2000rpm": 0.1936595841795128,
-    "eddy_W_at_max_speed": 0.3481162537153283,
+    "eddy_W_at_2000rpm": 0.20348060514649907,
+    "eddy_W_at_max_speed": 0.3657702058353423,
     "circulating_W_at_2000rpm": 2.1830700310281337,
     "circulating_W_at_max_speed": 3.9242166300185395,
     "P_cu_at_15mNm_W": 0.49935513034553847,
-    "loss_15mNm_2000rpm_W": 2.876084745553185
+    "loss_15mNm_2000rpm_W": 2.885905766520171
   },
   {
     "name": "wave_env21-41_e5_n48_cap0.8",
@@ -1630,12 +1630,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 2.616012874296161,
-    "eddy_W_at_2000rpm": 0.15638777950888072,
-    "eddy_W_at_max_speed": 0.8684558587631338,
+    "eddy_W_at_2000rpm": 0.16390045211710602,
+    "eddy_W_at_max_speed": 0.9101753880132569,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 1.079170694702113,
-    "loss_15mNm_2000rpm_W": 1.2355584742109937
+    "loss_15mNm_2000rpm_W": 1.243071146819219
   },
   {
     "name": "wave_env21-41_e5_n48_cap1.6",
@@ -1669,12 +1669,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 4.723853829267816,
-    "eddy_W_at_2000rpm": 0.9709683423942279,
-    "eddy_W_at_max_speed": 5.392001525144174,
+    "eddy_W_at_2000rpm": 1.017499567361066,
+    "eddy_W_at_max_speed": 5.6503996881258365,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.6318654991224798,
-    "loss_15mNm_2000rpm_W": 1.6028338415167078
+    "loss_15mNm_2000rpm_W": 1.6493650664835457
   },
   {
     "name": "wave_env21-41_e5_n48_cap2",
@@ -1708,12 +1708,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 5.082947279527607,
-    "eddy_W_at_2000rpm": 1.3414750244225238,
-    "eddy_W_at_max_speed": 7.449506911619023,
+    "eddy_W_at_2000rpm": 1.4020703354045299,
+    "eddy_W_at_max_speed": 7.786006048579458,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.604081342146069,
-    "loss_15mNm_2000rpm_W": 1.9455563665685927
+    "loss_15mNm_2000rpm_W": 2.0061516775505988
   },
   {
     "name": "wave_env21-41_e5_n48_cap2.5",
@@ -1747,12 +1747,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 5.531814092352343,
-    "eddy_W_at_2000rpm": 2.062780672663327,
-    "eddy_W_at_max_speed": 11.455076388600395,
+    "eddy_W_at_2000rpm": 2.1507502091425668,
+    "eddy_W_at_max_speed": 11.943590642003006,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5817977968544341,
-    "loss_15mNm_2000rpm_W": 2.6445784695177608
+    "loss_15mNm_2000rpm_W": 2.7325480059970007
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap0.8",
@@ -1786,12 +1786,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 3.2373158040693215,
-    "eddy_W_at_2000rpm": 0.09876448993335075,
-    "eddy_W_at_max_speed": 0.3943999134388002,
+    "eddy_W_at_2000rpm": 0.10344950706298854,
+    "eddy_W_at_max_speed": 0.4131087667081825,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.948417154484003,
-    "loss_15mNm_2000rpm_W": 1.0471816444173538
+    "loss_15mNm_2000rpm_W": 1.0518666615469916
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap1.6",
@@ -1825,12 +1825,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 5.706838450222565,
-    "eddy_W_at_2000rpm": 0.717785885543045,
-    "eddy_W_at_max_speed": 2.8663610910845625,
+    "eddy_W_at_2000rpm": 0.7488953595786326,
+    "eddy_W_at_max_speed": 2.9905917115741962,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.572196443499886,
-    "loss_15mNm_2000rpm_W": 1.2899823290429309
+    "loss_15mNm_2000rpm_W": 1.3210918030785186
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2",
@@ -1864,12 +1864,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 6.3610114691051445,
-    "eddy_W_at_2000rpm": 1.3543873238161566,
-    "eddy_W_at_max_speed": 5.408525307387043,
+    "eddy_W_at_2000rpm": 1.4115769505640359,
+    "eddy_W_at_max_speed": 5.636902772346181,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5357455874107511,
-    "loss_15mNm_2000rpm_W": 1.8901329112269076
+    "loss_15mNm_2000rpm_W": 1.947322537974787
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2.5",
@@ -1903,12 +1903,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 7.168967478652858,
-    "eddy_W_at_2000rpm": 2.5953158206261127,
-    "eddy_W_at_max_speed": 10.36397125821273,
+    "eddy_W_at_2000rpm": 2.7033713119946245,
+    "eddy_W_at_max_speed": 10.795473273472338,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5069675112101577,
-    "loss_15mNm_2000rpm_W": 3.1022833318362704
+    "loss_15mNm_2000rpm_W": 3.2103388232047823
   },
   {
     "name": "wave_env21-41_e5_n72_cap0.8",
@@ -1942,12 +1942,12 @@
     "H_max_mNms": 67.44912864056134,
     "tau_at_1A_mNm": 29.030134199564237,
     "copper_g": 3.924019311444241,
-    "eddy_W_at_2000rpm": 0.2345816692633211,
-    "eddy_W_at_max_speed": 0.5863892217869955,
+    "eddy_W_at_2000rpm": 0.245850678175659,
+    "eddy_W_at_max_speed": 0.6145586238854985,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.7286657778358075,
-    "loss_15mNm_2000rpm_W": 0.9632474470991287
+    "loss_15mNm_2000rpm_W": 0.9745164560114665
   },
   {
     "name": "wave_env21-41_e5_n72_cap1.6",
@@ -1981,12 +1981,12 @@
     "H_max_mNms": 67.44912864056134,
     "tau_at_1A_mNm": 29.030134199564237,
     "copper_g": 5.26411954474584,
-    "eddy_W_at_2000rpm": 0.8016044082899613,
-    "eddy_W_at_max_speed": 2.003789071133838,
+    "eddy_W_at_2000rpm": 0.8357011752719242,
+    "eddy_W_at_max_speed": 2.0890215478179486,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5940418365881458,
-    "loss_15mNm_2000rpm_W": 1.395646244878107
+    "loss_15mNm_2000rpm_W": 1.42974301186007
   },
   {
     "name": "wave_env21-41_e5_n72_cap2",
@@ -2020,12 +2020,12 @@
     "H_max_mNms": 67.44912864056134,
     "tau_at_1A_mNm": 29.030134199564237,
     "copper_g": 5.802759720135527,
-    "eddy_W_at_2000rpm": 1.3541736547339238,
-    "eddy_W_at_max_speed": 3.38505919093158,
+    "eddy_W_at_2000rpm": 1.4092375569827835,
+    "eddy_W_at_max_speed": 3.5227037003668813,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5751819098597875,
-    "loss_15mNm_2000rpm_W": 1.9293555645937113
+    "loss_15mNm_2000rpm_W": 1.984419466842571
   },
   {
     "name": "wave_env21-41_e5_n72_cap2.5",
@@ -2059,12 +2059,12 @@
     "H_max_mNms": 67.44912864056134,
     "tau_at_1A_mNm": 29.030134199564237,
     "copper_g": 6.36144737125537,
-    "eddy_W_at_2000rpm": 2.2465422620145814,
-    "eddy_W_at_max_speed": 5.615733628596469,
+    "eddy_W_at_2000rpm": 2.337057715579373,
+    "eddy_W_at_max_speed": 5.841997200435814,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5623909842153688,
-    "loss_15mNm_2000rpm_W": 2.8089332462299503
+    "loss_15mNm_2000rpm_W": 2.8994486997947417
   },
   {
     "name": "wave_env15-44_act22-40_n72_cap0.8",
@@ -2098,12 +2098,12 @@
     "H_max_mNms": 57.19697269824888,
     "tau_at_1A_mNm": 34.23358201856573,
     "copper_g": 4.658439442998044,
-    "eddy_W_at_2000rpm": 0.14188355938001745,
-    "eddy_W_at_max_speed": 0.25504533310049915,
+    "eddy_W_at_2000rpm": 0.14835866897713285,
+    "eddy_W_at_max_speed": 0.26668478231698906,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.668028318788807,
-    "loss_15mNm_2000rpm_W": 0.8099118781688244
+    "loss_15mNm_2000rpm_W": 0.8163869877659398
   },
   {
     "name": "wave_env15-44_act22-40_n72_cap1.6",
@@ -2137,12 +2137,12 @@
     "H_max_mNms": 57.19697269824888,
     "tau_at_1A_mNm": 34.23358201856573,
     "copper_g": 6.825071321543972,
-    "eddy_W_at_2000rpm": 1.019110476922914,
-    "eddy_W_at_max_speed": 1.8319202886421215,
+    "eddy_W_at_2000rpm": 1.0614817824272633,
+    "eddy_W_at_max_speed": 1.9080855876625364,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5236893297031933,
-    "loss_15mNm_2000rpm_W": 1.5427998066261073
+    "loss_15mNm_2000rpm_W": 1.5851711121304566
   },
   {
     "name": "wave_env15-44_act22-40_n72_cap2",
@@ -2176,12 +2176,12 @@
     "H_max_mNms": 57.19697269824888,
     "tau_at_1A_mNm": 34.23358201856573,
     "copper_g": 7.752203377508043,
-    "eddy_W_at_2000rpm": 1.944868414032742,
-    "eddy_W_at_max_speed": 3.4960330475292536,
+    "eddy_W_at_2000rpm": 2.025765386839508,
+    "eddy_W_at_max_speed": 3.641450849750174,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.5003051194274974,
-    "loss_15mNm_2000rpm_W": 2.445173533460239
+    "loss_15mNm_2000rpm_W": 2.526070506267005
   },
   {
     "name": "wave_env15-44_act22-40_n72_cap2.5",
@@ -2215,12 +2215,12 @@
     "H_max_mNms": 57.19697269824888,
     "tau_at_1A_mNm": 34.23358201856573,
     "copper_g": 8.590344262045548,
-    "eddy_W_at_2000rpm": 3.3349115749064193,
-    "eddy_W_at_max_speed": 5.994730025094846,
+    "eddy_W_at_2000rpm": 3.4802398312396683,
+    "eddy_W_at_max_speed": 6.255967434893351,
     "circulating_W_at_2000rpm": 0.0,
     "circulating_W_at_max_speed": 0.0,
     "P_cu_at_15mNm_W": 0.4866074132258542,
-    "loss_15mNm_2000rpm_W": 3.8215189881322735
+    "loss_15mNm_2000rpm_W": 3.9668472444655225
   },
   {
     "name": "wave_env21-41_e5_n48_cap1.6_s2swap",
@@ -2254,12 +2254,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 4.233351415337286,
-    "eddy_W_at_2000rpm": 0.17608071246685006,
-    "eddy_W_at_max_speed": 0.9778150622589983,
+    "eddy_W_at_2000rpm": 0.18451210268878557,
+    "eddy_W_at_max_speed": 1.0246364332046884,
     "circulating_W_at_2000rpm": 0.0023726761435690817,
     "circulating_W_at_max_speed": 0.013175994341124812,
     "P_cu_at_15mNm_W": 0.6978283049039861,
-    "loss_15mNm_2000rpm_W": 0.8762816935144052
+    "loss_15mNm_2000rpm_W": 0.8847130837363407
   },
   {
     "name": "wave_env21-41_e5_n48_cap1.6_s2fixed",
@@ -2293,12 +2293,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 4.233351415337286,
-    "eddy_W_at_2000rpm": 0.17608071246685006,
-    "eddy_W_at_max_speed": 0.9778150622589983,
+    "eddy_W_at_2000rpm": 0.18451210268878557,
+    "eddy_W_at_max_speed": 1.0246364332046884,
     "circulating_W_at_2000rpm": 0.11893839894264335,
     "circulating_W_at_max_speed": 0.6604911823546922,
     "P_cu_at_15mNm_W": 0.6978283049039861,
-    "loss_15mNm_2000rpm_W": 0.9928474163134795
+    "loss_15mNm_2000rpm_W": 1.001278806535415
   },
   {
     "name": "wave_env21-41_e5_n48_cap1.6_s3swap",
@@ -2332,12 +2332,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 3.7428490014067552,
-    "eddy_W_at_2000rpm": 0.05464918625366912,
-    "eddy_W_at_max_speed": 0.3034789938681977,
+    "eddy_W_at_2000rpm": 0.057262940454461286,
+    "eddy_W_at_max_speed": 0.317993747873742,
     "circulating_W_at_2000rpm": 0.0026313668927614685,
     "circulating_W_at_max_speed": 0.014612561171662842,
     "P_cu_at_15mNm_W": 0.7814810968844497,
-    "loss_15mNm_2000rpm_W": 0.8387616500308802
+    "loss_15mNm_2000rpm_W": 0.8413754042316725
   },
   {
     "name": "wave_env21-41_e5_n48_cap1.6_s3fixed",
@@ -2371,12 +2371,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 3.7428490014067552,
-    "eddy_W_at_2000rpm": 0.05464918625366912,
-    "eddy_W_at_max_speed": 0.3034789938681977,
+    "eddy_W_at_2000rpm": 0.057262940454461286,
+    "eddy_W_at_max_speed": 0.317993747873742,
     "circulating_W_at_2000rpm": 0.12306591952245442,
     "circulating_W_at_max_speed": 0.6834122151934428,
     "P_cu_at_15mNm_W": 0.7814810968844497,
-    "loss_15mNm_2000rpm_W": 0.9591962026605733
+    "loss_15mNm_2000rpm_W": 0.9618099568613654
   },
   {
     "name": "wave_env21-41_e5_n48_cap2_s2swap",
@@ -2410,12 +2410,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 4.592444865597076,
-    "eddy_W_at_2000rpm": 0.2539375787653179,
-    "eddy_W_at_max_speed": 1.4101714259990612,
+    "eddy_W_at_2000rpm": 0.26532430157173226,
+    "eddy_W_at_max_speed": 1.473404411110796,
     "circulating_W_at_2000rpm": 0.0025499572439797074,
     "circulating_W_at_max_speed": 0.01416047542259474,
     "P_cu_at_15mNm_W": 0.6646745925259258,
-    "loss_15mNm_2000rpm_W": 0.9211621285352234
+    "loss_15mNm_2000rpm_W": 0.9325488513416377
   },
   {
     "name": "wave_env21-41_e5_n48_cap2_s2fixed",
@@ -2449,12 +2449,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 4.592444865597076,
-    "eddy_W_at_2000rpm": 0.2539375787653179,
-    "eddy_W_at_max_speed": 1.4101714259990612,
+    "eddy_W_at_2000rpm": 0.26532430157173226,
+    "eddy_W_at_max_speed": 1.473404411110796,
     "circulating_W_at_2000rpm": 0.1544619586664433,
     "circulating_W_at_max_speed": 0.8577613505426371,
     "P_cu_at_15mNm_W": 0.6646745925259258,
-    "loss_15mNm_2000rpm_W": 1.073074129957687
+    "loss_15mNm_2000rpm_W": 1.0844608527641013
   },
   {
     "name": "wave_env21-41_e5_n48_cap2_s3swap",
@@ -2488,12 +2488,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 4.101942451666545,
-    "eddy_W_at_2000rpm": 0.08326037621185937,
-    "eddy_W_at_max_speed": 0.4623632469946657,
+    "eddy_W_at_2000rpm": 0.08696015108756744,
+    "eddy_W_at_max_speed": 0.4829089135231098,
     "circulating_W_at_2000rpm": 0.00303896438507031,
     "circulating_W_at_max_speed": 0.01687604001460321,
     "P_cu_at_15mNm_W": 0.7412247394739573,
-    "loss_15mNm_2000rpm_W": 0.827524080070887
+    "loss_15mNm_2000rpm_W": 0.831223854946595
   },
   {
     "name": "wave_env21-41_e5_n48_cap2_s3fixed",
@@ -2527,12 +2527,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 4.101942451666545,
-    "eddy_W_at_2000rpm": 0.08326037621185937,
-    "eddy_W_at_max_speed": 0.4623632469946657,
+    "eddy_W_at_2000rpm": 0.08696015108756744,
+    "eddy_W_at_max_speed": 0.4829089135231098,
     "circulating_W_at_2000rpm": 0.1608032379740092,
     "circulating_W_at_max_speed": 0.8929758742349843,
     "P_cu_at_15mNm_W": 0.7412247394739573,
-    "loss_15mNm_2000rpm_W": 0.9852883536598258
+    "loss_15mNm_2000rpm_W": 0.988988128535534
   },
   {
     "name": "wave_env21-41_e5_n48_cap2.5_s2swap",
@@ -2566,12 +2566,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 5.041311678421812,
-    "eddy_W_at_2000rpm": 0.4110309206431496,
-    "eddy_W_at_max_speed": 2.2825454283342985,
+    "eddy_W_at_2000rpm": 0.42837933828848057,
+    "eddy_W_at_max_speed": 2.3788850207990784,
     "circulating_W_at_2000rpm": 0.0027222310370859635,
     "circulating_W_at_max_speed": 0.015117149821350942,
     "P_cu_at_15mNm_W": 0.6390334149544571,
-    "loss_15mNm_2000rpm_W": 1.0527865666346927
+    "loss_15mNm_2000rpm_W": 1.0701349842800236
   },
   {
     "name": "wave_env21-41_e5_n48_cap2.5_s2fixed",
@@ -2605,12 +2605,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 5.041311678421812,
-    "eddy_W_at_2000rpm": 0.4110309206431496,
-    "eddy_W_at_max_speed": 2.2825454283342985,
+    "eddy_W_at_2000rpm": 0.42837933828848057,
+    "eddy_W_at_max_speed": 2.3788850207990784,
     "circulating_W_at_2000rpm": 0.20362653066030362,
     "circulating_W_at_max_speed": 1.1307830708185826,
     "P_cu_at_15mNm_W": 0.6390334149544571,
-    "loss_15mNm_2000rpm_W": 1.2536908662579105
+    "loss_15mNm_2000rpm_W": 1.2710392839032414
   },
   {
     "name": "wave_env21-41_e5_n48_cap2.5_s3swap",
@@ -2644,12 +2644,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 4.550809264491283,
-    "eddy_W_at_2000rpm": 0.1434694499187686,
-    "eddy_W_at_max_speed": 0.7967175231131353,
+    "eddy_W_at_2000rpm": 0.14945409673681823,
+    "eddy_W_at_max_speed": 0.8299515878724486,
     "circulating_W_at_2000rpm": 0.0036845549706171245,
     "circulating_W_at_max_speed": 0.02046114703601606,
     "P_cu_at_15mNm_W": 0.711399904043497,
-    "loss_15mNm_2000rpm_W": 0.8585539089328826
+    "loss_15mNm_2000rpm_W": 0.8645385557509323
   },
   {
     "name": "wave_env21-41_e5_n48_cap2.5_s3fixed",
@@ -2683,12 +2683,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 4.550809264491283,
-    "eddy_W_at_2000rpm": 0.1434694499187686,
-    "eddy_W_at_max_speed": 0.7967175231131353,
+    "eddy_W_at_2000rpm": 0.14945409673681823,
+    "eddy_W_at_max_speed": 0.8299515878724486,
     "circulating_W_at_2000rpm": 0.21272069188220255,
     "circulating_W_at_max_speed": 1.1812849554191382,
     "P_cu_at_15mNm_W": 0.711399904043497,
-    "loss_15mNm_2000rpm_W": 1.067590045844468
+    "loss_15mNm_2000rpm_W": 1.0735746926625178
   },
   {
     "name": "wave_env21-41_e5_n48_fill_s2swap",
@@ -2722,12 +2722,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 6.299356635118055,
-    "eddy_W_at_2000rpm": 1.4074771214073039,
-    "eddy_W_at_max_speed": 7.816031124681527,
+    "eddy_W_at_2000rpm": 1.4651913791111024,
+    "eddy_W_at_max_speed": 8.136531136859158,
     "circulating_W_at_2000rpm": 0.0030458449184241096,
     "circulating_W_at_max_speed": 0.01691424913504272,
     "P_cu_at_15mNm_W": 0.6040784093017711,
-    "loss_15mNm_2000rpm_W": 2.014601375627499
+    "loss_15mNm_2000rpm_W": 2.0723156333312978
   },
   {
     "name": "wave_env21-41_e5_n48_fill_s2fixed",
@@ -2761,12 +2761,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 6.299356635118055,
-    "eddy_W_at_2000rpm": 1.4074771214073039,
-    "eddy_W_at_max_speed": 7.816031124681527,
+    "eddy_W_at_2000rpm": 1.4651913791111024,
+    "eddy_W_at_max_speed": 8.136531136859158,
     "circulating_W_at_2000rpm": 0.36697854730198765,
     "circulating_W_at_max_speed": 2.037912875581796,
     "P_cu_at_15mNm_W": 0.6040784093017711,
-    "loss_15mNm_2000rpm_W": 2.3785340780110626
+    "loss_15mNm_2000rpm_W": 2.436248335714861
   },
   {
     "name": "wave_env21-41_e5_n48_fill_s3swap",
@@ -2800,12 +2800,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 5.808854221187525,
-    "eddy_W_at_2000rpm": 0.5453978230215956,
-    "eddy_W_at_max_speed": 3.0287144957695764,
+    "eddy_W_at_2000rpm": 0.5676793735613973,
+    "eddy_W_at_max_speed": 3.1524488640775483,
     "circulating_W_at_2000rpm": 0.007068980816278403,
     "circulating_W_at_max_speed": 0.03925561079427284,
     "P_cu_at_15mNm_W": 0.6724873430467064,
-    "loss_15mNm_2000rpm_W": 1.2249541468845804
+    "loss_15mNm_2000rpm_W": 1.2472356974243821
   },
   {
     "name": "wave_env21-41_e5_n48_fill_s3fixed",
@@ -2839,12 +2839,12 @@
     "H_max_mNms": 100.53166101210678,
     "tau_at_1A_mNm": 19.477020834693693,
     "copper_g": 5.808854221187525,
-    "eddy_W_at_2000rpm": 0.5453978230215956,
-    "eddy_W_at_max_speed": 3.0287144957695764,
+    "eddy_W_at_2000rpm": 0.5676793735613973,
+    "eddy_W_at_max_speed": 3.1524488640775483,
     "circulating_W_at_2000rpm": 0.3833583194647728,
     "circulating_W_at_max_speed": 2.12887336587489,
     "P_cu_at_15mNm_W": 0.6724873430467064,
-    "loss_15mNm_2000rpm_W": 1.6012434855330746
+    "loss_15mNm_2000rpm_W": 1.6235250360728766
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap1.6_s2swap",
@@ -2878,12 +2878,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 5.099841736959568,
-    "eddy_W_at_2000rpm": 0.13263017814869174,
-    "eddy_W_at_max_speed": 0.5296370265924178,
+    "eddy_W_at_2000rpm": 0.1383369933212376,
+    "eddy_W_at_max_speed": 0.5524262640155262,
     "circulating_W_at_2000rpm": 0.00027311741699950727,
     "circulating_W_at_max_speed": 0.001090649946108418,
     "P_cu_at_15mNm_W": 0.6380905275320771,
-    "loss_15mNm_2000rpm_W": 0.7709938230977683
+    "loss_15mNm_2000rpm_W": 0.7767006382703141
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap1.6_s2fixed",
@@ -2917,12 +2917,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 5.099841736959568,
-    "eddy_W_at_2000rpm": 0.13263017814869174,
-    "eddy_W_at_max_speed": 0.5296370265924178,
+    "eddy_W_at_2000rpm": 0.1383369933212376,
+    "eddy_W_at_max_speed": 0.5524262640155262,
     "circulating_W_at_2000rpm": 0.08568717998625443,
     "circulating_W_at_max_speed": 0.34217780491955696,
     "P_cu_at_15mNm_W": 0.6380905275320771,
-    "loss_15mNm_2000rpm_W": 0.8564078856670232
+    "loss_15mNm_2000rpm_W": 0.8621147008395691
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap1.6_s3swap",
@@ -2956,12 +2956,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 4.492845023696569,
-    "eddy_W_at_2000rpm": 0.04214584083835772,
-    "eddy_W_at_max_speed": 0.16830255479141315,
+    "eddy_W_at_2000rpm": 0.04394429711089391,
+    "eddy_W_at_max_speed": 0.1754843971589524,
     "circulating_W_at_2000rpm": 0.00047234740738486664,
     "circulating_W_at_max_speed": 0.0018862424815978877,
     "P_cu_at_15mNm_W": 0.7238222940860499,
-    "loss_15mNm_2000rpm_W": 0.7664404823317925
+    "loss_15mNm_2000rpm_W": 0.7682389386043287
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap1.6_s3fixed",
@@ -2995,12 +2995,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 4.492845023696569,
-    "eddy_W_at_2000rpm": 0.04214584083835772,
-    "eddy_W_at_max_speed": 0.16830255479141315,
+    "eddy_W_at_2000rpm": 0.04394429711089391,
+    "eddy_W_at_max_speed": 0.1754843971589524,
     "circulating_W_at_2000rpm": 0.08782243745299598,
     "circulating_W_at_max_speed": 0.350704608030885,
     "P_cu_at_15mNm_W": 0.7238222940860499,
-    "loss_15mNm_2000rpm_W": 0.8537905723774036
+    "loss_15mNm_2000rpm_W": 0.8555890286499398
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2_s2swap",
@@ -3034,12 +3034,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 5.754014755842149,
-    "eddy_W_at_2000rpm": 0.26643622133098205,
-    "eddy_W_at_max_speed": 1.0639696787865063,
+    "eddy_W_at_2000rpm": 0.27762403759540605,
+    "eddy_W_at_max_speed": 1.1086464018601099,
     "circulating_W_at_2000rpm": 0.00033085256879966315,
     "circulating_W_at_max_speed": 0.0013212058765620035,
     "P_cu_at_15mNm_W": 0.5945884027399957,
-    "loss_15mNm_2000rpm_W": 0.8613554766397774
+    "loss_15mNm_2000rpm_W": 0.8725432929042014
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2_s2fixed",
@@ -3073,12 +3073,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 5.754014755842149,
-    "eddy_W_at_2000rpm": 0.26643622133098205,
-    "eddy_W_at_max_speed": 1.0639696787865063,
+    "eddy_W_at_2000rpm": 0.27762403759540605,
+    "eddy_W_at_max_speed": 1.1086464018601099,
     "circulating_W_at_2000rpm": 0.13237594561008206,
     "circulating_W_at_max_speed": 0.5286217903340354,
     "P_cu_at_15mNm_W": 0.5945884027399957,
-    "loss_15mNm_2000rpm_W": 0.9934005696810597
+    "loss_15mNm_2000rpm_W": 1.0045883859454838
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2_s3swap",
@@ -3112,12 +3112,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 5.147018042579149,
-    "eddy_W_at_2000rpm": 0.09133198383866889,
-    "eddy_W_at_max_speed": 0.3647194102300653,
+    "eddy_W_at_2000rpm": 0.09514490054746458,
+    "eddy_W_at_max_speed": 0.37994567243132,
     "circulating_W_at_2000rpm": 0.0007740894715961527,
     "circulating_W_at_max_speed": 0.0030912002967608643,
     "P_cu_at_15mNm_W": 0.6709902614918989,
-    "loss_15mNm_2000rpm_W": 0.763096334802164
+    "loss_15mNm_2000rpm_W": 0.7669092515109596
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2_s3fixed",
@@ -3151,12 +3151,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 5.147018042579149,
-    "eddy_W_at_2000rpm": 0.09133198383866889,
-    "eddy_W_at_max_speed": 0.3647194102300653,
+    "eddy_W_at_2000rpm": 0.09514490054746458,
+    "eddy_W_at_max_speed": 0.37994567243132,
     "circulating_W_at_2000rpm": 0.1365308321897941,
     "circulating_W_at_max_speed": 0.5452136535481551,
     "P_cu_at_15mNm_W": 0.6709902614918989,
-    "loss_15mNm_2000rpm_W": 0.8988530775203618
+    "loss_15mNm_2000rpm_W": 0.9026659942291575
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2.5_s2swap",
@@ -3190,12 +3190,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 6.56197076538986,
-    "eddy_W_at_2000rpm": 0.5367919026325733,
-    "eddy_W_at_max_speed": 2.1435910829469633,
+    "eddy_W_at_2000rpm": 0.5590601414731141,
+    "eddy_W_at_max_speed": 2.232515669881707,
     "circulating_W_at_2000rpm": 0.00040911178384114036,
     "circulating_W_at_max_speed": 0.0016337213126157509,
     "P_cu_at_15mNm_W": 0.5614810397219883,
-    "loss_15mNm_2000rpm_W": 1.0986820541384028
+    "loss_15mNm_2000rpm_W": 1.1209502929789434
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2.5_s2fixed",
@@ -3229,12 +3229,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 6.56197076538986,
-    "eddy_W_at_2000rpm": 0.5367919026325733,
-    "eddy_W_at_max_speed": 2.1435910829469633,
+    "eddy_W_at_2000rpm": 0.5590601414731141,
+    "eddy_W_at_max_speed": 2.232515669881707,
     "circulating_W_at_2000rpm": 0.204135023640519,
     "circulating_W_at_max_speed": 0.8151799873413943,
     "P_cu_at_15mNm_W": 0.5614810397219883,
-    "loss_15mNm_2000rpm_W": 1.3024079659950805
+    "loss_15mNm_2000rpm_W": 1.3246762048356213
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2.5_s3swap",
@@ -3268,12 +3268,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 5.95497405212686,
-    "eddy_W_at_2000rpm": 0.19499182050054165,
-    "eddy_W_at_max_speed": 0.7786680939534578,
+    "eddy_W_at_2000rpm": 0.20305254974278855,
+    "eddy_W_at_max_speed": 0.8108573040383898,
     "circulating_W_at_2000rpm": 0.00139652331735288,
     "circulating_W_at_max_speed": 0.005576788538582347,
     "P_cu_at_15mNm_W": 0.632490693917418,
-    "loss_15mNm_2000rpm_W": 0.8288790377353126
+    "loss_15mNm_2000rpm_W": 0.8369397669775593
   },
   {
     "name": "wave_env15-44_act22-40_n48_cap2.5_s3fixed",
@@ -3307,12 +3307,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 5.95497405212686,
-    "eddy_W_at_2000rpm": 0.19499182050054165,
-    "eddy_W_at_max_speed": 0.7786680939534578,
+    "eddy_W_at_2000rpm": 0.20305254974278855,
+    "eddy_W_at_max_speed": 0.8108573040383898,
     "circulating_W_at_2000rpm": 0.21103672594227166,
     "circulating_W_at_max_speed": 0.8427408120085245,
     "P_cu_at_15mNm_W": 0.632490693917418,
-    "loss_15mNm_2000rpm_W": 1.0385192403602312
+    "loss_15mNm_2000rpm_W": 1.0465799696024782
   },
   {
     "name": "wave_env15-44_act22-40_n48_fill_s2swap",
@@ -3346,12 +3346,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 8.82646421501904,
-    "eddy_W_at_2000rpm": 2.5322602017199825,
-    "eddy_W_at_max_speed": 10.112168908449267,
+    "eddy_W_at_2000rpm": 2.6519978025227804,
+    "eddy_W_at_max_speed": 10.590321526094145,
     "circulating_W_at_2000rpm": 0.0006801595488543033,
     "circulating_W_at_max_speed": 0.002716106440419397,
     "P_cu_at_15mNm_W": 0.5182891324783258,
-    "loss_15mNm_2000rpm_W": 3.051229493747163
+    "loss_15mNm_2000rpm_W": 3.1709670945499604
   },
   {
     "name": "wave_env15-44_act22-40_n48_fill_s2fixed",
@@ -3385,12 +3385,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 8.82646421501904,
-    "eddy_W_at_2000rpm": 2.5322602017199825,
-    "eddy_W_at_max_speed": 10.112168908449267,
+    "eddy_W_at_2000rpm": 2.6519978025227804,
+    "eddy_W_at_max_speed": 10.590321526094145,
     "circulating_W_at_2000rpm": 0.4831434660032754,
     "circulating_W_at_max_speed": 1.929354784283337,
     "P_cu_at_15mNm_W": 0.5182891324783258,
-    "loss_15mNm_2000rpm_W": 3.533692800201584
+    "loss_15mNm_2000rpm_W": 3.653430401004382
   },
   {
     "name": "wave_env15-44_act22-40_n48_fill_s3swap",
@@ -3424,12 +3424,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 8.21946750175604,
-    "eddy_W_at_2000rpm": 1.004110586555863,
-    "eddy_W_at_max_speed": 4.009752175988175,
+    "eddy_W_at_2000rpm": 1.051772162037762,
+    "eddy_W_at_max_speed": 4.200080919214643,
     "circulating_W_at_2000rpm": 0.006995713342801805,
     "circulating_W_at_max_speed": 0.027936242456227143,
     "P_cu_at_15mNm_W": 0.5844734166863201,
-    "loss_15mNm_2000rpm_W": 1.595579716584985
+    "loss_15mNm_2000rpm_W": 1.643241292066884
   },
   {
     "name": "wave_env15-44_act22-40_n48_fill_s3fixed",
@@ -3463,12 +3463,12 @@
     "H_max_mNms": 85.25078427334928,
     "tau_at_1A_mNm": 22.968202260765437,
     "copper_g": 8.21946750175604,
-    "eddy_W_at_2000rpm": 1.004110586555863,
-    "eddy_W_at_max_speed": 4.009752175988175,
+    "eddy_W_at_2000rpm": 1.051772162037762,
+    "eddy_W_at_max_speed": 4.200080919214643,
     "circulating_W_at_2000rpm": 0.4979512806082353,
     "circulating_W_at_max_speed": 1.988487381458244,
     "P_cu_at_15mNm_W": 0.5844734166863201,
-    "loss_15mNm_2000rpm_W": 2.0865352838504188
+    "loss_15mNm_2000rpm_W": 2.1341968593323175
   },
   {
     "name": "wave_stitched_act21-41_n48_fill",
@@ -3502,12 +3502,12 @@
     "H_max_mNms": 127.98281103461589,
     "tau_at_1A_mNm": 5.603997379098161,
     "copper_g": 7.7543103749384965,
-    "eddy_W_at_2000rpm": 12.256673164118729,
-    "eddy_W_at_max_speed": 110.31005847706858,
+    "eddy_W_at_2000rpm": 12.873511685363338,
+    "eddy_W_at_max_speed": 115.86160516827007,
     "circulating_W_at_2000rpm": 3.7360938760014277,
     "circulating_W_at_max_speed": 33.62484488401286,
     "P_cu_at_15mNm_W": 1.1524108779891398,
-    "loss_15mNm_2000rpm_W": 17.145177918109297
+    "loss_15mNm_2000rpm_W": 17.762016439353907
   },
   {
     "name": "wave_stitched_act21-41_n96_fill",
@@ -3541,11 +3541,11 @@
     "H_max_mNms": 127.98281103461589,
     "tau_at_1A_mNm": 11.112108809318347,
     "copper_g": 7.403018917233109,
-    "eddy_W_at_2000rpm": 2.7521402181767436,
-    "eddy_W_at_max_speed": 24.769261963590697,
+    "eddy_W_at_2000rpm": 2.8913531616523334,
+    "eddy_W_at_max_speed": 26.022178454871007,
     "circulating_W_at_2000rpm": 3.5805274180319,
     "circulating_W_at_max_speed": 32.22474676228711,
     "P_cu_at_15mNm_W": 1.312362696493662,
-    "loss_15mNm_2000rpm_W": 7.645030332702306
+    "loss_15mNm_2000rpm_W": 7.784243276177896
   }
 ]

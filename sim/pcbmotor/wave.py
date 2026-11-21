@@ -45,7 +45,7 @@ from dataclasses import dataclass, asdict, replace
 import numpy as np
 
 from .geometry import RotorDesign, StatorDesign, STACKUPS, OZ_TO_M
-from .em import rotor_magnets, analyse, RHO_CU_20C
+from .em import rotor_magnets, analyse, RHO_CU_20C, mean_dbz_dtheta2, rotor_bz
 from .designs import drive_metrics
 from .stacking import coil_curves
 
@@ -199,10 +199,9 @@ def template_curves(d: WaveDesign, rot: RotorDesign, n_theta=144):
             F = np.cross(dls, B)
             tq[i] = -np.sum(mids[:, 0] * F[:, 1] - mids[:, 1] * F[:, 0])
             Bz[i] = B[:, 2]
-        dth = thetas[1] - thetas[0]
-        dBdth = (np.roll(Bz, -1, axis=0) - np.roll(Bz, 1, axis=0)) / (2 * dth)
+        bz, key = rotor_bz(rotor_magnets, rot)
         vol = wm * oz * OZ_TO_M * np.linalg.norm(dls, axis=1)
-        c_eddy = float(np.sum(SIGMA_CU * ws ** 2 / 12 * np.mean(dBdth ** 2, axis=0) * vol))
+        c_eddy = float(np.sum(SIGMA_CU * ws ** 2 / 12 * mean_dbz_dtheta2(bz, key, rot.n_poles, mids) * vol))
         out.append(dict(z=z, oz=oz, sigma=sigma, tq=tq, c_eddy=c_eddy,
                         c_slit=slit_circulating(d, rot, z, oz, thetas[::4])))
     return thetas, out

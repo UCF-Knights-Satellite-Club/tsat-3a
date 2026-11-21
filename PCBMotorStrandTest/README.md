@@ -11,11 +11,11 @@ number only exists in the model (`sim/pcbmotor/ace_stackups.py`, `cubesat_wheels
 ## Why the payload geometry, not the small test stator
 
 Eddy loss goes with trace width squared. On the 40 mm test stator the 0.15 mm traces lose almost
-nothing, and even 1 mm traces with its small magnets give about 0.14 mN·m at 3,000 rpm. Bearing
+nothing, and even 1 mm traces with its small magnets give about 0.16 mN·m at 3,000 rpm. Bearing
 drag would swamp that. These boards are the recommended high-momentum payload stator
 (`payload_high_momentum` in `sim/results/pcbmotor_designs.json`) and run the payload rotor. They're
 built on JLC's all-2 oz 4-layer board, the best JLC option in `sim/results/pcbmotor_ace_stackups.md`.
-The payload design itself is 2 oz outer / 1 oz inner. The solid board loses about 6.5 mN·m at
+The payload design itself is 2 oz outer / 1 oz inner. The solid board loses about 8.2 mN·m at
 3,000 rpm, so the difference is easy to measure, and the result checks the payload board directly.
 
 ## Files
@@ -70,7 +70,7 @@ to leave a layer first, so every via set reverses the lane order. A strand runs 
 n−1−s on L2, s on L3 and n−1−s on L4. Over the four layers every strand links almost the same
 flux. Without that, a current would circulate round the strand loop at speed. The model puts the
 untransposed version at 0.33 mN·m at 3,000 rpm, nearly doubling the stranded board's drag. With the
-transposition it's 0.3 % of the drag.
+transposition it's 0.2 % of the drag.
 
 **Vias.** For the payload geometry the coil opening is a wide, shallow slot, about 1.1 mm of
 clear space between the last turns. The L1→L2 and L3→L4 vias sit side by side in a row across it.
@@ -113,8 +113,8 @@ doesn't include bearing drag (see below).
 | Phase resistance, 20 °C (A1–A2 / B1–B2 / C1–C2) | 0.77 / 0.79 / 0.77 Ω | 1.01 / 1.02 / 1.01 Ω |
 | Kt (FOC, per A peak) | 20.1 mN·m/A | 20.1 mN·m/A |
 | Phase back-EMF | 1.40 V peak per 1000 rpm (66.7 Hz electrical per 1000 rpm) | same |
-| Stator drag at 1,000 / 2,000 / 3,000 rpm | 2.15 / 4.31 / 6.46 mN·m | 0.101 / 0.202 / 0.302 mN·m |
-| Loss at 3,000 rpm | 2.03 W | 0.095 W |
+| Stator drag at 1,000 / 2,000 / 3,000 rpm | 2.73 / 5.46 / 8.19 mN·m | 0.128 / 0.256 / 0.383 mN·m |
+| Loss at 3,000 rpm | 2.57 W | 0.120 W |
 | Extra deceleration at 3,000 rpm (rotor J = 2.04e-4 kg·m²) | 303 rpm/s | 14.2 rpm/s |
 
 Drag ratio solid / stranded: **21×**. This matches the design-study estimate (21×), so a measured
@@ -141,7 +141,7 @@ per 1000 rpm, about 6–10 mV rms at 3,000 rpm. An untransposed bundle would sho
 4. **Also measure** phase R cold (4-wire, log the temperature: copper rises 0.39 %/K) and back-EMF
    amplitude. On the stranded board, measure the J2 pads before bridging.
 
-The solid board's eddy loss is 2.0 W at 3,000 rpm. That's fine for a coast-down, but don't hold it
+The solid board's eddy loss is 2.6 W at 3,000 rpm. That's fine for a coast-down, but don't hold it
 at speed for long.
 
 ## Ordering

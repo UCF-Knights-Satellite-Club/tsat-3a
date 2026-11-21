@@ -35,13 +35,13 @@ from __future__ import annotations
 import json
 import math
 import pathlib
-from dataclasses import replace
+from dataclasses import replace, astuple
 
 import numpy as np
 import magpylib as magpy
 
 from .geometry import StatorDesign, RotorDesign, STACKUPS, OSHPARK_STACKUPS, coil_turns, OZ_TO_M
-from .em import (_coil_segments, rotor_magnets, foc_torque, phase_resistance, phase_inductance,
+from .em import (_coil_segments, _subdivide, rotor_magnets, mean_dbz_dtheta2, rotor_bz, foc_torque, phase_resistance, phase_inductance,
                  RHO_CU_20C)
 from .designs import drive_metrics, V_BUS
 
@@ -104,8 +104,9 @@ def coil_curves(d: StatorDesign, r: RotorDesign, dual: bool, n_theta=72):
     for z, oz in zip(d.stack["z_mm"], d.stack["oz"]):
         n = 0
         for poly in turns:
-            sub = np.linalg.norm(np.diff(poly, axis=0), axis=1)
-            n += int(np.sum(np.maximum(1, np.ceil(sub / 0.25))))
+            # count with em._subdivide itself: recomputing ceil(length / 0.25) here can round a
+            # segment that is a whole number of 0.25 mm steps differently (seen at r_in = 15 mm)
+            n += len(_subdivide(poly, 0.25)) - 1
         per_layer.append((n, oz * OZ_TO_M))
     t_cu = np.concatenate([np.full(n, t) for n, t in per_layer])
     assert len(t_cu) == len(mids)
@@ -124,11 +125,16 @@ def coil_curves(d: StatorDesign, r: RotorDesign, dual: bool, n_theta=72):
         F = np.cross(dls, B)
         tq[i] = np.sum(mids[:, 0] * F[:, 1] - mids[:, 1] * F[:, 0])
         Bz[i] = B[:, 2]
-    dth = thetas[1] - thetas[0]
-    dBdth = (np.roll(Bz, -1, axis=0) - np.roll(Bz, 1, axis=0)) / (2 * dth)
+    if dual:
+        top, bot = mags(0.0)
+        bz = lambda p: top.getB(p)[:, 2] + bot.getB(p)[:, 2]
+        key = ("dual", rotor_magnets, astuple(r), zmax)
+    else:
+        bz, key = rotor_bz(rotor_magnets, r)
+    g = mean_dbz_dtheta2(bz, key, r.n_poles, mids)          # mean (dBz/dtheta)^2, finely resolved
     w = d.trace_mm / 1e3
     vol = w * t_cu * seg_len
-    c_eddy = d.n_coils * float(np.sum(SIGMA_CU * w ** 2 / 12 * np.mean(dBdth ** 2, axis=0) * vol))
+    c_eddy = d.n_coils * float(np.sum(SIGMA_CU * w ** 2 / 12 * g * vol))
     return thetas, -tq, c_eddy, float(np.abs(Bz).max())
 
 

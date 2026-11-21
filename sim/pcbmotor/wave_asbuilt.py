@@ -17,7 +17,7 @@ import pathlib
 
 import numpy as np
 
-from .em import rotor_magnets, RHO_CU_20C
+from .em import rotor_magnets, RHO_CU_20C, mean_dbz_dtheta2, rotor_bz
 from .geometry import STACKUPS, OZ_TO_M
 from .designs import drive_metrics
 from . import wave
@@ -76,10 +76,9 @@ def _curves(pieces, z_mm, thetas, rot):
             F = np.cross(dls, B)
             t[i] = -np.sum(mids[:, 0] * F[:, 1] - mids[:, 1] * F[:, 0])
             Bz[i] = B[:, 2]
-        dth = thetas[1] - thetas[0]
-        dB = (np.roll(Bz, -1, 0) - np.roll(Bz, 1, 0)) / (2 * dth)
+        bz, key = rotor_bz(rotor_magnets, rot)
         tq.append(t)
-        ce.append(dB)          # eddy needs the copper thickness too: finished by the caller
+        ce.append(mean_dbz_dtheta2(bz, key, rot.n_poles, mids))   # mean (dBz/dtheta)^2; caller adds thickness
         c._mids, c._len, c._wm = mids, np.linalg.norm(dls, axis=1), wm
     return tq, ce
 
@@ -111,8 +110,8 @@ def analyse(name, n_theta=72, stackup=STACKUP):
     for (pair, L), j in keys.items():
         pcs = _pieces(wb, (pair, L, j))
         tq, dB = _curves(pcs, st["z_mm"][L], thetas, rot)
-        eddy = sum(float(np.sum(SIGMA_CU * c._wm ** 2 / 12 * np.mean(d ** 2, axis=0) * c._wm * t_cu[L] * c._len))
-                   for c, d in zip(pcs, dB))
+        eddy = sum(float(np.sum(SIGMA_CU * c._wm ** 2 / 12 * g * c._wm * t_cu[L] * c._len))
+                   for c, g in zip(pcs, dB))
         lanes = [(c, t) for c, t in zip(pcs, tq) if c.tag != "solid"]
         solid = [t for c, t in zip(pcs, tq) if c.tag == "solid"]
         tmpl[(pair, L)] = dict(angle=wb.conductors[(pair, L, j)]["angle"],
