@@ -4,13 +4,17 @@ Generated 2026-11-17 by the scripts in `sim/` (see [`../README.md`](../README.md
 assumptions). Full Monte Carlo tables: [`yaw_tables.md`](yaw_tables.md). Raw data:
 `pcbmotor_sweep.csv`, `pcbmotor_designs.json`, `yaw_summary.csv`, `yaw_requirements.json`,
 `tsat1_swing.json`, `video_spin_tsat2b_full.*`, `video_phases_tsat2b_full.*`, `yaw_calibration.json`,
-`hang_summary.json`. Sections 5 and 6 (PCB motor design studies, KAOS-3 hanging payload) were added 2026-11-18/19; 5e (larger wheels) on 2026-11-19.
+`hang_summary.json`. Sections 5 and 6 (PCB motor design studies, KAOS-3 hanging payload) were added
+2026-11-18/19, 5e–5h on 2026-11-19 and 5i on 2026-11-20. Short summaries of each study are on the
+club Notion under TSat-3A Home → Design Studies & Simulations; this file and the per-study files
+hold the full data.
 
 ## Conclusions
 
-Updated 2026-11-17 after calibrating the disturbance model to the TSat-2B onboard flight video
-(section 2b). The video showed far more spin than the original "medium" assumption, so the
-requirements and the recommended payload design changed.
+Points 1–6 were written 2026-11-17/19 after calibrating the disturbance model to the TSat-2B onboard
+flight video (section 2b). The video showed far more spin than the original "medium" assumption, so
+the requirements and the recommended payload design changed. Points 7–10 were added 2026-11-20 from
+the winding and stator studies (5f–5i); they change the recommended winding in point 2.
 
 1. **Put a swivel or slip ring at the payload attachment.** TSat-2B, flown without one, spun at
    172 °/s RMS (median 15 rpm, 1 s peaks up to 128 rpm) and the camera was steady (under 2 °/s) only
@@ -45,12 +49,36 @@ requirements and the recommended payload design changed.
    (section 6): it holds within 0.7° through a ±10° swing and passes the D&C demo specs S1–S3 at eye
    heights of 2–6 mm. Pitch/roll momentum is set by the centre-of-mass error at release (about 100
    mN·m·s per mm), so pre-trim before release or size the wheels for about 70 mN·m·s.
+7. **Use a wave winding instead of spiral coils** (section 5f). Same rotor, board and drive as the
+   high-momentum design in point 2: 48 conductors per layer, traces up to 1.6 mm split into 2 strands
+   that swap lanes at every via. Km 18.8 against the spiral's 16.2, and 0.77 W against 1.63 W at
+   15 mN·m and 2000 rpm. With blind vias Km is 21.2 (JLC 2 oz) or 23.6 (assumed 3 oz). Plan on a
+   5–15% torque derating until the wave test boards are measured. The spiral stays as the fallback.
+   Open item: the wave layout doesn't fit the 90 mm payload board yet (test boards are 117–129 mm);
+   90 mm needs a 6-layer build with jumper layers.
+8. **Drive at 11.1 V (3S) with PWM at 100 kHz or more** (section 5h). Turn count doesn't change Km,
+   so the bus voltage only sets the rewind (n must be a multiple of 24). The phase inductance is only
+   8.1 µH, so at 50 kHz the PWM ripple costs about 1 W per wheel at 2000 rpm, more than the copper
+   loss. 100 kHz cuts it to about 0.26 W; series inductors also work.
+9. **One stator board, one rotor, no stator iron** (sections 1, 5g, 5i). Stacked boards, dual rotors,
+   a slotless stator yoke and a dual stator all lose at the payload's operating point (speed, eddy drag,
+   axial pull or mass). The cheap gain is thicker magnets: two stacked blocks per pole on the existing
+   3 mm of steel give Km +14% and 43% more inertia for 92 g.
+10. **PCB motors win for large, slow wheels** (section 5e). Km grows as D² (disc) or D^1.84 (ring),
+    so a PCB motor reaches iron-core frameless motors at about 400–600 mm and leads per kilogram of
+    non-flywheel mass from about 150 mm. At 90 mm its Km is 3–6× lower than a frameless motor's, which
+    is acceptable only because the wheels need mN·m and a fraction of a watt.
 
 ## 1. PCB motor designs
 
-### Recommended designs
+### Designs from the first sweep
 
-| | Test stator | Payload stator (recommended) | Payload, OSH Park 6L (comparison) |
+These are the 2026-11-17 sweep picks. The current recommendation is the high-momentum 6c/8p variant
+(Conclusions point 2) with a wave winding (point 7, section 5f); the 12c/16p payload stator below is
+the lighter fallback.
+
+
+| | Test stator | Payload stator (12c/16p, first pick) | Payload, OSH Park 6L (comparison) |
 |---|---|---|---|
 | Name | `test_4L_6c8p_w0.15_m8.0x3.0` | `payload_jlc4_2oz_out_12c16p_w1.2_h3.18` | `payload_osh6_9c12p_w1.2_h3.18` |
 | Fab / stackup | OSH Park 4-layer (published stackup: 1.7 mil plated outer, 0.5 oz inner, 39 mil core) | JLCPCB 4-layer, 2 oz outer / 1 oz inner | OSH Park 6-layer |
@@ -149,7 +177,7 @@ the model (method of images) is not covered by this check; the test stator still
 doi:10.3788/OPE.20152304.1004) both use wave windings instead of spiral coils. CIOMP measured 26.2%
 lower motor power at 5,000 rpm with the wave winding than with a spiral winding on otherwise identical
 flywheel prototypes. The payload designs here use spiral (concentrated) coils. Section 5f now simulates
-a wave-winding variant: it cuts loss by 22–39% on the same rotor.
+a wave-winding variant: it cuts loss by 22–53% on the same rotor.
 
 ### Test stator as laid out (PCBMotorTest v0.1, 2026-11-18)
 
@@ -202,6 +230,8 @@ Recommended payload (high-momentum 6c/8p), 11.1 V, 1 A driver limit:
    requirement. Loss scales with trace width squared, so splitting each wide trace into narrower parallel
    strands would cut it sharply. Those strands need transposing between layers, or circulating currents
    replace the eddy currents. Eddy loss is negligible on the 0.15 mm test stator, so the bench won't measure it.
+   (Later: section 5a quantifies the strands, and the strand-test and wave-test boards measure the drag by
+   coast-down.)
 3. **Test stator: two cheap extra measurements.**
    - OSH Park makes 3 boards, so stacking two and measuring each board's back-EMF on its own checks how the
      field falls off with distance: the model gives about 0.47× for the second board.
@@ -317,9 +347,9 @@ Demand comes from ideal-actuator runs that hold heading for 10 minutes with no u
 - Hang-test the payload with a logging IMU, with and without the swivel, to tell the line-driven and
   gust-driven explanations apart before flight.
 
-## 5. PCB motor design studies (2026-11-18)
+## 5. PCB motor design studies (2026-11-18 to 2026-11-20)
 
-Five studies on the same EM model, for the KAOS-3 senior design scoping and possible ACE sponsorship.
+Nine studies (5a–5i) on the same EM model, for the KAOS-3 senior design scoping and possible ACE sponsorship.
 Each module's docstring lists its assumptions; the full tables are in the linked files.
 
 ### 5a. Custom stackups and stranded traces ([`pcbmotor_ace_stackups.md`](pcbmotor_ace_stackups.md))
@@ -690,9 +720,16 @@ target's azimuth drifts slowly). Payload inertia and trim-stage parameters are a
 - **PCB motor model.**
   - Rotor back iron is ideal (method of images, no saturation; 1.5 mm steel is about 1 T at these
     fluxes, by estimate).
-  - No stator iron. No eddy or proximity losses in the copper.
+  - No stator iron (section 5g models a yoke separately).
+  - Eddy loss uses the thin-strip formula (σ·w²/12·(dB/dt)², drag power ∝ speed²) and circulating
+    current between strands uses a lumped EMF model. The section 1 design sweep and the yaw
+    simulation (section 3) ignore eddy drag; the stacking study, section 5 and the hanging-payload
+    simulation (section 6) include it. Proximity loss from PWM ripple in wide traces
+    is not modelled.
   - 10% allowance for via and link resistance.
-  - Inductance is ±30–50%.
+  - Inductance is a Neumann integral of the mean turn (section 5h); treat it as ±30–50%.
+  - The only check against built hardware is the CMU wheel (about 10%). Paul 2019's wave motor
+    measured 15.5% below FEA on torque, so plan on 5–15% derating.
   - Thermal limit assumes natural convection on both board faces (rotor airflow ignored, so
     conservative).
   - JLC and OSH Park 6-layer layer spacing is assumed.
