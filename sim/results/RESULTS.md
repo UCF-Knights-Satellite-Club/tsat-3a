@@ -77,7 +77,7 @@ revised the same day after section 5k gave the spiral the same envelope as the w
    so the bus voltage only sets the rewind (n must be a multiple of 24). The phase inductance is only
    8.1 µH, so at 50 kHz the PWM ripple costs about 1 W per wheel at 2000 rpm, more than the copper
    loss. 100 kHz cuts it to about 0.26 W; series inductors also work. That applies to the wave. The
-   stranded ends-out spiral in point 7 has 2.4× the inductance and loses only 0.14 W at 50 kHz
+   stranded ends-out spiral in point 7 has 2.3× the inductance and loses only 0.15 W at 50 kHz
    (section 5k).
 9. **One stator board, one rotor, no stator iron** (sections 1, 5g, 5i). Stacked boards, dual rotors,
    a slotless stator yoke and a dual stator all lose at the payload's operating point (speed, eddy drag,
@@ -93,7 +93,7 @@ revised the same day after section 5k gave the spiral the same envelope as the w
 ### Designs from the first sweep
 
 These are the 2026-11-17 sweep picks. The current recommendation is the high-momentum 6c/8p variant
-(Conclusions point 2) with a wave winding (point 7, section 5f); the 12c/16p payload stator below is
+(Conclusions point 2) with a stranded ends-out spiral winding (point 7, section 5k); the 12c/16p payload stator below is
 the lighter fallback.
 
 
