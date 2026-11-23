@@ -12,11 +12,15 @@ import pathlib
 from dataclasses import replace
 
 from .geometry import StatorDesign, RotorDesign, OZ_TO_M
-from .layout import coil_layout, check_layout, VIA_DRILL_MM
+from .layout import coil_layout, check_layout
 from .em import analyse_layout, RHO_CU_20C, ALPHA_CU
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "sim" / "results"
+# The test stator is ordered from JLCPCB on its published JLC04161H-3313 stackup (2026-11-23; it was
+# designed on OSH Park's), with 0.3 mm via drills (JLC charges extra below 0.3 mm).
+STACKUP = "jlc4_3313"
+VIA_DRILL_MM = 0.3
 
 
 def ring_resistance(ring, d, ring_w, ring_oz):
@@ -31,7 +35,7 @@ def ring_resistance(ring, d, ring_w, ring_oz):
 
 def main():
     designs = json.loads((OUT / "pcbmotor_designs.json").read_text())["test"]
-    d, r = StatorDesign(**designs["stator"]), RotorDesign(**designs["rotor"])
+    d, r = replace(StatorDesign(**designs["stator"]), stackup=STACKUP), RotorDesign(**designs["rotor"])
     lay = coil_layout(d)
     check_layout(lay)
     board = json.loads((ROOT / "PCBMotorTest" / "stator_asbuilt.json").read_text())

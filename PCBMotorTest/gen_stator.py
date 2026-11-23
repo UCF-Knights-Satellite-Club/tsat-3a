@@ -10,8 +10,8 @@ What it does
    board and the simulation use one design.
 2. Builds the as-built coil copper with sim/pcbmotor/layout.py (spirals, vias, terminals).
 3. Writes PCBMotorTest/PCBMotorTest.kicad_pcb and .kicad_pro: six coils, the ring tracks that
-   wire them into three phases, a 6-pin header, mounting holes, silkscreen, OSH Park 4-layer
-   design rules and stackup.
+   wire them into three phases, a 6-pin header, mounting holes, silkscreen, 4-layer design rules
+   (OSH Park's, which JLCPCB also meets) and JLCPCB's published JLC04161H-3313 stackup.
 4. Writes PCBMotorTest/stator_asbuilt.json (turns, track lengths per phase) for the as-built
    model check in sim/ (`.venv/bin/python -m pcbmotor.asbuilt`).
 
@@ -34,9 +34,12 @@ HERE = pathlib.Path(__file__).resolve().parent
 SIM = HERE.parent / "sim"
 sys.path.insert(0, str(SIM))
 from pcbmotor.geometry import (StatorDesign, RotorDesign, phase_map, coil_angles,  # noqa: E402
-                               _OSH4_CU, _OSH4_DIEL)
+                               _JLC4_3313_CU, _JLC4_3313_DIEL)
 from pcbmotor.layout import (coil_layout, check_layout, transform, Arc, Line, polar,  # noqa: E402
-                             path_length, VIA_DIA_MM, VIA_DRILL_MM)
+                             path_length, VIA_DIA_MM)
+
+# 0.3 mm drill (pad unchanged at VIA_DIA_MM): JLCPCB adds a surcharge for holes < 0.3 mm.
+VIA_DRILL_MM = 0.3
 
 BOARD = HERE / "PCBMotorTest.kicad_pcb"
 CX, CY = 100.0, 100.0          # stator centre on the sheet (mm)
@@ -297,7 +300,7 @@ def main():
     B.text((14.5, -24.6), f"{lay.n_turns} turns x 4L", "F.Silkscreen", size=0.8)
     B.text((0, 23.6), "KSC TSat-3A  test stator  phases: A1-A2, B1-B2, C1-C2", "B.Silkscreen", size=0.8, mirror=True)
 
-    # ---- design rules (OSH Park 4-layer) and stackup
+    # ---- design rules (OSH Park 4-layer; JLCPCB's are looser) and stackup
     ds = B.b.GetDesignSettings()
     ds.m_TrackMinWidth = pcbnew.FromMM(0.127)
     ds.m_MinClearance = pcbnew.FromMM(0.127)
@@ -322,35 +325,36 @@ def main():
 
 
 def write_stackup(d):
-    """Insert OSH Park's published 4-layer stackup into the saved board (the KiCad 10 Python API
-    doesn't expose the stackup list). Thicknesses are the same ones the sim uses
-    (geometry._OSH4_CU / _OSH4_DIEL, from docs.oshpark.com/services/four-layer): FR408HR, 1.7 mil
-    plated outer copper, 0.5 oz inner, 7.87 mil prepreg, 39 mil core."""
+    """Insert JLCPCB's published JLC04161H-3313 stackup into the saved board (the KiCad 10 Python
+    API doesn't expose the stackup list). Thicknesses are the same ones the sim uses
+    (geometry._JLC4_3313_CU / _JLC4_3313_DIEL): 35 um outer, 15.2 um inner copper, 3313 prepreg
+    0.2064 mm, 1.065 mm core. (Until 2026-11-23 this was OSH Park's stackup.)"""
     txt = BOARD.read_text()
     if "(stackup" in txt:
         return "stackup already present"
     cu = ["F.Cu", "In1.Cu", "In2.Cu", "B.Cu"]
-    diel = [("prepreg", _OSH4_DIEL[0]), ("core", _OSH4_DIEL[1]), ("prepreg", _OSH4_DIEL[2])]
+    diel = [("prepreg", round(_JLC4_3313_DIEL[0], 4)), ("core", _JLC4_3313_DIEL[1]),
+            ("prepreg", round(_JLC4_3313_DIEL[2], 4))]
     lines = ['\t\t(stackup',
              '\t\t\t(layer "F.SilkS" (type "Top Silk Screen") (thickness 0.0152))',
              '\t\t\t(layer "F.Paste" (type "Top Solder Paste"))',
              '\t\t\t(layer "F.Mask" (type "Top Solder Mask") (thickness 0.0152))']
     for i, name in enumerate(cu):
-        lines.append(f'\t\t\t(layer "{name}" (type "copper") (thickness {_OSH4_CU[i]}))')
+        lines.append(f'\t\t\t(layer "{name}" (type "copper") (thickness {_JLC4_3313_CU[i]}))')
         if i < 3:
             kind, t = diel[i]
             lines.append(f'\t\t\t(layer "dielectric {i + 1}" (type "{kind}") (thickness {t}) '
-                         f'(material "FR408HR") (epsilon_r 3.61))')
+                         f'(material "FR4") (epsilon_r 4.5))')
     lines += ['\t\t\t(layer "B.Mask" (type "Bottom Solder Mask") (thickness 0.0152))',
               '\t\t\t(layer "B.Paste" (type "Bottom Solder Paste"))',
               '\t\t\t(layer "B.SilkS" (type "Bottom Silk Screen") (thickness 0.0152))',
-              '\t\t\t(copper_finish "ENIG")',
+              '\t\t\t(copper_finish "HAL lead-free")',
               '\t\t\t(dielectric_constraints no)',
               '\t\t)']
     assert "\t(setup\n" in txt
     BOARD.write_text(txt.replace("\t(setup\n", "\t(setup\n" + "\n".join(lines) + "\n", 1))
-    return ("OSH Park 4L (published): copper " + " / ".join(f"{t * 1000:g}" for t in _OSH4_CU)
-            + " um, dielectric " + " / ".join(f"{t:g}" for t in _OSH4_DIEL) + " mm")
+    return ("JLCPCB JLC04161H-3313 (published): copper " + " / ".join(f"{t * 1000:g}" for t in _JLC4_3313_CU)
+            + " um, dielectric " + " / ".join(f"{t:.4g}" for t in _JLC4_3313_DIEL) + " mm")
 
 
 def fix_project(d):

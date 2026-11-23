@@ -39,7 +39,7 @@ sys.path.insert(0, str(ROOT / "PCBMotorTest"))
 import gen_stator as gs                                                    # noqa: E402
 from gen_stator import P                                                   # noqa: E402
 from pcbmotor import wave_layout as wl                                     # noqa: E402
-from pcbmotor.geometry import STACKUPS                                     # noqa: E402
+from pcbmotor.geometry import STACKUPS, OZ_TO_M                            # noqa: E402
 
 STACKUP = "jlc4_2oz"
 SIMPLIFY_MM = 0.005
@@ -227,13 +227,13 @@ def build(name):
 
 
 def write_stackup(board):
-    """Insert the JLCPCB 4-layer stackup (copper weights from the sim's stackup; JLC doesn't publish
-    the dielectric thicknesses, so they come from the layer depths the sim assumes)."""
+    """Insert the JLCPCB 4-layer stackup from the sim's stackup (geometry.STACKUPS: JLC's published
+    all-2 oz 7628 build since 2026-11-23; before that, assumed thicknesses)."""
     txt = board.read_text()
     if "(stackup" in txt:
         return "stackup already present"
     st = STACKUPS[STACKUP]
-    cu = [round(oz * 0.035, 4) for oz in st["oz"]]
+    cu = [round(oz * OZ_TO_M * 1e3, 4) for oz in st["oz"]]
     z = st["z_mm"]
     diel = [round(z[i + 1] - z[i] - (cu[i] + cu[i + 1]) / 2, 4) for i in range(3)]
     kinds = ["prepreg", "core", "prepreg"]
@@ -254,7 +254,7 @@ def write_stackup(board):
               '\t\t)']
     assert "\t(setup\n" in txt
     board.write_text(txt.replace("\t(setup\n", "\t(setup\n" + "\n".join(lines) + "\n", 1))
-    return ("JLCPCB 4L (assumed thicknesses): copper " + " / ".join(f"{t * 1000:g}" for t in cu)
+    return ("JLCPCB 4L 2 oz, 7628 build (published): copper " + " / ".join(f"{t * 1000:g}" for t in cu)
             + " um, dielectric " + " / ".join(f"{t:g}" for t in diel) + " mm")
 
 

@@ -32,9 +32,10 @@ script (change its parameters and regenerate) or switch to editing by hand, not 
 
 | | |
 |---|---|
-| Fab | OSH Park 4-layer, FR408HR, 1.6 mm nominal: 1.7 mil plated outer copper, 0.5 oz inner, 7.87 mil prepreg, 39 mil core (OSH Park's published stackup). About $40 for 3 boards. |
+| Fab | JLCPCB 4-layer, JLC04161H-3313 (published stackup): 1 oz (35 µm) outer, 0.5 oz (15.2 µm) inner copper, 0.206 mm 3313 prepreg, 1.065 mm core, 1.58 mm finished. Ordered 2026-11-23 (5 boards, $35.06 after promotions, with UPS Express Saver and the 35% US duty). Designed on OSH Park's stackup (1.7 mil plated outer copper); the board still meets OSH Park's rules. |
 | Board | 50 × 51.5 mm, four M3 holes on a 42 mm square, M3 centre hole for a fixed axle |
 | Winding | 6 coils / 8 poles, 13–38 mm diameter, 0.15 mm trace / 0.15 mm space |
+| Vias | 0.3 mm drill, 0.508 mm pad (0.254 mm until 2026-11-23: JLC charges extra below 0.3 mm) |
 | Coil | 4 layers in series, 17.0–17.6 turns per layer (18 turn rings) |
 | Phases | Two coils per phase in series. Both ends of each phase go to the header. Star or delta is wired off the board. |
 | Header J1 (bottom side, 2.54 mm) | 1 B1, 2 A2, 3 C2, 4 B2, 5 A1, 6 C1. For star, tie A2 + B2 + C2 together and drive A1 / B1 / C1. |
@@ -51,6 +52,8 @@ The header is on the bottom so its plastic stays away from the rotor.
 
 ## Checks done (2026-11-18)
 
+Rerun on 2026-11-23 after the via drill went to 0.3 mm: DRC 0 violations, `check_spacing.py` 0 violations.
+
 - **KiCad DRC:** 0 errors, 0 unconnected. The only warnings say the footprint libraries aren't in
   KiCad 10's library table yet; they go away once KiCad 10 has been opened in the GUI once.
 - **`check_spacing.py`:** 0 violations at 0.15 mm on all four layers. This matters because a whole phase is
@@ -66,22 +69,24 @@ rotor (8 × 8 × 3 mm N42 discs at 12.75 mm radius, 1.5 mm steel back plate, 0.5
 
 | Quantity | Predicted | Design sweep |
 |---|---|---|
-| Phase resistance (A1–A2 etc.), 20 °C | 19.6–19.8 Ω (B is longest) | 19.3 Ω |
-| Phase back-EMF | 0.80 V peak per 1000 rpm (66.7 Hz electrical per 1000 rpm) | 0.73 |
-| Line-to-line back-EMF, star | 1.39 V peak per 1000 rpm | |
-| Kt (sinusoidal drive, per A peak) | 11.5 mN·m/A | 10.5 |
-| Km | 2.1 mN·m/√W | 1.95 |
-| Voltage-limited stall at 11.1 V | 3.7 mN·m | 3.5 |
+| Phase resistance (A1–A2 etc.), 20 °C | 23.0–23.3 Ω (B is longest) | 19.3 Ω (OSH Park copper) |
+| Phase back-EMF | 0.79 V peak per 1000 rpm (66.7 Hz electrical per 1000 rpm) | 0.73 |
+| Line-to-line back-EMF, star | 1.37 V peak per 1000 rpm | |
+| Kt (sinusoidal drive, per A peak) | 11.3 mN·m/A | 10.5 |
+| Km | 1.92 mN·m/√W | 1.95 |
+| Voltage-limited stall at 11.1 V | 3.1 mN·m | 3.5 |
 
-Kt is 9% above the sweep: the as-built turns are wider at the outer radius, and that outweighs the two
-dropped turns. Copper resistance rises 0.39 %/K, so measure R cold or log board temperature.
+Kt is 8% above the sweep: the as-built turns are wider at the outer radius, and that outweighs the two
+dropped turns. The resistance is 17% above the OSH Park figure (19.6–19.8 Ω) because JLC's finished copper
+is thinner (35 µm outer against OSH Park's 43 µm plated, 15.2 µm inner against 17.5 µm). The deeper
+bottom layers cost about 1% of Kt, so Km is 9% below the OSH Park build. Copper resistance rises 0.39 %/K, so measure R cold or log board temperature.
 
 **Back-EMF against air gap, with and without the steel back plate** (V peak per 1000 rpm, phase):
 
 | Gap | 0.5 mm | 0.75 mm | 1.0 mm | 1.5 mm |
 |---|---|---|---|---|
-| With 1.5 mm steel plate | 0.80 | 0.72 | 0.65 | 0.54 |
-| Magnets only | 0.61 | 0.55 | 0.50 | 0.41 |
+| With 1.5 mm steel plate | 0.79 | 0.72 | 0.65 | 0.53 |
+| Magnets only | 0.61 | 0.55 | 0.49 | 0.41 |
 
 The CMU comparison did not test the back-iron part of the model. Spinning the same rotor with and without
 its plate tests it directly: the model predicts a ratio of about 1.31 at 0.5 mm.
@@ -92,5 +97,6 @@ its plate tests it directly: the model predicts a ratio of about 1.31 at 0.5 mm.
   around an M3 axle through the centre hole, with shims to set the 0.5 mm gap. Nothing is drawn yet. For
   sensored FOC down to zero speed, an AS5600/AS5048 magnetic encoder on the axle end works; there are no Hall
   sensors on this board.
-- **Fab files** aren't generated yet. When it's time to order:
-  `kicad-cli pcb export gerbers` and `kicad-cli pcb export drill` (OSH Park also accepts the `.kicad_pcb`).
+- **Fab files** aren't committed. They were made with `kicad-cli pcb export gerbers` (copper, mask, silk,
+  paste, Edge.Cuts) and `kicad-cli pcb export drill`, then zipped. OSH Park runs KiCad 9, so send it gerbers,
+  not the KiCad 10 `.kicad_pcb`.

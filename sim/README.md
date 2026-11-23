@@ -165,7 +165,7 @@ are in the shared Drive under TSat-1 / Flight Data / tsatlog3). It is not copied
 | Gust yaw torque | 0.1 / 0.3 / 1.0 mN·m RMS, 0.3 Hz | 0.5·ρ·v²·A·Cd at 5 m/s on a 1U face ≈ 0.16 N, times a 2–6 mm centre-of-pressure offset |
 | Swivel friction | 0.05 mN·m (ball bearing), 1 mN·m (slip ring) | μ·F·r estimate; capsule slip-ring datasheets ~0.5–1 mN·m |
 | Gyro noise | 0.1 °/s RMS | BNO085 class |
-| JLCPCB layer spacing | 1.6 mm board, outer prepreg ~0.2 mm | ASSUMED: JLC doesn't publish JLC04161H-7628 / JLC06161H-2116 spacing on the capabilities page |
+| JLCPCB layer spacing | all-2 oz 4L: 70 / 61 / 61 / 70 µm copper, 0.436 mm prepreg, 0.5 mm core; JLC04161H-3313 (test stator): 35 / 15.2 µm copper, 0.206 mm prepreg, 1.065 mm core | JLC stackup tables (2026-11-23). Other JLC presets (1 oz, 6L, 2 oz out / 1 oz in) are ASSUMED: 1.6 mm, outer prepreg ~0.2 mm |
 | OSH Park 6-layer spacing | evenly paired layers | ASSUMED |
 | Magnets | N42, Br = 1.32 T | stock K&J-style blocks and discs |
 | mj5208 parameters | Kv 304, R ≈ 0.12 Ω, rotor J ≈ 8.5×10⁻⁵ | APPROX, verify |

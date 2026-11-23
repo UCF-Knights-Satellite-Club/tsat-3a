@@ -221,8 +221,8 @@ def main():
     out = dict(design=d.name, stackup=d.stackup, rotor={k: getattr(r, k) for k in r.__dataclass_fields__},
                boards=rows, design_study_estimate=est,
                notes=["Bearing drag is not included: measure it by spinning the rotor with no stator.",
-                      "JLC does not publish its 4-layer dielectric thicknesses; layer depths are the "
-                      "sim's assumed 1.6 mm build (geometry.STACKUPS['jlc4_2oz']).",
+                      "Layer depths and copper are JLC's published all-2 oz 7628 build "
+                      "(geometry.STACKUPS['jlc4_2oz']).",
                       "Resistance at 20 C; copper rises 0.39 %/K."])
     (OUT / "pcbmotor_strand_test.json").write_text(json.dumps(out, indent=2, default=float))
     s, t = rows["solid"], rows["stranded"]

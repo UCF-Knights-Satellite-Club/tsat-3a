@@ -4,7 +4,7 @@
   "strands": 2,
   "swap": true,
   "cap_mm": 1.6,
-  "stackup": "JLCPCB 4L (assumed thicknesses): copper 70 / 70 / 70 / 70 um, dielectric 0.14 / 1.11 / 0.14 mm",
+  "stackup": "JLCPCB 4L 2 oz, 7628 build (published): copper 70 / 61 / 61 / 70 um, dielectric 0.4355 / 0.5 / 0.4355 mm",
   "board_mm": 129.4,
   "segments": 16338,
   "vias": 330,

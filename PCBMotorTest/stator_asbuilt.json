@@ -43,7 +43,7 @@
     50.0,
     51.5
   ],
-  "stackup": "OSH Park 4L (published): copper 43.2 / 17.5 / 17.5 / 43.2 um, dielectric 0.1999 / 0.9906 / 0.1999 mm",
+  "stackup": "JLCPCB JLC04161H-3313 (published): copper 35 / 15.2 / 15.2 / 35 um, dielectric 0.2064 / 1.065 / 0.2064 mm",
   "header_pins": {
     "1": "B1",
     "2": "A2",
