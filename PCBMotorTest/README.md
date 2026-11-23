@@ -32,7 +32,7 @@ script (change its parameters and regenerate) or switch to editing by hand, not 
 
 | | |
 |---|---|
-| Fab | JLCPCB 4-layer, JLC04161H-3313 (published stackup): 1 oz (35 µm) outer, 0.5 oz (15.2 µm) inner copper, 0.206 mm 3313 prepreg, 1.065 mm core, 1.58 mm finished. Ordered 2026-11-23 (5 boards, $35.06 after promotions, with UPS Express Saver and the 35% US duty). Designed on OSH Park's stackup (1.7 mil plated outer copper); the board still meets OSH Park's rules. |
+| Fab | JLCPCB 4-layer, JLC04161H-3313 (published stackup): 1 oz (35 µm) outer, 0.5 oz (15.2 µm) inner copper, 0.206 mm 3313 prepreg, 1.065 mm core, 1.58 mm finished, leaded HASL. Ordered 2026-11-23 (5 boards, $35.06 after promotions, with UPS Express Saver and the 35% US duty). Designed on OSH Park's stackup (1.7 mil plated outer copper); the board still meets OSH Park's rules. |
 | Board | 50 × 51.5 mm, four M3 holes on a 42 mm square, M3 centre hole for a fixed axle |
 | Winding | 6 coils / 8 poles, 13–38 mm diameter, 0.15 mm trace / 0.15 mm space |
 | Vias | 0.3 mm drill, 0.508 mm pad (0.254 mm until 2026-11-23: JLC charges extra below 0.3 mm) |

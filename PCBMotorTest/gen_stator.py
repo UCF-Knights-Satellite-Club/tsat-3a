@@ -348,7 +348,7 @@ def write_stackup(d):
     lines += ['\t\t\t(layer "B.Mask" (type "Bottom Solder Mask") (thickness 0.0152))',
               '\t\t\t(layer "B.Paste" (type "Bottom Solder Paste"))',
               '\t\t\t(layer "B.SilkS" (type "Bottom Silk Screen") (thickness 0.0152))',
-              '\t\t\t(copper_finish "HAL lead-free")',
+              '\t\t\t(copper_finish "HAL SnPb")',
               '\t\t\t(dielectric_constraints no)',
               '\t\t)']
     assert "\t(setup\n" in txt
