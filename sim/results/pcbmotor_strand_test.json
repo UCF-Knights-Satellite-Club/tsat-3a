@@ -26,62 +26,62 @@
       "turns_per_layer": 7,
       "copper_width_mm": 1.2,
       "strand_R_ohm": [
-        0.3634468314679769
+        0.3873431167343643
       ],
-      "R_coil_ohm": 0.3634468314679769,
-      "R_phase_ohm": 0.7870261001177439,
+      "R_coil_ohm": 0.3873431167343643,
+      "R_phase_ohm": 0.8411687377084938,
       "ring_ohm_per_phase": {
-        "PHASE_A": 0.044353630653663545,
-        "PHASE_B": 0.060132437181790094,
-        "PHASE_C": 0.04599472828931389
+        "PHASE_A": 0.048644703958760624,
+        "PHASE_B": 0.06648250423976516,
+        "PHASE_C": 0.05043262757317994
       },
       "phase_R_bench_ohm": {
-        "A1-A2": 0.7712472935896173,
-        "B1-B2": 0.7870261001177439,
-        "C1-C2": 0.7728883912252678
+        "A1-A2": 0.8233309374274892,
+        "B1-B2": 0.8411687377084938,
+        "C1-C2": 0.8251188610419085
       },
-      "Kt_mNm_per_A": 20.11248438181945,
-      "ripple_pct": 3.6717778417165676,
-      "Km_mNm_per_sqrtW": 18.510814248069142,
-      "phase_backEMF_V_peak_per_krpm": 1.404116292874743,
-      "line_backEMF_V_peak_per_krpm_star": 2.4320007589943167,
+      "Kt_mNm_per_A": 20.127302737614105,
+      "ripple_pct": 3.6169891508078402,
+      "Km_mNm_per_sqrtW": 17.918365354568216,
+      "phase_backEMF_V_peak_per_krpm": 1.4051508092681377,
+      "line_backEMF_V_peak_per_krpm_star": 2.4337925939489393,
       "electrical_Hz_per_krpm": 66.66666666666667,
-      "c_eddy": 2.607876866596127e-05,
-      "c_circ": 1.0996603758115094e-36,
-      "c_total": 2.607876866596127e-05,
-      "strand_backEMF_spread_mV_rms_per_krpm": 2.7027303870114903e-14,
+      "c_eddy": 2.315574183244669e-05,
+      "c_circ": 8.573203956920478e-37,
+      "c_total": 2.315574183244669e-05,
+      "strand_backEMF_spread_mV_rms_per_krpm": 2.4636130279036648e-14,
       "rotor_J_kgm2": 0.0002036909700695509,
       "drag": {
         "1000": {
-          "eddy_mNm": 2.7309622685217207,
-          "circ_mNm": 1.151561652697743e-31,
-          "total_mNm": 2.7309622685217207,
-          "total_W": 0.28598570000062506,
-          "decel_rpm_per_s": 128.03104947193586
+          "eddy_mNm": 2.424863614307879,
+          "circ_mNm": 8.977838189596108e-32,
+          "total_mNm": 2.424863614307879,
+          "total_W": 0.25393112388889416,
+          "decel_rpm_per_s": 113.68074797100769
         },
         "2000": {
-          "eddy_mNm": 5.4619245370434415,
-          "circ_mNm": 2.303123305395486e-31,
-          "total_mNm": 5.4619245370434415,
-          "total_W": 1.1439428000025003,
-          "decel_rpm_per_s": 256.0620989438717
+          "eddy_mNm": 4.849727228615758,
+          "circ_mNm": 1.7955676379192216e-31,
+          "total_mNm": 4.849727228615758,
+          "total_W": 1.0157244955555766,
+          "decel_rpm_per_s": 227.36149594201538
         },
         "3000": {
-          "eddy_mNm": 8.192886805565161,
-          "circ_mNm": 3.454684958093229e-31,
-          "total_mNm": 8.192886805565161,
-          "total_W": 2.573871300005626,
-          "decel_rpm_per_s": 384.09314841580743
+          "eddy_mNm": 7.274590842923637,
+          "circ_mNm": 2.6933514568788326e-31,
+          "total_mNm": 7.274590842923637,
+          "total_W": 2.285380115000048,
+          "decel_rpm_per_s": 341.04224391302307
         },
         "4000": {
-          "eddy_mNm": 10.923849074086883,
-          "circ_mNm": 4.606246610790972e-31,
-          "total_mNm": 10.923849074086883,
-          "total_W": 4.575771200010001,
-          "decel_rpm_per_s": 512.1241978877434
+          "eddy_mNm": 9.699454457231516,
+          "circ_mNm": 3.591135275838443e-31,
+          "total_mNm": 9.699454457231516,
+          "total_W": 4.062897982222307,
+          "decel_rpm_per_s": 454.72299188403076
         }
       },
-      "coast_tau_s": 7.810605350221691
+      "coast_tau_s": 8.796564219079844
     },
     "stranded": {
       "variant": "stranded",
@@ -91,111 +91,111 @@
       "turns_per_layer": 7,
       "copper_width_mm": 0.8999999999999999,
       "strand_R_ohm": [
-        1.4405364987253213,
-        1.440647493770241,
-        1.4405364987253213
+        1.5358904975818664,
+        1.5362257482471606,
+        1.536324863433398
       ],
-      "R_coil_ohm": 0.48019116505773807,
-      "R_phase_ohm": 1.0205147672972663,
+      "R_coil_ohm": 0.512049004644084,
+      "R_phase_ohm": 1.0905805135279332,
       "ring_ohm_per_phase": {
-        "PHASE_A": 0.04418553637369804,
-        "PHASE_B": 0.060132437181790094,
-        "PHASE_C": 0.04599472828931389
+        "PHASE_A": 0.04847761222917264,
+        "PHASE_B": 0.06648250423976516,
+        "PHASE_C": 0.05043262757317994
       },
       "phase_R_bench_ohm": {
-        "A1-A2": 1.0045678664891742,
-        "B1-B2": 1.0205147672972663,
-        "C1-C2": 1.00637705840479
+        "A1-A2": 1.0725756215173405,
+        "B1-B2": 1.0905805135279332,
+        "C1-C2": 1.0745306368613479
       },
-      "Kt_mNm_per_A": 20.078602200169268,
-      "ripple_pct": 3.551802280043643,
-      "Km_mNm_per_sqrtW": 16.22849325026772,
-      "phase_backEMF_V_peak_per_krpm": 1.401750870364525,
-      "line_backEMF_V_peak_per_krpm_star": 2.4279037270252517,
+      "Kt_mNm_per_A": 20.093122926564444,
+      "ripple_pct": 3.5029344708859,
+      "Km_mNm_per_sqrtW": 15.709882794380125,
+      "phase_backEMF_V_peak_per_krpm": 1.4027646083060332,
+      "line_backEMF_V_peak_per_krpm_star": 2.4296595726455044,
       "electrical_Hz_per_krpm": 66.66666666666667,
-      "c_eddy": 1.2171124803081405e-06,
-      "c_circ": 2.957978775847995e-09,
-      "c_total": 1.2200704590839885e-06,
-      "strand_backEMF_spread_mV_rms_per_krpm": 1.6112202270006863,
+      "c_eddy": 1.0803918095790539e-06,
+      "c_circ": 4.475657310872004e-09,
+      "c_total": 1.0848674668899258e-06,
+      "strand_backEMF_spread_mV_rms_per_krpm": 2.046632842679013,
       "rotor_J_kgm2": 0.0002036909700695509,
       "drag": {
         "1000": {
-          "eddy_mNm": 0.1274557208909502,
-          "circ_mNm": 0.000309758813055953,
-          "total_mNm": 0.12776547970400615,
-          "total_W": 0.013379569747349383,
-          "decel_rpm_per_s": 5.989811225639467
+          "eddy_mNm": 0.11313836573240461,
+          "circ_mNm": 0.00046868973759403126,
+          "total_mNm": 0.11360705546999862,
+          "total_W": 0.011896903028683858,
+          "decel_rpm_per_s": 5.326045953433746
         },
         "2000": {
-          "eddy_mNm": 0.2549114417819004,
-          "circ_mNm": 0.000619517626111906,
-          "total_mNm": 0.2555309594080123,
-          "total_W": 0.05351827898939753,
-          "decel_rpm_per_s": 11.979622451278933
+          "eddy_mNm": 0.22627673146480923,
+          "circ_mNm": 0.0009373794751880625,
+          "total_mNm": 0.22721411093999724,
+          "total_W": 0.04758761211473543,
+          "decel_rpm_per_s": 10.652091906867492
         },
         "3000": {
-          "eddy_mNm": 0.3823671626728506,
-          "circ_mNm": 0.0009292764391678591,
-          "total_mNm": 0.38329643911201844,
-          "total_W": 0.12041612772614448,
-          "decel_rpm_per_s": 17.969433676918396
+          "eddy_mNm": 0.3394150971972138,
+          "circ_mNm": 0.001406069212782094,
+          "total_mNm": 0.34082116640999593,
+          "total_W": 0.10707212725815475,
+          "decel_rpm_per_s": 15.97813786030124
         },
         "4000": {
-          "eddy_mNm": 0.5098228835638008,
-          "circ_mNm": 0.001239035252223812,
-          "total_mNm": 0.5110619188160246,
-          "total_W": 0.21407311595759013,
-          "decel_rpm_per_s": 23.959244902557867
+          "eddy_mNm": 0.45255346292961846,
+          "circ_mNm": 0.001874758950376125,
+          "total_mNm": 0.4544282218799945,
+          "total_W": 0.19035044845894172,
+          "decel_rpm_per_s": 21.304183813734983
         }
       },
-      "coast_tau_s": 166.95016960125332,
+      "coast_tau_s": 187.7565474919141,
       "jumper_J2_open": {
         "pads 3-2 (strands 0-1)": {
-          "R_ohm": 2.8811839924955622,
-          "V_mV_rms_per_krpm": 2.087182021585168,
-          "V_mV_peak_per_krpm": 3.44938898386359
+          "R_ohm": 3.0721162458290268,
+          "V_mV_rms_per_krpm": 2.0576448292077605,
+          "V_mV_peak_per_krpm": 4.259924234950947
         },
         "pads 1-2 (strands 2-1)": {
-          "R_ohm": 2.8811839924955622,
-          "V_mV_rms_per_krpm": 2.7300973210777806,
-          "V_mV_peak_per_krpm": 5.444009692627871
+          "R_ohm": 3.0725506116805583,
+          "V_mV_rms_per_krpm": 3.5075926537598043,
+          "V_mV_peak_per_krpm": 7.369586499756061
         },
         "pads 3-1 (strands 0-2)": {
-          "R_ohm": 2.8810729974506426,
-          "V_mV_rms_per_krpm": 3.3991933450927667,
-          "V_mV_peak_per_krpm": 4.944805256731547
+          "R_ohm": 3.0722153610152643,
+          "V_mV_rms_per_krpm": 4.600135334350115,
+          "V_mV_peak_per_krpm": 8.770568587170416
         }
       },
-      "jumper_J2_open_phaseA_R_ohm": 1.9809710960097693,
+      "jumper_J2_open_phaseA_R_ohm": 2.11475725713101,
       "untransposed_jumper": {
         "pads 3-2 (strands 0-1)": {
-          "R_ohm": 2.955415941761162,
-          "V_mV_rms_per_krpm": 35.812334787939,
-          "V_mV_peak_per_krpm": 58.556284654212746
+          "R_ohm": 3.151591511845131,
+          "V_mV_rms_per_krpm": 35.757282811690615,
+          "V_mV_peak_per_krpm": 58.3082724028585
         },
         "pads 1-2 (strands 2-1)": {
-          "R_ohm": 2.8069520432299626,
-          "V_mV_rms_per_krpm": 38.26873311115412,
-          "V_mV_peak_per_krpm": 62.5354409580654
+          "R_ohm": 2.993075345664455,
+          "V_mV_rms_per_krpm": 38.21244399570767,
+          "V_mV_peak_per_krpm": 62.36261707948829
         },
         "pads 3-1 (strands 0-2)": {
-          "R_ohm": 2.8810729974506426,
-          "V_mV_rms_per_krpm": 74.04035054510543,
-          "V_mV_peak_per_krpm": 121.09172561227805
+          "R_ohm": 3.0722153610152647,
+          "V_mV_rms_per_krpm": 73.9299352668405,
+          "V_mV_peak_per_krpm": 120.6708894823467
         }
       },
-      "untransposed_c_circ": 1.0439370325434648e-06,
-      "untransposed_circ_mNm_at_3000": 0.32796249122488774,
-      "untransposed_strand_backEMF_spread_mV_rms_per_krpm": 30.26474549818205
+      "untransposed_c_circ": 9.760670723869452e-07,
+      "untransposed_circ_mNm_at_3000": 0.3066405144021724,
+      "untransposed_strand_backEMF_spread_mV_rms_per_krpm": 30.21957414476021
     }
   },
   "design_study_estimate": {
-    "c_eddy_solid": 2.601218870606195e-05,
-    "c_eddy_stranded": 1.219321345596654e-06
+    "c_eddy_solid": 2.3078951515951027e-05,
+    "c_eddy_stranded": 1.0818258523102044e-06
   },
   "notes": [
     "Bearing drag is not included: measure it by spinning the rotor with no stator.",
-    "JLC does not publish its 4-layer dielectric thicknesses; layer depths are the sim's assumed 1.6 mm build (geometry.STACKUPS['jlc4_2oz']).",
+    "Layer depths and copper are JLC's published all-2 oz 7628 build (geometry.STACKUPS['jlc4_2oz']).",
     "Resistance at 20 C; copper rises 0.39 %/K."
   ]
 }

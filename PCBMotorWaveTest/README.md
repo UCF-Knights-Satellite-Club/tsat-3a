@@ -58,7 +58,7 @@ The generator overwrites the boards. Once you edit one in the KiCad GUI, either 
 
 | | |
 |---|---|
-| Fab | JLCPCB 4-layer, 1.6 mm, 2 oz copper on all four layers (`jlc4_2oz`, the same as the strand-test boards). Dielectric thicknesses are the sim's assumed ones (JLC doesn't publish them). |
+| Fab | JLCPCB 4-layer, 1.6 mm, 2 oz copper on all four layers (`jlc4_2oz`, the same as the strand-test boards). The stackup is JLC's published one: 70 / 61 / 61 / 70 µm copper, 0.436 mm prepreg, 0.5 mm core, 1.63 mm finished. |
 | Board | About 129 × 129 mm. M3 centre hole, four M3 hub holes on a 23 mm circle, four M3 corner holes. |
 | Winding | 48 conductor positions per layer, 8 poles, q = 2 conductors per pole per phase, full pitch. Two layer pairs, each a two-layer wave: L1 + L2 and L3 + L4. All 4 layers are in series, 64 conductors per phase. |
 | Radial (active) sections | pair 1: r 17.3 to 46.4 mm; pair 2: r 22 to 40 mm. The magnets cover 21.5 to 40.5 mm. |
@@ -95,18 +95,18 @@ swap, each strand in that loop links the same flux to first order.
   parallel, on rings at 55.3 and 56.5 mm.
 - The first and last loop ends run out on B.Cu to the phase pads.
 
-## Predictions (as built, `sim/pcbmotor/wave_asbuilt.py`)
+## Predictions (as built, `sim/pcbmotor/wave_asbuilt.py`, JLC's published stackup since 2026-11-23)
 
 | | Kt mN·m/A | R phase Ω | Km mN·m/√W | Eddy drag @2000 rpm | Strand circulating @2000 rpm | Total drag @2000 rpm |
 |---|---|---|---|---|---|---|
-| solid | 22.4 | 0.89 | 19.4 | 0.40 W | – | **1.92 mN·m** |
-| swap | 22.4 | 0.86 | 19.7 | 0.18 W | 0.001 W | **0.86 mN·m** |
-| fixed | 22.4 | 0.86 | 19.7 | 0.18 W | 0.19 W | **1.77 mN·m** |
+| solid | 22.5 | 0.95 | 18.9 | 0.36 W | – | **1.71 mN·m** |
+| swap | 22.5 | 0.91 | 19.2 | 0.16 W | 0.002 W | **0.77 mN·m** |
+| fixed | 22.5 | 0.91 | 19.2 | 0.16 W | 0.17 W | **1.59 mN·m** |
 
-Drag grows linearly with speed: at 3000 rpm it is 2.9, 1.3 and 2.6 mN·m.
+Drag grows linearly with speed: at 3000 rpm it is 2.6, 1.2 and 2.4 mN·m.
 
 - **swap vs solid:** stranding halves the eddy drag.
-- **fixed vs swap:** the about 0.9 mN·m difference is the circulating current alone.
+- **fixed vs swap:** the about 0.8 mN·m difference is the circulating current alone.
 
 Phase resistance includes about 0.1 Ω of jumpers, stubs and vias. Plan on a 5–15% torque derating
 before trusting Kt to better than that: Paul et al. 2019 measured a wave PCB motor 15.5% below FEA.
@@ -125,8 +125,8 @@ longer runs the long way round pair 2's rings.
 
 | As built, at 15 mN·m and 2000 rpm | Km mN·m/√W | R phase Ω | Loss | Drag (swap / fixed) |
 |---|---|---|---|---|
-| Through vias, 2 oz (this folder's main boards), swap | 19.7 | 0.86 | 0.76 W | 0.86 / 1.77 mN·m |
-| Blind vias, 2 oz, swap | 21.2 | 0.76 | 0.68 W | 0.85 / 1.87 mN·m |
+| Through vias, 2 oz (this folder's main boards), swap | 19.2 | 0.91 | 0.77 W | 0.77 / 1.59 mN·m |
+| Blind vias, 2 oz, swap | 20.6 | 0.81 | 0.69 W | 0.76 / 1.68 mN·m |
 | Blind vias, 3 oz (ASSUMED ACE-style build, 0.2 mm space, 0.4 / 0.2 mm vias), swap | 23.6 | 0.61 | 0.64 W | 1.13 / 2.56 mN·m |
 | Spiral coils (the current payload design), for reference | 16.2 | 1.21 | 1.75 W | – |
 

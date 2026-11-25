@@ -41,12 +41,29 @@ OSHPARK_STACKUPS = {
             min_trace_mm=0.127, min_space_mm=0.127),
 }
 
+# JLCPCB published stackups (JLC's impedance/stackup tables, read 2026-11-23; finished copper
+# thicknesses as JLC lists them, each prepreg layer summed):
+# - JLC04161H-3313, 4L 1.6 mm, 1 oz outer / 0.5 oz inner: 35 um outer, 15.2 um inner copper,
+#   3313 prepreg 0.107 + 0.0994 mm, 1.065 mm core. The test stator (PCBMotorTest) is ordered on this.
+# - 4L 1.6 mm, 2 oz on all layers (7628 build): 70 um outer, 61 um inner copper (about 1.75 oz, not
+#   2), prepreg 7628 0.218 + 2116 0.124 + 2116 0.0935 mm, 0.50 mm core; 1.633 mm finished.
+_JLC4_3313_CU = (0.035, 0.0152, 0.0152, 0.035)
+_JLC4_3313_DIEL = (0.107 + 0.0994, 1.065, 0.0994 + 0.107)
+_JLC4_2OZ_CU = (0.070, 0.061, 0.061, 0.070)
+_JLC4_2OZ_DIEL = (0.218 + 0.124 + 0.0935, 0.500, 0.0935 + 0.124 + 0.218)
+
+
+def _published(cu, diel, **rules):
+    return dict(fab="JLCPCB", z_mm=_midplane_depths(cu, diel), oz=[round(t / OZ_TO_M / 1e3, 3) for t in cu],
+                **rules)
+
+
 # Named fab presets. OSH Park = quick test stator; JLCPCB = cheap integrated payload board.
 # JLCPCB rules (capabilities page, 2026-11-17): outer 1 or 2 oz, inner 0.5/1/2 oz; min trace/space
-# 0.09/0.09 mm at 1 oz, 0.15/0.15 mm at 2 oz; 1.6 mm standard. JLC does not publish prepreg/core
-# thicknesses for JLC04161H-7628 / JLC06161H-2116 on that page, so the z positions below are an
-# ASSUMED 1.6 mm build (thin prepreg under the outer layers, thick core in the middle, like the
-# OSH Park stackups). min_trace is the worst case over all layers of that stackup.
+# 0.09/0.09 mm at 1 oz, 0.15/0.15 mm at 2 oz; 1.6 mm standard. jlc4_3313 and jlc4_2oz use JLC's
+# published stackups (above). The others (jlc4_1oz, jlc6_1oz, jlc4_2oz_out) still use an ASSUMED
+# 1.6 mm build (thin prepreg under the outer layers, thick core in the middle, like the OSH Park
+# stackups) with nominal copper. min_trace is the worst case over all layers of that stackup.
 STACKUPS = {
     "osh2": dict(fab="OSH Park", **OSHPARK_STACKUPS[2]),
     "osh4": dict(fab="OSH Park", **OSHPARK_STACKUPS[4]),
@@ -58,9 +75,11 @@ STACKUPS = {
     "jlc4_2oz_out": dict(fab="JLCPCB", z_mm=[0.0, 0.21, 1.39, 1.6], oz=[2.0, 1.0, 1.0, 2.0],
                          min_trace_mm=0.15, min_space_mm=0.15),
     # JLC's heaviest multilayer option: 2 oz on all four layers (2 oz inner only on 4L 1.6 mm with
-    # 2 oz outer; capabilities page checked 2026-11-19)
-    "jlc4_2oz": dict(fab="JLCPCB", z_mm=[0.0, 0.21, 1.39, 1.6], oz=[2.0] * 4,
-                     min_trace_mm=0.15, min_space_mm=0.15),
+    # 2 oz outer; capabilities page checked 2026-11-19). Published 7628 build; until 2026-11-23 this
+    # was an assumed z 0 / 0.21 / 1.39 / 1.6 mm with 2 oz (69.6 um) on every layer.
+    "jlc4_2oz": _published(_JLC4_2OZ_CU, _JLC4_2OZ_DIEL, min_trace_mm=0.15, min_space_mm=0.15),
+    # JLC04161H-3313, 1 oz outer / 0.5 oz inner: the test stator's fab.
+    "jlc4_3313": _published(_JLC4_3313_CU, _JLC4_3313_DIEL, min_trace_mm=0.09, min_space_mm=0.09),
 }
 
 
